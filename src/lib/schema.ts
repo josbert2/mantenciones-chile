@@ -63,6 +63,18 @@ export function serviceSchema(s: Servicio) {
   };
 }
 
+export function localServiceSchema(s: Servicio, comunaNombre: string) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: `${s.nombre} en ${comunaNombre}`,
+    serviceType: s.nombre,
+    description: `${s.nombre} a domicilio en ${comunaNombre}. ${s.seoDescription}`,
+    provider: { "@id": `${site.url}/#business` },
+    areaServed: { "@type": "City", name: comunaNombre },
+  };
+}
+
 export function breadcrumb(items: { name: string; path: string }[]) {
   return {
     "@context": "https://schema.org",

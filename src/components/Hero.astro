@@ -13,7 +13,7 @@ const strip = [
   { img: "qIjlcu2mcGbEtpBhazcWPQTkIU", label: "Muebles" },
 ];
 const cdn = (id: string) =>
-  `https://framerusercontent.com/images/${id}.png?scale-down-to=1024&width=2048&height=2048`;
+  `https://framerusercontent.com/images/${id}.png?scale-down-to=512&width=2048&height=2048`;
 
 const props = [
   { title: "Respuesta rapida", icon: "hugeicons:clock-01" },
@@ -30,13 +30,16 @@ const props = [
       {
         [0, 1].map((copy) => (
           <div class="marquee-group" aria-hidden={copy === 1 ? "true" : undefined}>
-            {strip.map((s) => (
+            {strip.map((s, i) => (
               <figure class="group relative h-[240px] w-[244px] shrink-0 overflow-hidden rounded-[20px] sm:h-[340px] sm:w-[345px] lg:h-[440px] lg:w-[447px]">
                 <img
                   src={cdn(s.img)}
                   alt={s.label}
+                  width="512"
+                  height="512"
                   class="h-full w-full object-cover transition-all duration-500 group-hover:scale-105 group-hover:grayscale group-hover:blur-[3px]"
-                  loading="eager"
+                  loading={copy === 0 && i < 5 ? "eager" : "lazy"}
+                  decoding="async"
                   draggable="false"
                 />
                 <span class="grain-layer" aria-hidden="true" />
