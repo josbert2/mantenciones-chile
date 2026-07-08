@@ -1,0 +1,110 @@
+---
+import { Icon } from "astro-icon/components";
+
+const strip = [
+  { img: "pePJB1NipN9yLGJ9W6Jxsp2XGM", label: "Jardineria" },
+  { img: "vzqNanbKCcj5CLe2o3o7dvcpY", label: "Gasfiteria" },
+  { img: "8FKXOumsLuAOf81tpPnI3zu2Jg", label: "Destapes" },
+  { img: "ljcpAUhpHnqi1zhA3LtTu63Cy3U", label: "Reparaciones" },
+  { img: "FmTfTzSoFYlC2GlWZeVVu5zN9E", label: "Instalaciones" },
+  { img: "5AgeMShXPsGp8UgPgzzfhnQJ9c", label: "Electricidad" },
+  { img: "z25S32QNJbWiuYMMh7286RzFrY", label: "Climatizacion" },
+  { img: "h8RHPQdFh0mQtKGjopKy3nIi2A", label: "Limpieza" },
+  { img: "qIjlcu2mcGbEtpBhazcWPQTkIU", label: "Muebles" },
+];
+const cdn = (id: string) =>
+  `https://framerusercontent.com/images/${id}.png?scale-down-to=1024&width=2048&height=2048`;
+
+const props = [
+  { title: "Respuesta rapida", icon: "hugeicons:clock-01" },
+  { title: "Precios claros y honestos", icon: "hugeicons:tag-01" },
+  { title: "Servicio con garantia", icon: "hugeicons:security-check" },
+  { title: "Tecnicos calificados", icon: "hugeicons:checkmark-badge-01" },
+];
+---
+
+<section id="inicio" class="pt-6">
+  <!-- Carrusel tipo ticker -->
+  <div class="marquee" data-reveal>
+    <div class="marquee-track">
+      {
+        [0, 1].map((copy) => (
+          <div class="marquee-group" aria-hidden={copy === 1 ? "true" : undefined}>
+            {strip.map((s) => (
+              <figure class="group relative h-[240px] w-[244px] shrink-0 overflow-hidden rounded-[20px] sm:h-[340px] sm:w-[345px] lg:h-[440px] lg:w-[447px]">
+                <img
+                  src={cdn(s.img)}
+                  alt={s.label}
+                  class="h-full w-full object-cover transition-all duration-500 group-hover:scale-105 group-hover:grayscale group-hover:blur-[3px]"
+                  loading="eager"
+                  draggable="false"
+                />
+                <span class="grain-layer" aria-hidden="true" />
+                <figcaption class="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 scale-90 rounded-md bg-accent/95 px-4 py-1.5 font-display text-sm uppercase tracking-tight text-accent-foreground opacity-0 transition-all duration-300 group-hover:scale-100 group-hover:opacity-100">
+                  {s.label}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        ))
+      }
+    </div>
+  </div>
+
+  <!-- Panel verde -->
+  <div class="container-x mt-4 sm:mt-5">
+    <div
+      class="rounded-3xl bg-primary p-7 text-primary-foreground shadow-soft sm:p-11 lg:p-14"
+      data-reveal
+    >
+      <div class="grid gap-8 lg:grid-cols-2 lg:items-end lg:gap-16">
+        <h1
+          class="font-display text-4xl uppercase leading-[0.95] tracking-tight sm:text-5xl lg:text-[3.9rem]"
+        >
+          Mantencion para casi
+          <span class="text-accent">todo lo que necesitas</span>
+        </h1>
+
+        <div>
+          <p class="max-w-md text-lg leading-relaxed text-primary-foreground/75">
+            Reparamos o instalamos practicamente cualquier cosa en tu casa o
+            empresa. Ademas contamos con servicio de emergencia a un llamado de
+            distancia.
+          </p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a
+              href="tel:+56912345678"
+              class="rounded-full bg-accent px-6 py-3.5 text-xs font-bold uppercase tracking-wide text-accent-foreground transition-transform hover:-translate-y-0.5"
+              >Llamar: +56 9 1234 5678</a
+            >
+            <a
+              href="#cotizar"
+              class="rounded-full border border-primary-foreground/30 px-6 py-3.5 text-xs font-bold uppercase tracking-wide text-primary-foreground transition-colors hover:bg-white/10"
+              >Solicitar servicio</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <hr class="my-8 border-primary-foreground/15 sm:my-10" />
+
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          props.map((p) => (
+            <div class="flex items-center gap-3">
+              <span class="grid h-9 w-9 shrink-0 rotate-45 place-items-center rounded-md bg-accent">
+                <Icon
+                  name={p.icon}
+                  class="h-[18px] w-[18px] -rotate-45 text-accent-foreground"
+                />
+              </span>
+              <span class="text-sm font-bold uppercase tracking-wide">
+                {p.title}
+              </span>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

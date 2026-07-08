@@ -1,0 +1,84 @@
+---
+import { Icon } from "astro-icon/components";
+
+const social = [
+  "hugeicons:facebook-01",
+  "hugeicons:instagram",
+  "hugeicons:new-twitter",
+];
+
+const cols = [
+  {
+    title: "Servicios",
+    links: ["Gasfiteria", "Electricidad", "Climatizacion", "Emergencias 24/7"],
+  },
+  {
+    title: "Empresa",
+    links: ["Nosotros", "Como trabajamos", "Planes", "Trabaja con nosotros"],
+  },
+  {
+    title: "Ayuda",
+    links: ["Preguntas frecuentes", "Cobertura", "Garantia", "Contacto"],
+  },
+];
+const year = 2026;
+---
+
+<footer class="border-t border-border bg-surface">
+  <div class="container-x py-16">
+    <div class="grid gap-10 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
+      <div>
+        <a href="#inicio" class="flex items-center gap-2.5">
+          <span class="grid h-9 w-9 place-items-center rounded-xl bg-primary text-accent">
+            <Icon name="hugeicons:wrench-01" class="h-5 w-5" />
+          </span>
+          <span class="text-lg font-extrabold tracking-tight text-primary"
+            >Mantenciones<span class="text-accent-strong">Chile</span></span
+          >
+        </a>
+        <p class="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
+          Servicio tecnico de mantencion para el hogar y empresas. Tecnicos
+          certificados, precio claro y garantia en todo Chile.
+        </p>
+        <div class="mt-5 flex gap-3">
+          {
+            social.map((name) => (
+              <a href="#" class="grid h-9 w-9 place-items-center rounded-xl border border-border text-muted-foreground transition-colors hover:bg-primary hover:text-primary-foreground">
+                <Icon name={name} class="h-4 w-4" />
+              </a>
+            ))
+          }
+        </div>
+      </div>
+
+      {
+        cols.map((c) => (
+          <div>
+            <h4 class="text-sm font-bold text-primary">{c.title}</h4>
+            <ul class="mt-4 space-y-2.5">
+              {c.links.map((l) => (
+                <li>
+                  <a href="#" class="text-sm text-muted-foreground transition-colors hover:text-accent-strong">
+                    {l}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+
+    <div
+      class="mt-12 flex flex-col items-center justify-between gap-3 border-t border-border pt-6 sm:flex-row"
+    >
+      <p class="text-sm text-muted-foreground">
+        © {year} Mantenciones Chile. Todos los derechos reservados.
+      </p>
+      <div class="flex gap-6">
+        <a href="#" class="text-sm text-muted-foreground hover:text-accent-strong">Terminos</a>
+        <a href="#" class="text-sm text-muted-foreground hover:text-accent-strong">Privacidad</a>
+      </div>
+    </div>
+  </div>
+</footer>

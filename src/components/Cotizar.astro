@@ -1,0 +1,112 @@
+---
+import { Icon } from "astro-icon/components";
+
+const servicios = [
+  "Gasfiteria",
+  "Electricidad",
+  "Climatizacion",
+  "Emergencia 24/7",
+];
+---
+
+<section id="cotizar" class="py-20 lg:py-28">
+  <div class="container-x">
+    <div
+      class="overflow-hidden rounded-3xl border border-border bg-primary text-primary-foreground shadow-soft"
+    >
+      <div class="grid gap-10 p-8 sm:p-12 lg:grid-cols-2 lg:gap-16">
+        <div data-reveal>
+          <span class="text-sm font-bold uppercase tracking-widest text-accent"
+            >Cotiza gratis</span
+          >
+          <h2 class="mt-3 text-3xl font-display uppercase tracking-tight sm:text-4xl">
+            Pide tu visita hoy y despreocupate
+          </h2>
+          <p class="mt-4 max-w-md text-primary-foreground/70">
+            Dejanos tus datos y te contactamos en minutos con una cotizacion
+            clara. Tambien puedes llamarnos o escribirnos por WhatsApp.
+          </p>
+
+          <div class="mt-8 space-y-4">
+            <a href="tel:+56912345678" class="flex items-center gap-3">
+              <span class="grid h-11 w-11 place-items-center rounded-2xl bg-white/10 text-accent">
+                <Icon name="hugeicons:call-02" class="h-5 w-5" />
+              </span>
+              <div>
+                <p class="text-xs text-primary-foreground/60">Llamanos</p>
+                <p class="font-bold">+56 9 1234 5678</p>
+              </div>
+            </a>
+            <div class="flex items-center gap-3">
+              <span class="grid h-11 w-11 place-items-center rounded-2xl bg-white/10 text-accent">
+                <Icon name="hugeicons:mail-01" class="h-5 w-5" />
+              </span>
+              <div>
+                <p class="text-xs text-primary-foreground/60">Escribenos</p>
+                <p class="font-bold">hola@mantenciones.cl</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <form
+          data-reveal
+          class="rounded-3xl bg-surface p-6 text-foreground sm:p-8"
+          onsubmit="event.preventDefault(); this.reset(); document.getElementById('form-ok').classList.remove('hidden');"
+        >
+          <div class="grid gap-4">
+            <div>
+              <label class="mb-1.5 block text-sm font-semibold text-primary" for="nombre">Nombre</label>
+              <input
+                id="nombre"
+                required
+                type="text"
+                placeholder="Tu nombre"
+                class="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm outline-none focus:border-accent"
+              />
+            </div>
+            <div>
+              <label class="mb-1.5 block text-sm font-semibold text-primary" for="fono">Telefono</label>
+              <input
+                id="fono"
+                required
+                type="tel"
+                placeholder="+56 9 ..."
+                class="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm outline-none focus:border-accent"
+              />
+            </div>
+            <div>
+              <label class="mb-1.5 block text-sm font-semibold text-primary" for="servicio">Servicio</label>
+              <select
+                id="servicio"
+                class="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm outline-none focus:border-accent"
+              >
+                {servicios.map((s) => <option>{s}</option>)}
+              </select>
+            </div>
+            <div>
+              <label class="mb-1.5 block text-sm font-semibold text-primary" for="mensaje">Cuentanos que necesitas</label>
+              <textarea
+                id="mensaje"
+                rows="3"
+                placeholder="Describe el problema..."
+                class="w-full resize-none rounded-xl border border-border bg-background px-4 py-3 text-sm outline-none focus:border-accent"
+              ></textarea>
+            </div>
+            <button
+              type="submit"
+              class="rounded-full bg-accent px-6 py-3.5 text-sm font-semibold text-accent-foreground transition-transform hover:-translate-y-0.5"
+              >Enviar solicitud</button
+            >
+            <p id="form-ok" class="hidden text-center text-sm font-semibold text-success">
+              Listo, te contactamos a la brevedad.
+            </p>
+            <p class="text-center text-xs text-muted-foreground">
+              Respondemos en horario habil en menos de 30 minutos.
+            </p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

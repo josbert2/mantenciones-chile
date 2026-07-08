@@ -1,0 +1,58 @@
+---
+const steps = [
+  {
+    n: "01",
+    title: "Cuentanos el problema",
+    desc: "Nos escribes por WhatsApp o el formulario y describes lo que pasa. Puedes adjuntar fotos.",
+  },
+  {
+    n: "02",
+    title: "Recibes tu cotizacion",
+    desc: "Te enviamos un valor claro y agendamos la visita en el horario que te acomode.",
+  },
+  {
+    n: "03",
+    title: "Vamos y lo resolvemos",
+    desc: "El tecnico llega puntual, ejecuta el trabajo y te muestra todo funcionando.",
+  },
+  {
+    n: "04",
+    title: "Quedas con garantia",
+    desc: "Recibes boleta y respaldo por 90 dias. Si algo falla, volvemos sin costo.",
+  },
+];
+---
+
+<section id="proceso" class="bg-primary py-20 text-primary-foreground lg:py-28">
+  <div class="container-x">
+    <div class="mx-auto max-w-2xl text-center" data-reveal>
+      <span class="text-sm font-bold uppercase tracking-widest text-accent"
+        >Como trabajamos</span
+      >
+      <h2 class="mt-3 text-3xl font-display uppercase tracking-tight sm:text-4xl">
+        Cuatro pasos y listo
+      </h2>
+      <p class="mt-4 text-lg text-primary-foreground/70">
+        Pensado para que no pierdas tiempo ni tengas que estar encima del
+        trabajo.
+      </p>
+    </div>
+
+    <div class="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+      {
+        steps.map((s) => (
+          <div
+            data-reveal
+            class="relative rounded-3xl border border-white/10 bg-white/5 p-7 backdrop-blur-sm"
+          >
+            <span class="text-4xl font-extrabold text-accent">{s.n}</span>
+            <h3 class="mt-4 text-lg font-bold">{s.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-primary-foreground/70">
+              {s.desc}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

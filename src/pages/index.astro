@@ -1,0 +1,40 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Nav from "../components/Nav.astro";
+import Hero from "../components/Hero.astro";
+import Services from "../components/Services.astro";
+import WhyUs from "../components/WhyUs.astro";
+import Process from "../components/Process.astro";
+import Testimonials from "../components/Testimonials.astro";
+import Pricing from "../components/Pricing.astro";
+import Faq from "../components/Faq.astro";
+import Cotizar from "../components/Cotizar.astro";
+import Footer from "../components/Footer.astro";
+import { Icon } from "astro-icon/components";
+---
+
+<Layout>
+  <Nav />
+  <main>
+    <Hero />
+    <Services />
+    <WhyUs />
+    <Process />
+    <Testimonials />
+    <Pricing />
+    <Faq />
+    <Cotizar />
+  </main>
+  <Footer />
+
+  <!-- WhatsApp flotante -->
+  <a
+    href="https://wa.me/56912345678"
+    target="_blank"
+    rel="noopener"
+    aria-label="Escribir por WhatsApp"
+    class="fixed bottom-5 right-5 z-50 grid h-14 w-14 place-items-center rounded-full bg-success text-white shadow-soft transition-transform hover:-translate-y-1"
+  >
+    <Icon name="hugeicons:whatsapp" class="h-7 w-7" />
+  </a>
+</Layout>

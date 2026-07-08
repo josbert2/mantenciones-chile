@@ -1,0 +1,76 @@
+---
+import { Icon } from "astro-icon/components";
+
+const points = [
+  {
+    title: "Tecnicos certificados",
+    desc: "Personal propio con credencial SEC y evaluacion de antecedentes.",
+  },
+  {
+    title: "Precio claro antes de empezar",
+    desc: "Cotizas y apruebas el valor final. Sin sorpresas al terminar.",
+  },
+  {
+    title: "Garantia por escrito",
+    desc: "90 dias de respaldo en materiales y mano de obra en cada trabajo.",
+  },
+  {
+    title: "Agenda online",
+    desc: "Reservas tu visita en menos de dos minutos y eliges el horario.",
+  },
+];
+---
+
+<section id="nosotros" class="py-20 lg:py-28">
+  <div class="container-x grid items-center gap-14 lg:grid-cols-2">
+    <div data-reveal class="relative order-2 lg:order-1">
+      <div class="overflow-hidden rounded-3xl border border-border shadow-soft">
+        <img
+          src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=1000&q=80"
+          alt="Equipo tecnico de mantenciones"
+          class="aspect-[5/4] w-full object-cover"
+          loading="lazy"
+        />
+      </div>
+      <div
+        class="absolute -right-4 bottom-6 rounded-3xl border border-border bg-primary p-5 text-primary-foreground shadow-soft"
+      >
+        <p class="text-3xl font-extrabold text-accent">98%</p>
+        <p class="mt-1 max-w-[9rem] text-sm text-primary-foreground/80">
+          de clientes nos vuelve a contratar
+        </p>
+      </div>
+    </div>
+
+    <div data-reveal class="order-1 lg:order-2">
+      <span class="text-sm font-bold uppercase tracking-widest text-accent-strong"
+        >Por que elegirnos</span
+      >
+      <h2
+        class="mt-3 text-3xl font-display uppercase tracking-tight text-primary sm:text-4xl"
+      >
+        Un servicio serio, puntual y que responde
+      </h2>
+      <p class="mt-4 text-lg text-muted-foreground">
+        Nos tomamos en serio tu tiempo y tu casa. Llegamos a la hora, dejamos
+        todo limpio y respondemos si algo no queda perfecto.
+      </p>
+
+      <ul class="mt-8 grid gap-5 sm:grid-cols-2">
+        {
+          points.map((p) => (
+            <li class="flex gap-3">
+              <span class="mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-success/10 text-success">
+                <Icon name="hugeicons:tick-02" class="h-[18px] w-[18px]" />
+              </span>
+              <div>
+                <p class="font-bold text-primary">{p.title}</p>
+                <p class="mt-1 text-sm text-muted-foreground">{p.desc}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>

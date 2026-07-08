@@ -1,0 +1,170 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Tokens semanticos — Mantenciones Chile
+   Paleta estilo Handymandy: crema calido + verde bosque + acento lima
+--------------------------------------------------------------------------- */
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, Helvetica, Arial, sans-serif;
+  --font-display: "Righteous", "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  /* Superficies */
+  --color-background: #f0f0e5;
+  --color-foreground: #17210f;
+  --color-surface: #fdfbf7;
+  --color-muted: #e7e7d8;
+  --color-muted-foreground: #5c6150;
+  --color-border: #dcdccc;
+
+  /* Marca */
+  --color-primary: #1c3916;
+  --color-primary-foreground: #f0f0e5;
+  --color-accent: #c1e78f;
+  --color-accent-foreground: #16250f;
+  --color-accent-strong: #35571a;
+
+  /* Estados */
+  --color-success: #2f7d3b;
+  --color-danger: #d0463b;
+  --color-warning: #e0a31d;
+  --color-purple: #6b5bd2;
+
+  /* Radios y sombras */
+  --radius-3xl: 1.5rem;
+  --shadow-soft: 0 24px 60px -30px rgb(28 57 22 / 0.35);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Lenis smooth scroll */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Titulos display estilo Handymandy */
+.font-display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+/* Carrusel tipo ticker (marquee infinito) */
+.marquee {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 4%,
+    #000 96%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 4%,
+    #000 96%,
+    transparent
+  );
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-x 55s linear infinite;
+}
+.marquee-group {
+  display: flex;
+  gap: 12px;
+  padding-right: 12px;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+@keyframes marquee-x {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+
+/* Capa de grano/noise para las fotos del carrusel */
+.grain-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.28 0.28 0.28 0 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 150px 150px;
+  opacity: 0.5;
+}
+
+/* Vineta suave para dar profundidad a las fotos */
+.grain-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(to top, rgb(28 57 22 / 0.28), transparent 45%),
+    radial-gradient(120% 90% at 50% 0%, transparent 60%, rgb(28 57 22 / 0.18));
+}
+
+/* Utilidad de contenedor consistente */
+.container-x {
+  width: 100%;
+  max-width: 76rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+/* Animacion de aparicion al hacer scroll */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+[data-reveal] {
+  opacity: 0;
+}
+
+[data-reveal].is-visible {
+  animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  [data-reveal],
+  [data-reveal].is-visible {
+    opacity: 1;
+    animation: none;
+  }
+}
