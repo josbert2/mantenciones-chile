@@ -1,0 +1,104 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Nav from "../../components/Nav.astro";
+import Cotizar from "../../components/Cotizar.astro";
+import Footer from "../../components/Footer.astro";
+import { Icon } from "astro-icon/components";
+import { servicios } from "../../data/servicios";
+import { breadcrumb, localBusiness } from "../../lib/schema";
+import { site } from "../../data/site";
+
+const jsonLd = [
+  localBusiness(),
+  breadcrumb([
+    { name: "Inicio", path: "/" },
+    { name: "Servicios", path: "/servicios" },
+  ]),
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    itemListElement: servicios.map((s, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: s.nombre,
+      url: `${site.url}/servicios/${s.slug}`,
+    })),
+  },
+];
+---
+
+<Layout
+  title="Servicios de mantencion en Chile | Mantenciones Chile"
+  description="Gasfiteria, electricidad, climatizacion y emergencias 24/7. Tecnicos certificados, cotizacion clara y garantia de 90 dias en todo Chile."
+  canonical="/servicios"
+  jsonLd={jsonLd}
+>
+  <Nav />
+  <main>
+    <section class="pt-10 lg:pt-14">
+      <div class="container-x">
+        <nav aria-label="Migas de pan" class="text-sm text-muted-foreground">
+          <ol class="flex flex-wrap items-center gap-1.5">
+            <li><a href="/" class="hover:text-accent-strong">Inicio</a></li>
+            <li aria-hidden="true">/</li>
+            <li class="font-semibold text-primary" aria-current="page">
+              Servicios
+            </li>
+          </ol>
+        </nav>
+
+        <div class="mt-8 max-w-2xl">
+          <span class="text-sm font-bold uppercase tracking-widest text-accent-strong"
+            >Servicios</span
+          >
+          <h1
+            class="mt-3 font-display text-4xl uppercase tracking-tight text-primary sm:text-5xl"
+          >
+            Servicios de mantencion para tu hogar y empresa
+          </h1>
+          <p class="mt-4 text-lg text-muted-foreground">
+            Un solo equipo para resolver desde la gotera mas chica hasta la
+            mantencion completa de tu propiedad, con tecnicos certificados y
+            garantia en todo Chile.
+          </p>
+        </div>
+
+        <div class="mb-4 mt-12 grid gap-6 sm:grid-cols-2">
+          {
+            servicios.map((s) => (
+              <a
+                href={`/servicios/${s.slug}`}
+                class="group rounded-3xl border border-border bg-surface p-7 transition-all hover:-translate-y-1 hover:shadow-soft"
+              >
+                <span class="grid h-12 w-12 place-items-center rounded-2xl bg-primary/5 text-primary transition-colors group-hover:bg-accent group-hover:text-accent-foreground">
+                  <Icon name={s.icon} class="h-6 w-6" />
+                </span>
+                <h2 class="mt-5 text-xl font-bold text-primary">{s.titulo}</h2>
+                <p class="mt-2 text-[15px] leading-relaxed text-muted-foreground">
+                  {s.resumen}
+                </p>
+                <span class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-accent-strong">
+                  Ver servicio
+                  <Icon name="hugeicons:arrow-right-01" class="h-4 w-4" />
+                </span>
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <Cotizar />
+  </main>
+  <Footer />
+
+  <a
+    href="https://wa.me/56912345678"
+    target="_blank"
+    rel="noopener"
+    aria-label="Escribir por WhatsApp"
+    class="fixed bottom-5 right-5 z-50 grid h-14 w-14 place-items-center rounded-full bg-success text-white shadow-soft transition-transform hover:-translate-y-1"
+  >
+    <Icon name="hugeicons:whatsapp" class="h-7 w-7" />
+  </a>
+</Layout>

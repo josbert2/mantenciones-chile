@@ -11,9 +11,16 @@ import Faq from "../components/Faq.astro";
 import Cotizar from "../components/Cotizar.astro";
 import Footer from "../components/Footer.astro";
 import { Icon } from "astro-icon/components";
+import { localBusiness, websiteSchema } from "../lib/schema";
+
+const jsonLd = [localBusiness(), websiteSchema()];
 ---
 
-<Layout>
+<Layout
+  title="Mantenciones Chile — Gasfiteria, electricidad y climatizacion"
+  description="Servicio tecnico de mantencion para hogar y empresas en Chile. Gasfiteria, electricidad, climatizacion y emergencias 24/7. Cotizacion clara y garantia de 90 dias."
+  jsonLd={jsonLd}
+>
   <Nav />
   <main>
     <Hero />

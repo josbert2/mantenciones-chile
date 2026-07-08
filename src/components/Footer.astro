@@ -1,24 +1,39 @@
 ---
 import { Icon } from "astro-icon/components";
+import { servicios } from "../data/servicios";
+import { site } from "../data/site";
 
 const social = [
-  "hugeicons:facebook-01",
-  "hugeicons:instagram",
-  "hugeicons:new-twitter",
+  { icon: "hugeicons:facebook-01", href: site.sameAs[0] },
+  { icon: "hugeicons:instagram", href: site.sameAs[1] },
+  { icon: "hugeicons:new-twitter", href: "#" },
 ];
 
 const cols = [
   {
     title: "Servicios",
-    links: ["Gasfiteria", "Electricidad", "Climatizacion", "Emergencias 24/7"],
+    links: servicios.map((s) => ({
+      label: s.titulo,
+      href: `/servicios/${s.slug}`,
+    })),
   },
   {
     title: "Empresa",
-    links: ["Nosotros", "Como trabajamos", "Planes", "Trabaja con nosotros"],
+    links: [
+      { label: "Nosotros", href: "/#nosotros" },
+      { label: "Como trabajamos", href: "/#proceso" },
+      { label: "Planes", href: "/#precios" },
+      { label: "Clientes", href: "/#testimonios" },
+    ],
   },
   {
     title: "Ayuda",
-    links: ["Preguntas frecuentes", "Cobertura", "Garantia", "Contacto"],
+    links: [
+      { label: "Preguntas frecuentes", href: "/#faq" },
+      { label: "Cotizar", href: "/#cotizar" },
+      { label: "Servicios", href: "/servicios" },
+      { label: "Contacto", href: "/#cotizar" },
+    ],
   },
 ];
 const year = 2026;
@@ -28,7 +43,7 @@ const year = 2026;
   <div class="container-x py-16">
     <div class="grid gap-10 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
       <div>
-        <a href="#inicio" class="flex items-center gap-2.5">
+        <a href="/#inicio" class="flex items-center gap-2.5">
           <span class="grid h-9 w-9 place-items-center rounded-xl bg-primary text-accent">
             <Icon name="hugeicons:wrench-01" class="h-5 w-5" />
           </span>
@@ -42,9 +57,9 @@ const year = 2026;
         </p>
         <div class="mt-5 flex gap-3">
           {
-            social.map((name) => (
-              <a href="#" class="grid h-9 w-9 place-items-center rounded-xl border border-border text-muted-foreground transition-colors hover:bg-primary hover:text-primary-foreground">
-                <Icon name={name} class="h-4 w-4" />
+            social.map((s) => (
+              <a href={s.href} target="_blank" rel="noopener" aria-label="Red social" class="grid h-9 w-9 place-items-center rounded-xl border border-border text-muted-foreground transition-colors hover:bg-primary hover:text-primary-foreground">
+                <Icon name={s.icon} class="h-4 w-4" />
               </a>
             ))
           }
@@ -58,8 +73,8 @@ const year = 2026;
             <ul class="mt-4 space-y-2.5">
               {c.links.map((l) => (
                 <li>
-                  <a href="#" class="text-sm text-muted-foreground transition-colors hover:text-accent-strong">
-                    {l}
+                  <a href={l.href} class="text-sm text-muted-foreground transition-colors hover:text-accent-strong">
+                    {l.label}
                   </a>
                 </li>
               ))}

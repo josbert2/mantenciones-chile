@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mantenciones.cl/sitemap-index.xml

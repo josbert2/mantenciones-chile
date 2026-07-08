@@ -1,15 +1,19 @@
 ---
 import "../styles/global.css";
+import Seo from "../components/Seo.astro";
 
 interface Props {
   title?: string;
   description?: string;
+  canonical?: string;
+  image?: string;
+  type?: "website" | "article";
+  noindex?: boolean;
+  jsonLd?: Record<string, unknown>[];
 }
 
-const {
-  title = "Mantenciones Chile — Gasfiteria, electricidad y climatizacion",
-  description = "Servicio tecnico de mantencion para el hogar y empresas en todo Chile. Gasfiteria, electricidad, climatizacion y reparaciones con garantia. Cotiza en minutos.",
-} = Astro.props;
+const { title, description, canonical, image, type, noindex, jsonLd } =
+  Astro.props;
 ---
 
 <!doctype html>
@@ -20,11 +24,15 @@ const {
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
 
-    <title>{title}</title>
-    <meta name="description" content={description} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
+    <Seo
+      title={title}
+      description={description}
+      canonical={canonical}
+      image={image}
+      type={type}
+      noindex={noindex}
+      jsonLd={jsonLd}
+    />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -51,14 +59,15 @@ const {
       }
       requestAnimationFrame(raf);
 
-      // Anclas -> scroll suave con Lenis
-      document.querySelectorAll('a[href^="#"]').forEach((a) => {
+      // Anclas -> scroll suave con Lenis (soporta "#id" y "/#id" en la misma pagina)
+      document.querySelectorAll('a[href*="#"]').forEach((a) => {
+        const url = new URL(a.href, location.href);
+        if (url.pathname !== location.pathname || !url.hash) return;
         a.addEventListener("click", (e) => {
-          const id = a.getAttribute("href");
-          if (!id || id === "#") return;
-          const target = document.querySelector(id);
+          const target = document.querySelector(url.hash);
           if (!target) return;
           e.preventDefault();
+          history.replaceState(null, "", url.hash);
           lenis.scrollTo(target, { offset: -80 });
         });
       });

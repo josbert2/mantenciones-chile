@@ -2,11 +2,11 @@
 import { Icon } from "astro-icon/components";
 
 const links = [
-  { href: "#nosotros", label: "Nosotros" },
-  { href: "#servicios", label: "Servicios" },
-  { href: "#proceso", label: "Proceso" },
-  { href: "#testimonios", label: "Clientes" },
-  { href: "#faq", label: "Contacto" },
+  { href: "/#nosotros", label: "Nosotros" },
+  { href: "/#servicios", label: "Servicios" },
+  { href: "/#proceso", label: "Proceso" },
+  { href: "/#testimonios", label: "Clientes" },
+  { href: "/#faq", label: "Contacto" },
 ];
 ---
 
@@ -14,7 +14,7 @@ const links = [
   <nav
     class="container-x flex h-16 items-center justify-between gap-4 rounded-full border border-border bg-surface/95 pl-4 pr-3 shadow-soft backdrop-blur-md"
   >
-    <a href="#inicio" class="flex items-center gap-2.5">
+    <a href="/#inicio" class="flex items-center gap-2.5">
       <span
         class="grid h-9 w-9 place-items-center rounded-xl bg-primary text-accent"
       >
@@ -43,7 +43,7 @@ const links = [
 
     <div class="flex items-center gap-2">
       <a
-        href="#cotizar"
+        href="/#cotizar"
         class="rounded-full bg-primary px-5 py-2.5 text-xs font-bold uppercase tracking-wide text-primary-foreground transition-transform hover:-translate-y-0.5"
         >Cotizar</a
       >
