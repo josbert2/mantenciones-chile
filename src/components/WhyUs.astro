@@ -1,63 +1,26 @@
 ---
-// Seccion "Nosotros" estilo blueprint (Handymandy): panel de titulo con
-// textura de cruces, handles de seleccion y reveal palabra por palabra +
-// parrafo, y panel de video abajo a la derecha con marco de cruces.
 const heading =
-  "Somos un equipo chileno de mantencion que ayuda a las personas a resolver los arreglos y mejoras de todos los dias.";
-const words = heading.split(" ");
+  "Equipo chileno de mantenimiento. Resolvemos arreglos y mejoras del día a día.";
 ---
 
-<section id="nosotros" class="py-20 lg:py-28">
+<section id="nosotros" class="border-t border-border py-20 lg:py-28">
   <div class="container-x">
-    <div class="grid items-end gap-8 lg:grid-cols-2 lg:gap-0">
-      <div class="blueprint bp-frame p-8 sm:p-10" data-reveal>
-        <span class="handle handle-tl" aria-hidden="true"></span>
-        <span class="handle handle-tr" aria-hidden="true"></span>
-        <span class="handle handle-bl" aria-hidden="true"></span>
-        <span class="handle handle-br" aria-hidden="true"></span>
-        <h2
-          class="reveal-words font-display text-2xl uppercase leading-[1.3] tracking-tight text-[#141414]/80 sm:text-3xl lg:text-[2.25rem]"
-          data-reveal
-        >
-          {
-            words.map((w, i) => (
-              <>
-                <span class="word" style={`--i:${i}`}>
-                  {w}
-                </span>
-                {i < words.length - 1 ? " " : ""}
-              </>
-            ))
-          }
-        </h2>
-      </div>
-
-      <div class="px-2 pb-2 sm:px-8 sm:pb-8" data-reveal>
-        <p class="text-base font-medium leading-relaxed tracking-[-0.01em] text-primary">
-          Nuestro trabajo empezo como empiezan casi todos los buenos servicios
-          locales: ayudando a amigos, vecinos y recomendados con trabajos
-          chicos que no necesitaban una gran constructora, solo alguien
-          confiable que llegara a la hora y lo hiciera bien. Con el tiempo, eso
-          se convirtio en un servicio construido sobre una idea simple: que
-          arreglar tu casa sea algo directo, no un dolor de cabeza.
+    <div class="grid gap-12 lg:grid-cols-2 lg:gap-16">
+      <div data-reveal>
+        <h2 class="text-5xl font-display tracking-tight leading-tight">{heading}</h2>
+        <p class="mt-8 text-lg leading-relaxed text-muted-foreground max-w-lg">
+          Empezamos ayudando a amigos y vecinos con trabajos que no requerían una gran constructora. Solo alguien confiable, puntual y que lo hiciera bien.
+        </p>
+        <p class="mt-6 text-lg leading-relaxed text-muted-foreground max-w-lg">
+          Creemos que arreglar tu casa debe ser directo, sin complicaciones. Sin sorpresas en el precio, sin demoras.
         </p>
       </div>
-    </div>
 
-    <div class="bp-frame mt-8 grid lg:grid-cols-2" data-reveal>
-      <span class="handle handle-tl" aria-hidden="true"></span>
-      <span class="handle handle-tr" aria-hidden="true"></span>
-      <span class="handle handle-bl" aria-hidden="true"></span>
-      <span class="handle handle-br" aria-hidden="true"></span>
-      <span class="handle handle-tm hidden lg:block" aria-hidden="true"></span>
-      <span class="handle handle-bm hidden lg:block" aria-hidden="true"></span>
-      <span class="bp-divider hidden lg:block" aria-hidden="true"></span>
-      <div class="hidden lg:block"></div>
-      <div class="blueprint p-7 sm:p-[30px]">
+      <div data-reveal>
         <video
           src="/media/nosotros.mp4"
           poster="/media/nosotros-poster.jpg"
-          class="aspect-[551/290] w-full rounded-[20px] object-cover"
+          class="w-full aspect-video object-cover"
           autoplay
           muted
           loop

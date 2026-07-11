@@ -1,0 +1,279 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<div id="chatbot-whatsapp" class="fixed bottom-5 right-5 z-50">
+  <!-- Botón flotante -->
+  <button
+    id="chatbot-trigger"
+    aria-label="Abrir chat de WhatsApp"
+    class="grid h-14 w-14 place-items-center rounded-full bg-primary text-white shadow-soft transition-transform hover:-translate-y-1 hover:scale-110"
+  >
+    <Icon name="hugeicons:whatsapp" class="h-7 w-7" />
+  </button>
+
+  <!-- Modal -->
+  <div
+    id="chatbot-modal"
+    class="pointer-events-none absolute bottom-20 right-0 w-80 overflow-hidden rounded-2xl bg-white shadow-soft opacity-0 transition-all duration-300"
+  >
+    <div class="bg-primary px-6 py-4 text-white">
+      <h3 class="font-bold">Contacto rápido</h3>
+      <p class="text-xs text-primary-foreground/80 mt-1">¿Qué necesitas?</p>
+    </div>
+
+    <div class="space-y-2 p-4">
+      <!-- Paso 1: Tipo cliente -->
+      <div class="step" data-step="1">
+        <p class="mb-3 text-sm font-bold text-foreground">¿Eres empresa o particular?</p>
+        <div class="flex flex-col gap-2">
+          <button
+            class="step-btn rounded-lg border border-border bg-surface px-4 py-2.5 text-sm font-medium transition-colors hover:bg-muted"
+            data-value="particular"
+            data-next-step="2-particular"
+          >
+            Particular
+          </button>
+          <button
+            class="step-btn rounded-lg border border-border bg-surface px-4 py-2.5 text-sm font-medium transition-colors hover:bg-muted"
+            data-value="empresa"
+            data-next-step="2-empresa"
+          >
+            Empresa / Condóminio
+          </button>
+        </div>
+      </div>
+
+      <!-- Paso 2a: Particular - Emergencia o cotización -->
+      <div class="step hidden" data-step="2-particular">
+        <p class="mb-3 text-sm font-bold text-foreground">¿Es emergencia o cotización?</p>
+        <div class="flex flex-col gap-2">
+          <button
+            class="step-btn rounded-lg border border-danger/30 bg-danger/5 px-4 py-2.5 text-sm font-medium text-danger transition-colors hover:bg-danger/10"
+            data-value="emergencia"
+            data-next-step="3-emergencia"
+          >
+            ⚠️ Emergencia
+          </button>
+          <button
+            class="step-btn rounded-lg border border-border bg-surface px-4 py-2.5 text-sm font-medium transition-colors hover:bg-muted"
+            data-value="cotizacion"
+            data-next-step="3-cotizacion"
+          >
+            Solicitar cotización
+          </button>
+        </div>
+      </div>
+
+      <!-- Paso 2b: Empresa - Tipo -->
+      <div class="step hidden" data-step="2-empresa">
+        <p class="mb-3 text-sm font-bold text-foreground">¿Qué tipo de empresa?</p>
+        <div class="space-y-2">
+          <button
+            class="step-btn w-full rounded-lg border border-border bg-surface px-4 py-2 text-xs font-medium text-left transition-colors hover:bg-muted"
+            data-value="condominio"
+            data-next-step="3-cotizacion"
+          >
+            Condóminio / Edificio
+          </button>
+          <button
+            class="step-btn w-full rounded-lg border border-border bg-surface px-4 py-2 text-xs font-medium text-left transition-colors hover:bg-muted"
+            data-value="hotel-restaurante"
+            data-next-step="3-cotizacion"
+          >
+            Hotel / Restaurante
+          </button>
+          <button
+            class="step-btn w-full rounded-lg border border-border bg-surface px-4 py-2 text-xs font-medium text-left transition-colors hover:bg-muted"
+            data-value="educacion-salud"
+            data-next-step="3-cotizacion"
+          >
+            Colegio / Clínica / Universidad
+          </button>
+          <button
+            class="step-btn w-full rounded-lg border border-border bg-surface px-4 py-2 text-xs font-medium text-left transition-colors hover:bg-muted"
+            data-value="industrial"
+            data-next-step="3-cotizacion"
+          >
+            Empresa Industrial / Comercial
+          </button>
+        </div>
+      </div>
+
+      <!-- Paso 3: Seleccionar servicio -->
+      <div class="step hidden max-h-48 overflow-y-auto" data-step="3-emergencia">
+        <p class="mb-3 text-sm font-bold text-danger">Emergencia: ¿Qué tipo?</p>
+        <div class="space-y-2">
+          <button
+            class="step-btn w-full rounded-lg border border-primary/30 bg-primary/5 px-3 py-1.5 text-xs font-medium text-left transition-colors hover:bg-primary/10"
+            data-service="Reventón de cañería / Inundación"
+            data-send-whatsapp
+          >
+            Reventón / Inundación
+          </button>
+          <button
+            class="step-btn w-full rounded-lg border border-primary/30 bg-primary/5 px-3 py-1.5 text-xs font-medium text-left transition-colors hover:bg-primary/10"
+            data-service="Corte de luz / Cortocircuito"
+            data-send-whatsapp
+          >
+            Falla eléctrica
+          </button>
+          <button
+            class="step-btn w-full rounded-lg border border-primary/30 bg-primary/5 px-3 py-1.5 text-xs font-medium text-left transition-colors hover:bg-primary/10"
+            data-service="Emergencia de cerrajería"
+            data-send-whatsapp
+          >
+            Cerrajería urgente
+          </button>
+          <button
+            class="step-btn w-full rounded-lg border border-primary/30 bg-primary/5 px-3 py-1.5 text-xs font-medium text-left transition-colors hover:bg-primary/10"
+            data-service="Destape urgente"
+            data-send-whatsapp
+          >
+            Destape urgente
+          </button>
+        </div>
+      </div>
+
+      <div class="step hidden max-h-48 overflow-y-auto" data-step="3-cotizacion">
+        <p class="mb-3 text-sm font-bold text-foreground">¿Qué servicio necesitas?</p>
+        <div class="space-y-2">
+          <button
+            class="step-btn w-full rounded-lg border border-border bg-surface px-3 py-1.5 text-xs font-medium text-left transition-colors hover:bg-muted"
+            data-service="Hidrojet / Destapes"
+            data-send-whatsapp
+          >
+            Hidrojet y Destapes
+          </button>
+          <button
+            class="step-btn w-full rounded-lg border border-border bg-surface px-3 py-1.5 text-xs font-medium text-left transition-colors hover:bg-muted"
+            data-service="Gasfitería"
+            data-send-whatsapp
+          >
+            Gasfitería
+          </button>
+          <button
+            class="step-btn w-full rounded-lg border border-border bg-surface px-3 py-1.5 text-xs font-medium text-left transition-colors hover:bg-muted"
+            data-service="Cerrajería"
+            data-send-whatsapp
+          >
+            Cerrajería y Estructuras
+          </button>
+          <button
+            class="step-btn w-full rounded-lg border border-border bg-surface px-3 py-1.5 text-xs font-medium text-left transition-colors hover:bg-muted"
+            data-service="Obras civiles"
+            data-send-whatsapp
+          >
+            Obras Civiles
+          </button>
+          <button
+            class="step-btn w-full rounded-lg border border-border bg-surface px-3 py-1.5 text-xs font-medium text-left transition-colors hover:bg-muted"
+            data-service="Limpiezas industriales"
+            data-send-whatsapp
+          >
+            Limpiezas Industriales
+          </button>
+          <button
+            class="step-btn w-full rounded-lg border border-border bg-surface px-3 py-1.5 text-xs font-medium text-left transition-colors hover:bg-muted"
+            data-service="Pinturas corporativas"
+            data-send-whatsapp
+          >
+            Pinturas Corporativas
+          </button>
+          <button
+            class="step-btn w-full rounded-lg border border-border bg-surface px-3 py-1.5 text-xs font-medium text-left transition-colors hover:bg-muted"
+            data-service="Ferretería industrial"
+            data-send-whatsapp
+          >
+            Ferretería Industrial
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const trigger = document.getElementById("chatbot-trigger");
+  const modal = document.getElementById("chatbot-modal");
+  const steps = document.querySelectorAll(".step");
+  const stepBtns = document.querySelectorAll(".step-btn");
+
+  let currentStep = "1";
+  let userData = {
+    tipoCliente: "",
+    tipoEmpresa: "",
+    tipoContacto: "",
+    servicio: "",
+  };
+
+  // Toggle modal
+  trigger?.addEventListener("click", () => {
+    modal?.classList.toggle("pointer-events-none");
+    modal?.classList.toggle("opacity-0");
+  });
+
+  // Step navigation
+  stepBtns.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      const value = btn.dataset.value;
+      const nextStep = btn.dataset.nextStep;
+      const service = btn.dataset.service;
+
+      // Store data
+      if (value === "particular" || value === "empresa") userData.tipoCliente = value;
+      if (value === "condominio" || value === "hotel-restaurante" || value === "educacion-salud" || value === "industrial")
+        userData.tipoEmpresa = value;
+      if (value === "emergencia" || value === "cotizacion") userData.tipoContacto = value;
+      if (service) userData.servicio = service;
+
+      // Check if this is a send button
+      if (btn.dataset.sendWhatsapp !== undefined) {
+        sendToWhatsApp();
+        return;
+      }
+
+      // Show next step
+      if (nextStep) {
+        steps.forEach((s) => s.classList.add("hidden"));
+        document.querySelector(`[data-step="${nextStep}"]`)?.classList.remove("hidden");
+        currentStep = nextStep;
+      }
+    });
+  });
+
+  function sendToWhatsApp() {
+    const phone = "56912345678";
+    const isEmergency = userData.tipoContacto === "emergencia";
+    const prefix = isEmergency ? "🚨 EMERGENCIA" : "📋 COTIZACIÓN";
+
+    const message = `${prefix}
+Cliente: ${userData.tipoCliente === "empresa" ? `Empresa (${userData.tipoEmpresa})` : "Particular"}
+Servicio: ${userData.servicio}
+Tipo: ${userData.tipoContacto === "emergencia" ? "Urgente" : "Cotización"}
+
+Necesito más información.`;
+
+    const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, "_blank");
+
+    // Close modal
+    modal?.classList.add("pointer-events-none", "opacity-0");
+
+    // Reset
+    currentStep = "1";
+    userData = { tipoCliente: "", tipoEmpresa: "", tipoContacto: "", servicio: "" };
+    steps.forEach((s) => s.classList.add("hidden"));
+    document.querySelector('[data-step="1"]')?.classList.remove("hidden");
+  }
+
+  // Close on outside click
+  document.addEventListener("click", (e) => {
+    if (
+      !modal?.contains(e.target as Node) &&
+      !trigger?.contains(e.target as Node)
+    ) {
+      modal?.classList.add("pointer-events-none", "opacity-0");
+    }
+  });
+</script>

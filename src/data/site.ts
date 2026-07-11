@@ -1,14 +1,14 @@
 export const site = {
-  name: "Mantenciones Chile",
-  legalName: "Mantenciones Chile SpA",
-  url: "https://mantenciones.cl",
+  name: "Más de Chile",
+  legalName: "Más de Chile SpA",
+  url: "https://www.masdechile.cl",
   shortDescription:
-    "Servicio tecnico de mantencion para el hogar y empresas en Chile.",
+    "Servicios técnicos especializados para empresas, condominios y hogares en la Región Metropolitana.",
   description:
-    "Gasfiteria, electricidad, climatizacion y reparaciones con tecnicos certificados. Cotizacion clara, garantia de 90 dias y atencion en 24 hrs en todo Chile.",
+    "Hidrojet, gasfitería, cerrajería, estructuras metálicas, obras civiles, limpiezas industriales y pinturas corporativas. Emergencias 24/7 en toda la RM.",
   phone: "+56912345678",
   phoneDisplay: "+56 9 1234 5678",
-  email: "hola@mantenciones.cl",
+  email: "contacto@masdechile.cl",
   whatsapp: "56912345678",
   locale: "es_CL",
   lang: "es",

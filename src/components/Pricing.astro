@@ -1,6 +1,4 @@
 ---
-import { Icon } from "astro-icon/components";
-
 const plans = [
   {
     name: "Visita puntual",
@@ -8,10 +6,10 @@ const plans = [
     period: "por visita",
     desc: "Para ese arreglo que necesitas resolver hoy.",
     features: [
-      "Diagnostico en terreno",
-      "Cotizacion sin compromiso",
-      "Garantia de 90 dias",
-      "Atencion en 24 hrs",
+      "Diagnóstico en terreno",
+      "Cotización sin compromiso",
+      "Garantía 90 días",
+      "Atención en 24 hrs",
     ],
     cta: "Agendar visita",
     featured: false,
@@ -20,26 +18,26 @@ const plans = [
     name: "Plan Hogar",
     price: "$34.900",
     period: "por mes",
-    desc: "Mantencion preventiva para que nada se rompa de golpe.",
+    desc: "Mantenimiento preventivo. Sin sorpresas.",
     features: [
-      "2 visitas preventivas al mes",
+      "2 visitas preventivas mensuales",
       "Prioridad en emergencias",
-      "15% de descuento en repuestos",
-      "Reporte mensual de tu hogar",
-      "Soporte por WhatsApp",
+      "15% descuento en repuestos",
+      "Reporte mensual",
+      "Soporte WhatsApp",
     ],
     cta: "Contratar plan",
     featured: true,
   },
   {
-    name: "Comunidades y empresas",
+    name: "Empresas y edificios",
     price: "A medida",
-    period: "cotizacion",
-    desc: "Para edificios, oficinas y locales con multiples equipos.",
+    period: "cotización",
+    desc: "Para oficinas, locales y comunidades.",
     features: [
-      "Tecnico asignado a tu propiedad",
-      "Plan de mantencion anual",
-      "Facturacion y ordenes de trabajo",
+      "Técnico asignado",
+      "Plan mantenimiento anual",
+      "Facturación y OT",
       "Cobertura 24/7",
     ],
     cta: "Hablar con ventas",
@@ -48,80 +46,47 @@ const plans = [
 ];
 ---
 
-<section id="precios" class="py-20 lg:py-28">
+<section id="precios" class="border-t border-border py-20 lg:py-28">
   <div class="container-x">
-    <div class="mx-auto max-w-2xl text-center" data-reveal>
-      <span class="text-sm font-bold uppercase tracking-widest text-accent-strong"
-        >Planes</span
-      >
-      <h2
-        class="mt-3 text-3xl font-display uppercase tracking-tight text-primary sm:text-4xl"
-      >
-        Precios simples, sin letra chica
-      </h2>
-      <p class="mt-4 text-lg text-muted-foreground">
-        Paga por lo que necesitas o contrata un plan y olvidate de los
-        imprevistos.
-      </p>
+    <div class="mb-16" data-reveal>
+      <h2 class="text-5xl font-display tracking-tight">Precios simples</h2>
+      <p class="mt-6 max-w-2xl text-lg text-muted-foreground leading-relaxed">Sin letra chica. Paga por lo que necesitas o contrata un plan.</p>
     </div>
 
-    <div class="mt-14 grid items-stretch gap-6 lg:grid-cols-3">
+    <div class="grid gap-8 lg:grid-cols-3">
       {
         plans.map((p) => (
           <article
             data-reveal
-            class={`flex flex-col rounded-3xl border p-8 ${
-              p.featured
-                ? "border-primary bg-primary text-primary-foreground shadow-soft lg:-translate-y-3"
-                : "border-border bg-surface"
+            class={`flex flex-col border-l-4 pl-6 py-4 ${
+              p.featured ? "border-l-primary" : "border-l-primary/30"
             }`}
           >
             {p.featured && (
-              <span class="mb-4 inline-flex w-fit rounded-full bg-accent px-3 py-1 text-xs font-bold text-accent-foreground">
-                Mas elegido
+              <span class="mb-3 inline-flex w-fit text-xs font-bold text-primary uppercase">
+                Más popular
               </span>
             )}
-            <h3
-              class={`text-lg font-bold ${p.featured ? "" : "text-primary"}`}
-            >
-              {p.name}
-            </h3>
-            <p
-              class={`mt-1 text-sm ${p.featured ? "text-primary-foreground/70" : "text-muted-foreground"}`}
-            >
-              {p.desc}
-            </p>
-            <div class="mt-6 flex items-baseline gap-1.5">
-              <span
-                class={`text-4xl font-extrabold ${p.featured ? "" : "text-primary"}`}
-              >
-                {p.price}
-              </span>
-              <span
-                class={`text-sm ${p.featured ? "text-primary-foreground/60" : "text-muted-foreground"}`}
-              >
-                {p.period}
-              </span>
+            <h3 class="text-lg font-bold text-foreground">{p.name}</h3>
+            <p class="mt-2 text-sm text-muted-foreground">{p.desc}</p>
+
+            <div class="mt-6 mb-8 flex items-baseline gap-1.5">
+              <span class="text-3xl font-bold text-foreground">{p.price}</span>
+              <span class="text-sm text-muted-foreground">{p.period}</span>
             </div>
 
-            <ul class="mt-7 flex-1 space-y-3">
+            <ul class="space-y-2 mb-8 flex-1">
               {p.features.map((f) => (
-                <li class="flex items-center gap-2.5 text-sm">
-                  <Icon
-                    name="hugeicons:tick-02"
-                    class={`h-[18px] w-[18px] shrink-0 ${p.featured ? "text-accent" : "text-success"}`}
-                  />
-                  <span class={p.featured ? "" : "text-foreground"}>{f}</span>
-                </li>
+                <li class="text-sm text-muted-foreground">• {f}</li>
               ))}
             </ul>
 
             <a
               href="#cotizar"
-              class={`mt-8 rounded-full px-5 py-3 text-center text-sm font-semibold transition-transform hover:-translate-y-0.5 ${
+              class={`px-4 py-2 text-center font-bold border text-sm transition ${
                 p.featured
-                  ? "bg-accent text-accent-foreground"
-                  : "bg-primary text-primary-foreground"
+                  ? "bg-primary text-white border-primary hover:bg-primary/90"
+                  : "border-primary text-primary hover:bg-primary/5"
               }`}
             >
               {p.cta}

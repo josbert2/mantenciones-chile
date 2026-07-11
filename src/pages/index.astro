@@ -2,7 +2,10 @@
 import Layout from "../layouts/Layout.astro";
 import Nav from "../components/Nav.astro";
 import Hero from "../components/Hero.astro";
+import HeroRefit from "../components/HeroRefit.astro";
 import Services from "../components/Services.astro";
+import CasosExito from "../components/CasosExito.astro";
+import Equipo from "../components/Equipo.astro";
 import WhyUs from "../components/WhyUs.astro";
 import Process from "../components/Process.astro";
 import Testimonials from "../components/Testimonials.astro";
@@ -10,38 +13,32 @@ import Pricing from "../components/Pricing.astro";
 import Faq from "../components/Faq.astro";
 import Cotizar from "../components/Cotizar.astro";
 import Footer from "../components/Footer.astro";
-import { Icon } from "astro-icon/components";
+import ChatbotWhatsapp from "../components/ChatbotWhatsapp.astro";
 import { localBusiness, websiteSchema } from "../lib/schema";
 
 const jsonLd = [localBusiness(), websiteSchema()];
 ---
 
 <Layout
-  title="Mantenciones Chile — Gasfiteria, electricidad y climatizacion"
-  description="Servicio tecnico de mantencion para hogar y empresas en Chile. Gasfiteria, electricidad, climatizacion y emergencias 24/7. Cotizacion clara y garantia de 90 dias."
+  title="Más de Chile — Servicios técnicos especializados RM"
+  description="Hidrojet, gasfitería, cerrajería, obras civiles, emergencias 24/7 y más. Servicios técnicos profesionales para empresas, condominios y hogares en la Región Metropolitana."
   jsonLd={jsonLd}
 >
   <Nav />
   <main>
     <Hero />
     <Services />
+    <CasosExito />
+    <Equipo />
     <WhyUs />
     <Process />
     <Testimonials />
+    <HeroRefit />
     <Pricing />
     <Faq />
     <Cotizar />
   </main>
   <Footer />
 
-  <!-- WhatsApp flotante -->
-  <a
-    href="https://wa.me/56912345678?text=Hola!%20Quiero%20mas%20informacion%20sobre%20sus%20servicios%20de%20mantencion."
-    target="_blank"
-    rel="noopener"
-    aria-label="Escribir por WhatsApp"
-    class="fixed bottom-5 right-5 z-50 grid h-14 w-14 place-items-center rounded-full bg-success text-white shadow-soft transition-transform hover:-translate-y-1"
-  >
-    <Icon name="hugeicons:whatsapp" class="h-7 w-7" />
-  </a>
+  <ChatbotWhatsapp />
 </Layout>

@@ -1,0 +1,412 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<style>
+  :root {
+    --lt-color-gray-900: #111213;
+    --lt-color-gray-800: #1d1e20;
+    --lt-color-black: #111213;
+    --lt-color-white: #fff;
+    --lt-color-gray-500: #8f96a3;
+    --lt-color-gray-600: #5e636e;
+    --lt-color-background-dark: #dee3ed;
+    --lt-color-text-very-light: #8f96a3;
+    --lt-shadow-default: 0 2px 6px -1px rgba(0, 0, 0, 0.16), 0 1px 4px -1px rgba(0, 0, 0, 0.04);
+  }
+
+  .hero-banner {
+    background-color: transparent;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    width: 100%;
+    max-width: 1400px;
+    margin: 40px auto;
+    padding: 60px;
+    gap: 40px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+    background: #1a1a1a;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .hero-background {
+    grid-column: 2;
+    grid-row: 1;
+    width: 100%;
+    height: auto;
+    min-height: 400px;
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
+    border-radius: 2px;
+  }
+
+  .hero-image-wrapper {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    border-radius: 2px;
+  }
+
+  .hero-image-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+
+  .hero-image {
+    border-radius: 2px;
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  .hero-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 2px;
+    object-fit: cover;
+    object-position: center;
+    animation: fadeIn 1s ease-out 0.2s both;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .hero-overlay-top {
+    background: linear-gradient(180deg, #101014 0%, #ababab00 100%);
+    opacity: 0.8;
+    z-index: 1;
+    width: 100%;
+    height: 20%;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .hero-container {
+    grid-column: 1;
+    grid-row: 1;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    height: auto;
+    padding: 0;
+    position: relative;
+  }
+
+  .hero-container-inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 30px;
+    width: 100%;
+    animation: fadeInUp 0.8s ease-out;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .hero-badge {
+    background-color: #2a2a2a;
+    border-radius: 2px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: min-content;
+    padding: 5px 12px 6px;
+    position: relative;
+    animation: scaleIn 0.6s ease-out;
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .hero-badge-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #fff;
+    border-radius: 50%;
+  }
+
+  .hero-badge-text {
+    font-size: 12px;
+    color: #d0d1db;
+  }
+
+  .hero-title {
+    font-family: "Playfair Display", serif;
+    font-size: 52px;
+    font-weight: 600;
+    line-height: 115%;
+    letter-spacing: -0.8px;
+    color: #fff;
+    margin: 0;
+  }
+
+  .hero-description {
+    font-family: "Inter", sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 160%;
+    letter-spacing: -0.2px;
+    color: #d0d1db;
+    margin: 0;
+    width: 100%;
+  }
+
+  .hero-cta-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 40px;
+    width: 100%;
+    padding-right: 100px;
+  }
+
+  .hero-cta-button {
+    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    padding: 9px 12px 11px 26px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .hero-cta-button:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+  }
+
+  .hero-cta-text {
+    font-family: "Manrope", sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: #fff;
+  }
+
+  .hero-cta-arrow {
+    width: 40px;
+    height: 40px;
+    background-color: #fff;
+    border-radius: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hero-review-card {
+    backdrop-filter: blur(15px);
+    z-index: 10;
+    background-color: rgba(255, 255, 255, 0.06);
+    border-radius: 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 10px;
+    width: 280px;
+    padding: 20px 30px 30px;
+    position: absolute;
+    bottom: -30px;
+    right: 60px;
+    border: 1px solid rgba(208, 209, 219, 0.2);
+    animation: slideInUp 0.6s ease-out 0.3s both;
+  }
+
+  @keyframes slideInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .hero-stars {
+    display: flex;
+    gap: 2px;
+  }
+
+  .hero-stars-item {
+    color: #fff;
+    font-size: 20px;
+  }
+
+  .hero-review-text {
+    font-family: "Manrope", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1em;
+    color: #d0d1db;
+    margin: 0;
+  }
+
+  @media (max-width: 1199px) and (min-width: 810px) {
+    .hero-banner {
+      grid-template-columns: 1fr;
+      padding: 40px;
+      margin: 30px auto;
+    }
+    .hero-background {
+      grid-column: 1;
+      min-height: 350px;
+    }
+    .hero-container {
+      grid-column: 1;
+    }
+    .hero-title {
+      font-size: 40px;
+    }
+  }
+
+  @media (max-width: 809.98px) {
+    .hero-banner {
+      grid-template-columns: 1fr;
+      padding: 30px;
+      margin: 20px auto;
+      gap: 30px;
+    }
+    .hero-background {
+      grid-column: 1;
+      min-height: 280px;
+    }
+    .hero-container {
+      grid-column: 1;
+    }
+    .hero-content {
+      gap: 15px;
+    }
+    .hero-cta-wrapper {
+      gap: 20px;
+      padding: 0px;
+    }
+    .hero-title {
+      font-size: 32px;
+      letter-spacing: -0.8px;
+    }
+    .hero-description {
+      font-size: 16px;
+    }
+    .hero-review-card {
+      display: none;
+    }
+  }
+</style>
+
+<section class="hero-banner" id="banner">
+  <div class="hero-background">
+    <div class="hero-image-wrapper">
+      <div class="hero-image-container">
+        <div class="hero-overlay-top"></div>
+        <div class="hero-image">
+          <img
+            src="https://framerusercontent.com/images/yyYhQHFqAUi9h1nO5lH9iqGVY7o.png?width=1200&height=1200"
+            alt="Más de Chile - Servicios técnicos"
+            width="1200"
+            height="1200"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-container">
+    <div class="hero-container-inner">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="hero-badge-dot"></span>
+          <span class="hero-badge-text">Disponibles ahora</span>
+        </div>
+
+        <h1 class="hero-title">
+          Tu socio de confianza<br/>
+          en servicios técnicos
+        </h1>
+
+        <div class="hero-cta-wrapper">
+          <p class="hero-description">
+            Más de Chile ofrece soluciones profesionales en hidrojet, gasfitería, cerrajería, obras civiles y emergencias 24/7. Técnicos certificados, equipamiento especializado y garantía completa.
+          </p>
+
+          <a href="#cotizar" class="hero-cta-button">
+            <span class="hero-cta-text">Contactar ahora</span>
+            <div class="hero-cta-arrow">
+              <Icon name="hugeicons:arrow-right-01" class="h-5 w-5" style="color: #101014;" />
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-review-card">
+    <div class="hero-stars">
+      <span class="hero-stars-item">★</span>
+      <span class="hero-stars-item">★</span>
+      <span class="hero-stars-item">★</span>
+      <span class="hero-stars-item">★</span>
+      <span class="hero-stars-item">★</span>
+    </div>
+    <p class="hero-review-text">
+      "Excelente servicio, profesionales certificados y respuesta rápida. Muy recomendado para empresas."
+    </p>
+  </div>
+</section>

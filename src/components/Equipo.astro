@@ -1,0 +1,67 @@
+---
+const miembros = [
+  {
+    nombre: "Carlos Méndez",
+    rol: "Gasfitería",
+    especialidad: "25+ años. Residencial y comercial.",
+  },
+  {
+    nombre: "Roberto Silva",
+    rol: "Hidrojet",
+    especialidad: "Especialista en sistemas alta presión. Destapes certificados.",
+  },
+  {
+    nombre: "Jorge Torres",
+    rol: "Cerrajería",
+    especialidad: "Fabricación de portones. Seguridad perimetral.",
+  },
+  {
+    nombre: "David Rojas",
+    rol: "Emergencias 24/7",
+    especialidad: "Coordinador de respuesta. Logística especializada.",
+  },
+];
+
+const equipos = [
+  "Camión Hidrojet 350 bar",
+  "Cámaras endoscópicas",
+  "Equipos de seguridad en altura",
+  "Compresor industrial",
+  "Detectores de tuberías",
+  "Herramientas eléctricas profesionales",
+];
+---
+
+<section id="equipo" class="border-t border-border py-20 lg:py-28">
+  <div class="container-x">
+    <div class="mb-16" data-reveal>
+      <h2 class="text-5xl font-display tracking-tight">Equipo certificado</h2>
+      <p class="mt-6 max-w-2xl text-lg text-muted-foreground leading-relaxed">Profesionales con experiencia. Equipamiento moderno. Certificaciones de seguridad.</p>
+    </div>
+
+    <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 mb-20">
+      {
+        miembros.map((miembro) => (
+          <div data-reveal class="border-l-2 border-primary pl-6 py-2">
+            <h3 class="font-bold text-foreground">{miembro.nombre}</h3>
+            <p class="text-sm text-primary font-semibold mt-1">{miembro.rol}</p>
+            <p class="mt-4 text-sm leading-relaxed text-muted-foreground">{miembro.especialidad}</p>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="border-t border-border pt-20" data-reveal>
+      <h3 class="text-2xl font-bold mb-8">Equipamiento</h3>
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          equipos.map((equipo) => (
+            <div class="border-l-2 border-primary pl-6 py-2">
+              <p class="text-sm font-semibold text-foreground">{equipo}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
