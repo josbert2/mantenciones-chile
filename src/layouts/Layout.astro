@@ -47,7 +47,30 @@ const { title, description, canonical, image, type, noindex, jsonLd } =
     <slot />
 
     <script>
-      // Scroll suave optimizado con scrollIntoView
+      // Smooth scroll simple y ligero
+      function smoothScroll(target, duration = 400) {
+        const start = window.scrollY;
+        const end = target.getBoundingClientRect().top + start - 80;
+        const distance = end - start;
+        let startTime = null;
+
+        function animation(currentTime) {
+          if (startTime === null) startTime = currentTime;
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+
+          // Easing: ease-out-cubic
+          const easeProgress = 1 - Math.pow(1 - progress, 3);
+          window.scrollTo(0, start + distance * easeProgress);
+
+          if (progress < 1) {
+            requestAnimationFrame(animation);
+          }
+        }
+
+        requestAnimationFrame(animation);
+      }
+
       document.querySelectorAll('a[href*="#"]').forEach((a) => {
         const url = new URL(a.href, location.href);
         if (url.pathname !== location.pathname || !url.hash) return;
@@ -56,7 +79,7 @@ const { title, description, canonical, image, type, noindex, jsonLd } =
           if (!target) return;
           e.preventDefault();
           history.replaceState(null, "", url.hash);
-          target.scrollIntoView({ behavior: "smooth", block: "start" });
+          smoothScroll(target);
         });
       });
 
