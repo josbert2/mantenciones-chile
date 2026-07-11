@@ -1,0 +1,345 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<style>
+  .banner {
+    position: relative;
+    width: 100%;
+    height: 945px;
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    overflow: hidden;
+    background-color: #1a1a1a;
+  }
+
+  .banner-background {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+
+  .banner-image-wrapper {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .banner-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .overlay-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 20%;
+    background: linear-gradient(180deg, #101014 0%, #ababab00 100%);
+    opacity: 0.8;
+    z-index: 1;
+  }
+
+  .banner-container {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 60px 40px;
+    z-index: 2;
+    max-width: 1680px;
+    margin: 0 auto;
+  }
+
+  .banner-content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    max-width: 600px;
+    animation: fadeInUp 0.8s ease-out;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .banner-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50px;
+    padding: 8px 16px;
+    width: fit-content;
+    animation: scaleIn 0.6s ease-out;
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .badge-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #ffffff;
+    border-radius: 50%;
+  }
+
+  .badge-text {
+    font-family: "Inter", sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: #ffffff;
+  }
+
+  .banner-title {
+    font-family: "Inter", sans-serif;
+    font-size: 80px;
+    font-weight: 700;
+    line-height: 115%;
+    letter-spacing: -1px;
+    color: #ffffff;
+    margin: 0;
+  }
+
+  .banner-description {
+    font-family: "Inter", sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 160%;
+    letter-spacing: -0.2px;
+    color: #d0d1db;
+    margin: 0;
+  }
+
+  .banner-cta {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  .btn-cta {
+    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50px;
+    padding: 12px 30px;
+    font-family: "Inter", sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: #ffffff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+
+  .btn-cta:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+  }
+
+  .btn-arrow {
+    width: 40px;
+    height: 40px;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .btn-arrow:hover {
+    background-color: #f0f0f0;
+    transform: translateY(-2px);
+  }
+
+  .btn-arrow :global(svg) {
+    width: 24px;
+    height: 24px;
+    color: #1a1a1a;
+  }
+
+  .review-card {
+    position: absolute;
+    bottom: 60px;
+    right: 60px;
+    backdrop-filter: blur(15px);
+    background-color: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(208, 209, 219, 0.2);
+    border-radius: 12px;
+    padding: 20px 30px;
+    max-width: 320px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    animation: slideInUp 0.6s ease-out 0.3s both;
+    z-index: 3;
+  }
+
+  @keyframes slideInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .review-stars {
+    display: flex;
+    gap: 2px;
+  }
+
+  .star {
+    color: #ffffff;
+    font-size: 18px;
+  }
+
+  .review-text {
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #d0d1db;
+    margin: 0;
+  }
+
+  @media (max-width: 1199px) {
+    .banner {
+      height: 700px;
+    }
+
+    .banner-container {
+      padding: 40px;
+    }
+
+    .banner-title {
+      font-size: 56px;
+    }
+
+    .review-card {
+      display: none;
+    }
+  }
+
+  @media (max-width: 809px) {
+    .banner {
+      height: 600px;
+    }
+
+    .banner-container {
+      padding: 30px 20px;
+    }
+
+    .banner-content {
+      max-width: 100%;
+    }
+
+    .banner-title {
+      font-size: 36px;
+      letter-spacing: -0.5px;
+    }
+
+    .banner-description {
+      font-size: 16px;
+    }
+
+    .review-card {
+      display: none;
+    }
+  }
+</style>
+
+<section class="banner">
+  <div class="banner-background">
+    <div class="banner-image-wrapper">
+      <img
+        class="banner-image"
+        src="https://framerusercontent.com/images/yyYhQHFqAUi9h1nO5lH9iqGVY7o.png?width=1200&height=1200"
+        alt="Más de Chile - Servicios técnicos profesionales"
+        width="1200"
+        height="1200"
+      />
+      <div class="overlay-top"></div>
+    </div>
+  </div>
+
+  <div class="banner-container">
+    <div class="banner-content">
+      <div class="banner-badge">
+        <span class="badge-dot"></span>
+        <span class="badge-text">Disponibles 24/7</span>
+      </div>
+
+      <h1 class="banner-title">
+        Tu socio confiable en servicios técnicos
+      </h1>
+
+      <p class="banner-description">
+        Soluciones profesionales con técnicos certificados, equipamiento especializado y garantía completa. Disponibles para emergencias 24/7 en toda la Región Metropolitana.
+      </p>
+
+      <div class="banner-cta">
+        <a href="#cotizar" class="btn-cta">
+          Solicitar servicio
+        </a>
+        <button class="btn-arrow" aria-label="Ir a contacto">
+          <Icon name="hugeicons:arrow-right-01" />
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="review-card">
+    <div class="review-stars">
+      <span class="star">★</span>
+      <span class="star">★</span>
+      <span class="star">★</span>
+      <span class="star">★</span>
+      <span class="star">★</span>
+    </div>
+    <p class="review-text">
+      "Excelente servicio profesional. Técnicos certificados, respuesta rápida en emergencias. Muy recomendado."
+    </p>
+  </div>
+</section>
