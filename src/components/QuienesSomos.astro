@@ -4,81 +4,126 @@
 <style>
   .about-section {
     width: 100%;
-    padding: 120px 40px;
+    padding: 160px 40px;
     background-color: #ffffff;
     display: flex;
     justify-content: center;
+    align-items: center;
   }
 
   .about-container {
-    max-width: 800px;
+    max-width: 750px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  .about-header {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid #cccccc;
   }
 
   .about-label {
     font-family: "Inter", sans-serif;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 600;
-    letter-spacing: 1.5px;
+    letter-spacing: 2.5px;
     text-transform: uppercase;
-    color: #000000;
-    margin: 0 0 24px 0;
+    color: #8b0000;
+    margin: 0;
   }
 
   .about-title {
     font-family: "Inter", sans-serif;
-    font-size: 64px;
-    font-weight: 700;
-    line-height: 130%;
-    letter-spacing: -1.5px;
+    font-size: 56px;
+    font-weight: 500;
+    line-height: 140%;
+    letter-spacing: -1.2px;
     color: #000000;
-    margin: 0 0 32px 0;
+    margin: 0;
   }
 
   .about-accent {
+    font-weight: 700;
     color: #8b0000;
   }
 
+  .about-footer {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+
   .btn-learn-more {
-    background-color: #000000;
-    color: #ffffff;
-    border: none;
+    background-color: transparent;
+    color: #000000;
+    border: 1px solid #000000;
     border-radius: 2px;
-    padding: 12px 28px;
+    padding: 14px 36px;
     font-family: "Inter", sans-serif;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 1px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
     text-transform: uppercase;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
     text-decoration: none;
     display: inline-block;
+    white-space: nowrap;
   }
 
   .btn-learn-more:hover {
-    background-color: #8b0000;
+    background-color: #000000;
+    color: #ffffff;
+    letter-spacing: 2px;
   }
 
   @media (max-width: 809px) {
     .about-section {
-      padding: 80px 20px;
+      padding: 100px 20px;
+    }
+
+    .about-container {
+      gap: 40px;
     }
 
     .about-title {
-      font-size: 42px;
+      font-size: 40px;
+      line-height: 135%;
       letter-spacing: -0.8px;
+    }
+
+    .about-header {
+      gap: 10px;
+      padding-bottom: 32px;
+    }
+
+    .about-footer {
+      gap: 20px;
+    }
+
+    .btn-learn-more {
+      padding: 12px 28px;
+      font-size: 10px;
     }
   }
 </style>
 
 <section class="about-section">
   <div class="about-container">
-    <p class="about-label">Quiénes somos</p>
+    <div class="about-header">
+      <p class="about-label">Quiénes somos</p>
+      <h2 class="about-title">
+        Desde nuestros inicios, Más de Chile ha proporcionado <span class="about-accent">servicios técnicos especializados</span> en toda la Región Metropolitana.
+      </h2>
+    </div>
 
-    <h2 class="about-title">
-      Desde nuestros inicios, Más de Chile ha proporcionado <span class="about-accent">servicios técnicos especializados</span> en hidrojet, gasfitería, cerrajería y emergencias 24/7.
-    </h2>
-
-    <a href="#cotizar" class="btn-learn-more">Learn more</a>
+    <div class="about-footer">
+      <a href="#cotizar" class="btn-learn-more">Learn more</a>
+    </div>
   </div>
 </section>
