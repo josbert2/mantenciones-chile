@@ -1,0 +1,85 @@
+---
+const cdn = (id: string) =>
+  `https://framerusercontent.com/images/${id}.png?scale-down-to=512&width=2048&height=2048`;
+
+const trabajos = [
+  { img: "8FKXOumsLuAOf81tpPnI3zu2Jg", cat: "Hidrojet & Destapes", loc: "Supermercado · RM" },
+  { img: "vzqNanbKCcj5CLe2o3o7dvcpY", cat: "Gasfitería", loc: "Local comercial · Santiago" },
+  { img: "5AgeMShXPsGp8UgPgzzfhnQJ9c", cat: "Emergencia eléctrica", loc: "Retail · RM" },
+  { img: "h8RHPQdFh0mQtKGjopKy3nIi2A", cat: "Limpieza de campanas", loc: "Gastronomía · Santiago" },
+  { img: "qIjlcu2mcGbEtpBhazcWPQTkIU", cat: "Carpintería & Cerrajería", loc: "Bodega · RM" },
+  { img: "ljcpAUhpHnqi1zhA3LtTu63Cy3U", cat: "Obras civiles", loc: "Estacionamiento · Santiago" },
+];
+---
+
+<section
+  id="galeria"
+  class="relative overflow-hidden border-b border-white/10 bg-ink py-24 text-background lg:py-32"
+>
+  <div class="tech-grid pointer-events-none absolute inset-0 opacity-50"></div>
+
+  <div class="container-x relative">
+    <div
+      class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between"
+      data-reveal
+    >
+      <div class="max-w-xl">
+        <p class="eyebrow flex items-center gap-2.5 !text-primary">
+          <span class="h-px w-8 bg-primary"></span>
+          Nuestros trabajos
+        </p>
+        <h2
+          class="mt-6 font-display text-3xl font-extrabold uppercase leading-[1.02] tracking-[-0.02em] text-background sm:text-4xl lg:text-[2.9rem]"
+        >
+          Operaciones ejecutadas <span class="text-primary">en terreno</span>.
+        </h2>
+      </div>
+      <p class="max-w-sm text-background/55 lg:text-right">
+        Más de 15.000 soluciones técnicas ejecutadas para retail, supermercados
+        y gastronomía en toda la Región Metropolitana.
+      </p>
+    </div>
+
+    <div class="mt-14 grid grid-cols-2 gap-4 lg:grid-cols-3">
+      {
+        trabajos.map((t, i) => (
+          <figure
+            data-reveal
+            class:list={[
+              "group relative overflow-hidden rounded-md border border-white/10",
+              i === 0 && "col-span-2 lg:col-span-1",
+            ]}
+          >
+            <img
+              src={cdn(t.img)}
+              alt={`${t.cat} — Más de Chile`}
+              width="512"
+              height="384"
+              loading="lazy"
+              decoding="async"
+              class="aspect-[4/3] w-full object-cover grayscale transition-all duration-500 group-hover:scale-[1.04] group-hover:grayscale-0"
+            />
+            <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink via-ink/25 to-transparent" />
+            <figcaption class="absolute inset-x-0 bottom-0 p-4">
+              <p class="font-mono text-[0.62rem] uppercase tracking-[0.16em] text-primary">
+                {t.loc}
+              </p>
+              <p class="mt-1 font-display text-base font-bold text-background">
+                {t.cat}
+              </p>
+            </figcaption>
+          </figure>
+        ))
+      }
+    </div>
+
+    <div class="mt-10 flex justify-center" data-reveal>
+      <a
+        href="#cotizar"
+        class="inline-flex items-center gap-2 rounded-md border border-white/20 px-6 py-3.5 text-sm font-bold uppercase tracking-wide text-background transition-colors hover:border-primary hover:text-primary"
+      >
+        Solicita una visita técnica
+      </a>
+    </div>
+  </div>
+</section>

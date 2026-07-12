@@ -1,72 +1,119 @@
 ---
 import { Icon } from "astro-icon/components";
+import { site } from "../data/site";
 
 const links = [
   { href: "/#nosotros", label: "Nosotros" },
   { href: "/#servicios", label: "Servicios" },
-  { href: "/#proceso", label: "Proceso" },
-  { href: "/#testimonios", label: "Clientes" },
-  { href: "/#faq", label: "Contacto" },
+  { href: "/servicios", label: "Portfolio" },
+  { href: "/#cotizar", label: "Contacto" },
 ];
 ---
 
-<header class="sticky top-4 z-50 px-4">
-  <nav
-    class="container-x flex h-16 items-center justify-between gap-4 rounded-full border border-border bg-surface/95 pl-4 pr-3 shadow-soft backdrop-blur-md"
-  >
-    <a href="/#inicio" class="flex items-center gap-2">
-      <img
-        src="/maschile.svg"
-        alt="Más de Chile"
-        class="h-10 w-10"
-      />
-      <span class="font-display text-base font-bold tracking-tight text-foreground">
-        Más de Chile
+<header data-site-header class="sticky top-0 z-50">
+  <!-- Barra utilitaria -->
+  <div class="hidden border-b border-white/10 bg-ink text-background lg:block">
+    <div
+      class="container-x flex h-9 items-center justify-between font-mono text-[0.66rem] uppercase tracking-[0.15em]"
+    >
+      <span class="text-background/55">
+        Cobertura corporativa · Región Metropolitana
       </span>
-    </a>
+      <div class="flex items-center gap-6 text-background/70">
+        <a href={`tel:${site.phone}`} class="transition-colors hover:text-primary"
+          >{site.phoneDisplay}</a
+        >
+        <span class="text-white/15">/</span>
+        <a
+          href={`mailto:${site.email}`}
+          class="transition-colors hover:text-primary">{site.email}</a
+        >
+      </div>
+    </div>
+  </div>
 
-    <div class="hidden items-center gap-7 lg:flex">
+  <!-- Nav principal -->
+  <div
+    data-nav-bar
+    class="border-b border-border bg-surface/90 backdrop-blur-md transition-shadow"
+  >
+    <nav class="container-x flex h-16 items-center justify-between gap-4">
+      <a href="/#inicio" class="flex items-center gap-2.5">
+        <span
+          class="grid h-9 w-9 place-items-center rounded-md bg-primary text-accent-foreground"
+        >
+          <Icon name="hugeicons:wrench-01" class="h-5 w-5" />
+        </span>
+        <span
+          class="font-display text-lg font-extrabold tracking-tight text-foreground"
+        >
+          Más de Chile
+        </span>
+      </a>
+
+      <div class="hidden items-center gap-9 lg:flex">
+        {
+          links.map((l) => (
+            <a
+              href={l.href}
+              class="relative text-xs font-bold uppercase tracking-[0.08em] text-foreground/65 transition-colors after:absolute after:-bottom-1.5 after:left-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all hover:text-foreground hover:after:w-full"
+            >
+              {l.label}
+            </a>
+          ))
+        }
+      </div>
+
+      <div class="flex items-center gap-3">
+        <a
+          href={`tel:${site.phone}`}
+          class="hidden text-sm font-bold text-foreground xl:block"
+          >{site.phoneDisplay}</a
+        >
+        <a
+          href="/#cotizar"
+          class="rounded-md bg-primary px-5 py-2.5 text-xs font-bold uppercase tracking-wide text-accent-foreground transition-colors hover:bg-accent-strong"
+          >Cotizar</a
+        >
+        <button
+          data-nav-toggle
+          class="grid h-10 w-10 place-items-center rounded-md border border-border text-foreground lg:hidden"
+          aria-label="Abrir menú"
+        >
+          <Icon name="hugeicons:menu-01" class="h-5 w-5" />
+        </button>
+      </div>
+    </nav>
+  </div>
+
+  <div
+    data-nav-menu
+    class="hidden border-b border-border bg-surface lg:hidden"
+  >
+    <div class="container-x flex flex-col py-2">
       {
         links.map((l) => (
           <a
             href={l.href}
-            class="text-xs font-bold uppercase tracking-wide text-foreground/70 transition-colors hover:text-primary"
+            class="rounded-md px-3 py-3 text-sm font-bold uppercase tracking-wide text-foreground hover:bg-muted"
           >
             {l.label}
           </a>
         ))
       }
     </div>
-
-    <div class="flex items-center gap-2">
-      <a
-        href="/#cotizar"
-        class="rounded-full bg-primary px-5 py-2.5 text-xs font-bold uppercase tracking-wide text-primary-foreground transition-transform hover:-translate-y-0.5"
-        >Cotizar</a
-      >
-      <button
-        data-nav-toggle
-        class="grid h-10 w-10 place-items-center rounded-full border border-border text-primary lg:hidden"
-        aria-label="Abrir menu"
-      >
-        <Icon name="hugeicons:menu-01" class="h-5 w-5" />
-      </button>
-    </div>
-  </nav>
-
-  <div
-    data-nav-menu
-    class="container-x mt-2 hidden rounded-3xl border border-border bg-surface p-2 shadow-soft lg:hidden"
-  >
-    {
-      links.map((l) => (
-        <a
-          href={l.href}
-          class="block rounded-xl px-4 py-3 text-sm font-bold uppercase tracking-wide text-foreground hover:bg-muted"
-        >
-          {l.label}
-        </a>
-      ))
-    }
   </div>
 </header>
+
+<script is:inline>
+  (() => {
+    const bar = document.querySelector("[data-nav-bar]");
+    if (!bar) return;
+    const onScroll = () => {
+      if (window.scrollY > 8) bar.classList.add("shadow-soft");
+      else bar.classList.remove("shadow-soft");
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+  })();
+</script>

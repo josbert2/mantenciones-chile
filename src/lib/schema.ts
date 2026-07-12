@@ -34,11 +34,7 @@ export function localBusiness() {
     areaServed: site.areaServed.map((name) => ({ "@type": "Place", name })),
     openingHours: site.openingHours,
     sameAs: site.sameAs,
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: site.rating.value,
-      reviewCount: site.rating.count,
-    },
+    foundingDate: site.founded,
   };
 }
 

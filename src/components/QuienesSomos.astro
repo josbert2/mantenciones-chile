@@ -1,129 +1,105 @@
 ---
+import { Icon } from "astro-icon/components";
+
+const valores = [
+  {
+    icon: "hugeicons:justice-scale-01",
+    title: "Conducta Ética",
+    desc: "Actuamos bajo estrictos principios de integridad, honestidad y compromiso en cada entrega técnica.",
+  },
+  {
+    icon: "hugeicons:security-check",
+    title: "Seguridad & Calidad",
+    desc: "Priorizamos la prevención y la calidad del trabajo, resguardando la infraestructura y las personas.",
+  },
+  {
+    icon: "hugeicons:user-group",
+    title: "Trabajo en Equipo",
+    desc: "Sinergia de técnicos especializados enfocados en los objetivos de nuestros clientes de forma ágil.",
+  },
+];
 ---
 
-<style>
-  .about-section {
-    width: 100%;
-    padding: 160px 40px;
-    background-color: #ffffff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .about-container {
-    max-width: 750px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 48px;
-  }
-
-  .about-header {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    padding-bottom: 48px;
-    border-bottom: 1px solid #cccccc;
-  }
-
-  .about-label {
-    font-family: "Inter", sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    color: #8b0000;
-    margin: 0;
-  }
-
-  .about-title {
-    font-family: "Inter", sans-serif;
-    font-size: 56px;
-    font-weight: 500;
-    line-height: 140%;
-    letter-spacing: -1.2px;
-    color: #000000;
-    margin: 0;
-  }
-
-  .about-accent {
-    font-weight: 700;
-    color: #8b0000;
-  }
-
-  .about-footer {
-    display: flex;
-    align-items: center;
-    gap: 32px;
-  }
-
-  .btn-learn-more {
-    background-color: transparent;
-    color: #000000;
-    border: 1px solid #000000;
-    border-radius: 2px;
-    padding: 14px 36px;
-    font-family: "Inter", sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.4s ease;
-    text-decoration: none;
-    display: inline-block;
-    white-space: nowrap;
-  }
-
-  .btn-learn-more:hover {
-    background-color: #000000;
-    color: #ffffff;
-    letter-spacing: 2px;
-  }
-
-  @media (max-width: 809px) {
-    .about-section {
-      padding: 100px 20px;
-    }
-
-    .about-container {
-      gap: 40px;
-    }
-
-    .about-title {
-      font-size: 40px;
-      line-height: 135%;
-      letter-spacing: -0.8px;
-    }
-
-    .about-header {
-      gap: 10px;
-      padding-bottom: 32px;
-    }
-
-    .about-footer {
-      gap: 20px;
-    }
-
-    .btn-learn-more {
-      padding: 12px 28px;
-      font-size: 10px;
-    }
-  }
-</style>
-
-<section class="about-section">
-  <div class="about-container">
-    <div class="about-header">
-      <p class="about-label">Quiénes somos</p>
-      <h2 class="about-title">
-        Desde nuestros inicios, Más de Chile ha proporcionado <span class="about-accent">servicios técnicos especializados</span> en toda la Región Metropolitana.
+<section id="nosotros" class="border-b border-border py-24 lg:py-32">
+  <div class="container-x">
+    <!-- Identidad -->
+    <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+      <div data-reveal>
+        <p class="eyebrow flex items-center gap-2.5">
+          <span class="h-px w-8 bg-primary"></span>
+          Nuestra identidad
+        </p>
+        <p
+          class="mt-6 font-mono text-sm uppercase tracking-[0.15em] text-muted-foreground"
+        >
+          Desde 2013 · Santiago, RM
+        </p>
+      </div>
+      <h2
+        class="font-display text-3xl font-extrabold uppercase leading-[1.02] tracking-[-0.02em] text-foreground sm:text-4xl lg:text-[2.9rem]"
+        data-reveal
+      >
+        Construimos relaciones de confianza a largo plazo con una cultura
+        orientada a la <span class="text-primary">excelencia operativa</span> y la
+        seguridad.
       </h2>
     </div>
 
-    <div class="about-footer">
-      <a href="#cotizar" class="btn-learn-more">Learn more</a>
+    <!-- Mision & Vision -->
+    <div class="mt-16 grid gap-6 md:grid-cols-2 lg:mt-20">
+      <article
+        class="border-l-2 border-primary bg-surface p-8 shadow-soft lg:p-10"
+        data-reveal
+      >
+        <h3 class="font-display text-xl font-bold uppercase tracking-tight text-foreground">
+          Nuestra Misión
+        </h3>
+        <p class="mt-4 leading-relaxed text-muted-foreground">
+          Entregar servicios y soluciones integrales de mantenimiento superando
+          las expectativas de nuestros clientes, garantizando la máxima
+          eficiencia y una conducta de total responsabilidad con la seguridad,
+          la salud ocupacional y el medio ambiente.
+        </p>
+      </article>
+      <article
+        class="border-l-2 border-primary bg-surface p-8 shadow-soft lg:p-10"
+        data-reveal
+      >
+        <h3 class="font-display text-xl font-bold uppercase tracking-tight text-foreground">
+          Nuestra Visión
+        </h3>
+        <p class="mt-4 leading-relaxed text-muted-foreground">
+          Consolidarnos como una empresa referente y líder en el mercado chileno
+          de mantenimiento e infraestructura, implementando la mejora continua y
+          anticipándonos a las dinámicas operativas de las mayores industrias
+          del país.
+        </p>
+      </article>
+    </div>
+
+    <!-- Valores -->
+    <div class="mt-16 lg:mt-20">
+      <p class="eyebrow" data-reveal>Valores fundacionales</p>
+      <div class="mt-8 grid gap-6 md:grid-cols-3">
+        {
+          valores.map((v) => (
+            <article
+              class="group border-t-2 border-border bg-surface p-7 transition-colors hover:border-primary"
+              data-reveal
+            >
+              <span class="grid h-12 w-12 place-items-center rounded-md bg-primary/10 text-primary">
+                <Icon name={v.icon} class="h-6 w-6" />
+              </span>
+              <h3 class="mt-5 font-display text-lg font-bold text-foreground">
+                {v.title}
+              </h3>
+              <p class="mt-2 text-[15px] leading-relaxed text-muted-foreground">
+                {v.desc}
+              </p>
+            </article>
+          ))
+        }
+      </div>
     </div>
   </div>
 </section>

@@ -3,16 +3,10 @@ import { Icon } from "astro-icon/components";
 import { servicios } from "../data/servicios";
 import { site } from "../data/site";
 
-const social = [
-  { icon: "hugeicons:facebook-01", href: site.sameAs[0] },
-  { icon: "hugeicons:instagram", href: site.sameAs[1] },
-  { icon: "hugeicons:new-twitter", href: "#" },
-];
-
 const cols = [
   {
     title: "Servicios",
-    links: servicios.map((s) => ({
+    links: servicios.slice(0, 6).map((s) => ({
       label: s.titulo,
       href: `/servicios/${s.slug}`,
     })),
@@ -21,17 +15,8 @@ const cols = [
     title: "Empresa",
     links: [
       { label: "Nosotros", href: "/#nosotros" },
-      { label: "Como trabajamos", href: "/#proceso" },
-      { label: "Planes", href: "/#precios" },
-      { label: "Clientes", href: "/#testimonios" },
-    ],
-  },
-  {
-    title: "Ayuda",
-    links: [
-      { label: "Preguntas frecuentes", href: "/#faq" },
-      { label: "Cotizar", href: "/#cotizar" },
       { label: "Servicios", href: "/servicios" },
+      { label: "Clientes", href: "/#clientes" },
       { label: "Contacto", href: "/#cotizar" },
     ],
   },
@@ -39,41 +24,42 @@ const cols = [
 const year = 2026;
 ---
 
-<footer class="border-t border-border bg-surface">
-  <div class="container-x py-16">
-    <div class="grid gap-10 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
+<footer class="relative overflow-hidden border-t border-white/10 bg-ink text-background">
+  <div class="tech-grid pointer-events-none absolute inset-0 opacity-40"></div>
+  <div class="container-x relative py-16">
+    <div class="grid gap-12 lg:grid-cols-[1.5fr_1fr_1fr_1.2fr]">
       <div>
         <a href="/#inicio" class="flex items-center gap-2.5">
-          <span class="grid h-9 w-9 place-items-center rounded-xl bg-primary text-accent">
+          <span class="grid h-10 w-10 place-items-center rounded-md bg-primary text-accent-foreground">
             <Icon name="hugeicons:wrench-01" class="h-5 w-5" />
           </span>
-          <span class="text-lg font-extrabold tracking-tight text-primary"
-            >Mantenciones<span class="text-accent-strong">Chile</span></span
-          >
+          <span class="font-display text-lg font-extrabold tracking-tight text-background">
+            Más de Chile
+          </span>
         </a>
-        <p class="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
-          Servicio tecnico de mantencion para el hogar y empresas. Tecnicos
-          certificados, precio claro y garantia en todo Chile.
+        <p class="mt-5 max-w-xs text-sm leading-relaxed text-background/55">
+          Ingeniería, mantenimiento multitécnico y soluciones de infraestructura
+          comercial. Socio estratégico en continuidad de negocio para retail,
+          supermercados y gastronomía.
         </p>
-        <div class="mt-5 flex gap-3">
-          {
-            social.map((s) => (
-              <a href={s.href} target="_blank" rel="noopener" aria-label="Red social" class="grid h-9 w-9 place-items-center rounded-xl border border-border text-muted-foreground transition-colors hover:bg-primary hover:text-primary-foreground">
-                <Icon name={s.icon} class="h-4 w-4" />
-              </a>
-            ))
-          }
-        </div>
+        <p class="mt-5 font-mono text-[0.68rem] uppercase tracking-[0.16em] text-background/40">
+          Comercializadora y Productora Más de Chile SpA
+        </p>
       </div>
 
       {
         cols.map((c) => (
           <div>
-            <h3 class="text-sm font-bold text-primary">{c.title}</h3>
-            <ul class="mt-4 space-y-2.5">
+            <h3 class="font-mono text-[0.68rem] uppercase tracking-[0.18em] text-primary">
+              {c.title}
+            </h3>
+            <ul class="mt-5 space-y-3">
               {c.links.map((l) => (
                 <li>
-                  <a href={l.href} class="text-sm text-muted-foreground transition-colors hover:text-accent-strong">
+                  <a
+                    href={l.href}
+                    class="text-sm text-background/60 transition-colors hover:text-background"
+                  >
                     {l.label}
                   </a>
                 </li>
@@ -82,18 +68,45 @@ const year = 2026;
           </div>
         ))
       }
+
+      <div>
+        <h3 class="font-mono text-[0.68rem] uppercase tracking-[0.18em] text-primary">
+          Contacto
+        </h3>
+        <ul class="mt-5 space-y-3 text-sm text-background/60">
+          <li>
+            <a href={`tel:${site.phone}`} class="hover:text-background"
+              >{site.phoneDisplay}</a
+            >
+          </li>
+          <li>
+            <a href={`tel:${site.phoneAlt}`} class="hover:text-background"
+              >{site.phoneAltDisplay}</a
+            >
+          </li>
+          <li>
+            <a href={`mailto:${site.email}`} class="break-all hover:text-background"
+              >{site.email}</a
+            >
+          </li>
+          <li class="pt-1 leading-relaxed">
+            {site.address.street}<br />{site.address.city}, {site.address.region}
+          </li>
+        </ul>
+      </div>
     </div>
 
     <div
-      class="mt-12 flex flex-col items-center justify-between gap-3 border-t border-border pt-6 sm:flex-row"
+      class="mt-14 flex flex-col items-start justify-between gap-3 border-t border-white/10 pt-6 sm:flex-row sm:items-center"
     >
-      <p class="text-sm text-muted-foreground">
-        © {year} Mantenciones Chile. Todos los derechos reservados.
+      <p class="text-sm text-background/45">
+        © {year} Más de Chile SpA. Todos los derechos reservados.
       </p>
-      <div class="flex gap-6">
-        <a href="#" class="text-sm text-muted-foreground hover:text-accent-strong">Terminos</a>
-        <a href="#" class="text-sm text-muted-foreground hover:text-accent-strong">Privacidad</a>
-      </div>
+      <a
+        href={site.url}
+        class="font-mono text-[0.72rem] uppercase tracking-[0.16em] text-background/45 hover:text-background"
+        >www.masdechile.cl</a
+      >
     </div>
   </div>
 </footer>

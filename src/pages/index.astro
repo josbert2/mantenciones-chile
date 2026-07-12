@@ -5,6 +5,8 @@ import Hero from "../components/Hero.astro";
 import HeroRefit from "../components/HeroRefit.astro";
 import HeroProfesional from "../components/HeroProfesional.astro";
 import Services from "../components/Services.astro";
+import Portfolio from "../components/Portfolio.astro";
+import Galeria from "../components/Galeria.astro";
 import CasosExito from "../components/CasosExito.astro";
 import Equipo from "../components/Equipo.astro";
 import WhyUs from "../components/WhyUs.astro";
@@ -33,20 +35,10 @@ const jsonLd = [localBusiness(), websiteSchema()];
   <main>
     <BannerPromocion />
     <QuienesSomos />
-    <Estadisticas />
-    {/* <Hero /> */}
-    {/* <HeroProfesional /> */}
-    {/* <Services /> */}
-    {/* <CasosExito /> */}
-    {/* <Equipo /> */}
-    {/* <WhyUs /> */}
-    {/* <Process /> */}
-    {/* <Testimonials /> */}
-    {/* <TestimonialCarousel /> */}
-    {/* <HeroRefit /> */}
-    {/* <Pricing /> */}
-    {/* <Faq /> */}
-    {/* <Cotizar /> */}
+    <Services />
+    <Portfolio />
+    <Galeria />
+    <Cotizar />
   </main>
   <Footer />
 
