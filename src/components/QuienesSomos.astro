@@ -4,53 +4,48 @@
 <style>
   .about-section {
     width: 100%;
-    padding: 100px 40px;
+    padding: 120px 40px;
     background-color: #ffffff;
     display: flex;
     justify-content: center;
   }
 
   .about-container {
-    max-width: 900px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 28px;
+    max-width: 800px;
   }
 
   .about-label {
     font-family: "Inter", sans-serif;
     font-size: 12px;
     font-weight: 600;
-    letter-spacing: 2px;
+    letter-spacing: 1.5px;
     text-transform: uppercase;
     color: #000000;
-    margin: 0;
+    margin: 0 0 24px 0;
   }
 
   .about-title {
     font-family: "Inter", sans-serif;
-    font-size: 72px;
-    font-weight: 800;
-    line-height: 120%;
-    letter-spacing: -2px;
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 130%;
+    letter-spacing: -1.5px;
     color: #000000;
-    margin: 0;
+    margin: 0 0 32px 0;
   }
 
   .about-accent {
     color: #8b0000;
-    font-weight: 800;
   }
 
   .btn-learn-more {
     background-color: #000000;
     color: #ffffff;
     border: none;
-    border-radius: 4px;
-    padding: 14px 32px;
+    border-radius: 2px;
+    padding: 12px 28px;
     font-family: "Inter", sans-serif;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 700;
     letter-spacing: 1px;
     text-transform: uppercase;
@@ -58,43 +53,20 @@
     transition: all 0.3s ease;
     text-decoration: none;
     display: inline-block;
-    width: fit-content;
   }
 
   .btn-learn-more:hover {
     background-color: #8b0000;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-  }
-
-  @media (max-width: 1199px) {
-    .about-section {
-      padding: 80px 40px;
-    }
-
-    .about-title {
-      font-size: 56px;
-      letter-spacing: -1.5px;
-    }
   }
 
   @media (max-width: 809px) {
     .about-section {
-      padding: 60px 20px;
-    }
-
-    .about-container {
-      gap: 24px;
+      padding: 80px 20px;
     }
 
     .about-title {
-      font-size: 40px;
-      letter-spacing: -1px;
-    }
-
-    .btn-learn-more {
-      padding: 12px 28px;
-      font-size: 12px;
+      font-size: 42px;
+      letter-spacing: -0.8px;
     }
   }
 </style>
@@ -104,11 +76,9 @@
     <p class="about-label">Quiénes somos</p>
 
     <h2 class="about-title">
-      Desde nuestros inicios, Más de Chile ha proporcionado <span class="about-accent">servicios técnicos especializados</span> en hidrojet, gasfitería, cerrajería, obras civiles y emergencias 24/7 en toda la Región Metropolitana.
+      Desde nuestros inicios, Más de Chile ha proporcionado <span class="about-accent">servicios técnicos especializados</span> en hidrojet, gasfitería, cerrajería y emergencias 24/7.
     </h2>
 
-    <a href="#cotizar" class="btn-learn-more">
-      Conocer más
-    </a>
+    <a href="#cotizar" class="btn-learn-more">Learn more</a>
   </div>
 </section>
