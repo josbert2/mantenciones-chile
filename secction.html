@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Extracted · [data-id="7449ce1"]</title>
+  <title>Extracted · [data-id="cf864e2"]</title>
   <style>
 * { box-sizing: border-box; }
 body { margin: 0; padding: 20px; font-family: Inter; background: rgba(0, 0, 0, 0); }
@@ -93,16 +93,12 @@ body { margin: 0; padding: 20px; font-family: Inter; background: rgba(0, 0, 0, 0
 }
 
 /* ===== @keyframes usados ===== */
-@keyframes fadeIn { 
-  0% { opacity: 0; }
-  100% { opacity: 1; }
-}
 @keyframes slideInUp { 
   0% { transform: translate3d(0px, 100%, 0px); visibility: visible; }
   100% { transform: translate3d(0px, 0px, 0px); }
 }
 
-/* ===== Reglas CSS que matchean el scope (167) ===== */
+/* ===== Reglas CSS que matchean el scope (168) ===== */
 img:is([sizes="auto" i], [sizes^="auto," i]) {
   contain-intrinsic-size: 3000px 1500px;
 }
@@ -215,10 +211,6 @@ img:is([sizes="auto" i], [sizes^="auto," i]) {
 .elementor *, .elementor ::after, .elementor ::before {
   box-sizing: border-box;
 }
-.elementor a {
-  box-shadow: none;
-  text-decoration: none;
-}
 .elementor-element {
   --flex-direction: initial;
   --flex-wrap: initial;
@@ -253,6 +245,9 @@ img:is([sizes="auto" i], [sizes^="auto," i]) {
 }
 .elementor-widget:not(:last-child) {
   margin-block-end: var(--kit-widget-spacing,20px);
+}
+.elementor-widget:not(:last-child).elementor-absolute, .elementor-widget:not(:last-child).elementor-widget__width-auto, .elementor-widget:not(:last-child).elementor-widget__width-initial {
+  margin-block-end: 0px;
 }
 .e-con {
   --border-radius: 0;
@@ -438,33 +433,6 @@ img:is([sizes="auto" i], [sizes^="auto," i]) {
   margin: 0px;
   padding: 0px;
 }
-.elementor-button {
-  background-color: rgb(105, 114, 125);
-  border-radius: 3px;
-  color: rgb(255, 255, 255);
-  display: inline-block;
-  fill: rgb(255, 255, 255);
-  font-size: 15px;
-  line-height: 1;
-  padding: 12px 24px;
-  text-align: center;
-  transition: 0.3s;
-}
-.elementor-button:focus, .elementor-button:hover, .elementor-button:visited {
-  color: rgb(255, 255, 255);
-}
-.elementor-button-content-wrapper {
-  display: flex;
-  flex-direction: row;
-  gap: 5px;
-  justify-content: center;
-}
-.elementor-button-text {
-  display: inline-block;
-}
-.elementor-button span {
-  text-decoration: inherit;
-}
 .e-transform .elementor-widget-container, .e-transform:not(:has(.elementor-widget-container)) {
   transform: perspective(var(--e-transform-perspective,0)) rotate(var(--e-transform-rotateZ,0)) rotateX(var(--e-transform-rotateX,0)) rotateY(var(--e-transform-rotateY,0)) translate(var(--e-transform-translate,0)) translateX(var(--e-transform-translateX,0)) translateY(var(--e-transform-translateY,0)) scaleX(calc(var(--e-transform-flipX, 1) * var(--e-transform-scaleX, var(--e-transform-scale, 1)))) scaleY(calc(var(--e-transform-flipY, 1) * var(--e-transform-scaleY, var(--e-transform-scale, 1)))) skewX(var(--e-transform-skewX,0)) skewY(var(--e-transform-skewY,0));
   transform-origin: var(--e-transform-origin-y) var(--e-transform-origin-x);
@@ -474,28 +442,6 @@ img:is([sizes="auto" i], [sizes^="auto," i]) {
 }
 .animated.animated-fast {
   animation-duration: 0.75s;
-}
-.elementor-kit-4 button, .elementor-kit-4 input[type="button"], .elementor-kit-4 input[type="submit"], .elementor-kit-4 .elementor-button {
-  background-color: var( --e-global-color-vamtam_accent_3 );
-  font-family: var( --e-global-typography-a1064b5-font-family ), Sans-serif;
-  font-size: var( --e-global-typography-a1064b5-font-size );
-  font-weight: var( --e-global-typography-a1064b5-font-weight );
-  text-transform: var( --e-global-typography-a1064b5-text-transform );
-  line-height: var( --e-global-typography-a1064b5-line-height );
-  color: var( --e-global-color-vamtam_accent_5 );
-  border-radius: 4px;
-  padding: 15px 25px;
-}
-.elementor-kit-4 button:hover, .elementor-kit-4 button:focus, .elementor-kit-4 input[type="button"]:hover, .elementor-kit-4 input[type="button"]:focus, .elementor-kit-4 input[type="submit"]:hover, .elementor-kit-4 input[type="submit"]:focus, .elementor-kit-4 .elementor-button:hover, .elementor-kit-4 .elementor-button:focus {
-  background-color: var( --e-global-color-vamtam_accent_1 );
-  color: var( --e-global-color-vamtam_accent_5 );
-  border-radius: 4px;
-}
-.elementor-kit-4 a {
-  color: rgb(0, 0, 0);
-}
-.elementor-kit-4 a:hover {
-  color: var( --e-global-color-vamtam_accent_1 );
 }
 .elementor-kit-4 h3 {
   color: var( --e-global-color-vamtam_accent_3 );
@@ -524,11 +470,13 @@ img:is([sizes="auto" i], [sizes^="auto," i]) {
   display: flex;
   flex-direction: column;
 }
-.fadeIn {
-  animation-name: fadeIn;
-}
 .e-con {
   --container-widget-width: 100%;
+}
+.e-con-inner > .elementor-widget-spacer, .e-con > .elementor-widget-spacer {
+  width: var(--container-widget-width,var(--spacer-size));
+  --align-self: var( --container-widget-align-self,initial );
+  --flex-shrink: 0;
 }
 .e-con-inner > .elementor-widget-spacer:not(:has(> .elementor-widget-container)) > .elementor-spacer, .e-con > .elementor-widget-spacer:not(:has(> .elementor-widget-container)) > .elementor-spacer {
   height: 100%;
@@ -637,7 +585,48 @@ img:is([sizes="auto" i], [sizes^="auto," i]) {
   color: var( --e-global-color-vamtam_accent_5 );
   fill: var( --e-global-color-vamtam_accent_5 );
 }
-.elementor-35 .elementor-element.elementor-element-7449ce1 {
+.elementor-35 .elementor-element.elementor-element-cf864e2 {
+  --display: flex;
+  --flex-direction: column;
+  --container-widget-width: calc( ( 1 - var( --container-widget-flex-grow ) ) * 100% );
+  --container-widget-height: initial;
+  --container-widget-flex-grow: 0;
+  --container-widget-align-self: initial;
+  --flex-wrap-mobile: wrap;
+  --align-items: center;
+  --gap: 0px 0px;
+  --row-gap: 0px;
+  --column-gap: 0px;
+}
+.elementor-35 .elementor-element.elementor-element-17aae7b {
+  --spacer-size: 40px;
+  width: var( --container-widget-width, 1px );
+  max-width: 1px;
+  background-color: var( --e-global-color-vamtam_accent_1 );
+  margin: 0px 0.5px calc(var(--kit-widget-spacing, 0px) + -40px) 0px;
+  padding: 0px;
+  --container-widget-width: 1px;
+  --container-widget-flex-grow: 0;
+  z-index: 2;
+}
+.elementor-35 .elementor-element.elementor-element-b494a12 {
+  --display: flex;
+  --flex-direction: row;
+  --container-widget-width: calc( ( 1 - var( --container-widget-flex-grow ) ) * 100% );
+  --container-widget-height: 100%;
+  --container-widget-flex-grow: 1;
+  --container-widget-align-self: stretch;
+  --flex-wrap-mobile: wrap;
+  --align-items: flex-start;
+  --gap: 0% 0%;
+  --row-gap: 0%;
+  --column-gap: 0%;
+  --padding-top: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  --padding-right: 0px;
+}
+.elementor-35 .elementor-element.elementor-element-32c71bb {
   --display: flex;
   --flex-direction: column;
   --container-widget-width: 100%;
@@ -645,24 +634,160 @@ img:is([sizes="auto" i], [sizes^="auto," i]) {
   --container-widget-flex-grow: 0;
   --container-widget-align-self: initial;
   --flex-wrap-mobile: wrap;
-  --gap: 15px 15px;
-  --row-gap: 15px;
-  --column-gap: 15px;
-  --margin-top: 14vh;
-  --margin-bottom: 10vh;
+  --gap: 10px 10px;
+  --row-gap: 10px;
+  --column-gap: 10px;
+  border-style: solid;
+  --border-style: solid;
+  border-width: 0px 1px 0px 0px;
+  --border-top-width: 0px;
+  --border-right-width: 1px;
+  --border-bottom-width: 0px;
+  --border-left-width: 0px;
+  --padding-top: 1%;
+  --padding-bottom: 1%;
+  --padding-left: 0%;
+  --padding-right: 5%;
+}
+.elementor-35 .elementor-element.elementor-element-bf3cd08 {
+  --display: flex;
+  --min-height: 350px;
+  --margin-top: 3vh;
+  --margin-bottom: 0;
   --margin-left: 0;
   --margin-right: 0;
+  --padding-top: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  --padding-right: 0px;
 }
-.elementor-35 .elementor-element.elementor-element-7ca14fb .elementor-heading-title {
-  font-family: var( --e-global-typography-836c40e-font-family ), Sans-serif;
-  font-size: var( --e-global-typography-836c40e-font-size );
-  font-weight: var( --e-global-typography-836c40e-font-weight );
-  text-transform: var( --e-global-typography-836c40e-text-transform );
-  line-height: var( --e-global-typography-836c40e-line-height );
-  letter-spacing: var( --e-global-typography-836c40e-letter-spacing );
+.elementor-35 .elementor-element.elementor-element-bf3cd08:not(.elementor-motion-effects-element-type-background), .elementor-35 .elementor-element.elementor-element-bf3cd08 > .elementor-motion-effects-container > .elementor-motion-effects-layer {
+  background-color: var( --e-global-color-vamtam_accent_7 );
+  background-image: url("https://voltedge.vamtam.com/wp-content/uploads/2025/11/GettyImages-2197357382.jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
-.elementor-35 .elementor-element.elementor-element-ed9e417 {
-  margin: 0px 0px calc(var(--kit-widget-spacing, 0px) + 15px) 0px;
+.elementor-35 .elementor-element.elementor-element-3d1aab6 {
+  --display: flex;
+  --flex-direction: column;
+  --container-widget-width: 100%;
+  --container-widget-height: initial;
+  --container-widget-flex-grow: 0;
+  --container-widget-align-self: initial;
+  --flex-wrap-mobile: wrap;
+  --gap: 10px 10px;
+  --row-gap: 10px;
+  --column-gap: 10px;
+  border-style: solid;
+  --border-style: solid;
+  border-width: 0px 1px 0px 0px;
+  --border-top-width: 0px;
+  --border-right-width: 1px;
+  --border-bottom-width: 0px;
+  --border-left-width: 0px;
+  border-color: var( --e-global-color-vamtam_accent_7 );
+  --border-color: var( --e-global-color-vamtam_accent_7 );
+  --padding-top: 1%;
+  --padding-bottom: 14%;
+  --padding-left: 5%;
+  --padding-right: 5%;
+}
+.elementor-35 .elementor-element.elementor-element-ee716c6 {
+  --display: flex;
+  --min-height: 350px;
+  --margin-top: 3vh;
+  --margin-bottom: 0;
+  --margin-left: 0;
+  --margin-right: 0;
+  --padding-top: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  --padding-right: 0px;
+}
+.elementor-35 .elementor-element.elementor-element-ee716c6:not(.elementor-motion-effects-element-type-background), .elementor-35 .elementor-element.elementor-element-ee716c6 > .elementor-motion-effects-container > .elementor-motion-effects-layer {
+  background-color: var( --e-global-color-vamtam_accent_7 );
+  background-image: url("https://voltedge.vamtam.com/wp-content/uploads/2025/11/GettyImages-2224307786.jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.elementor-35 .elementor-element.elementor-element-a8a235d {
+  --display: flex;
+  --flex-direction: column;
+  --container-widget-width: 100%;
+  --container-widget-height: initial;
+  --container-widget-flex-grow: 0;
+  --container-widget-align-self: initial;
+  --flex-wrap-mobile: wrap;
+  --gap: 10px 10px;
+  --row-gap: 10px;
+  --column-gap: 10px;
+  border-style: solid;
+  --border-style: solid;
+  border-width: 0px 1px 0px 0px;
+  --border-top-width: 0px;
+  --border-right-width: 1px;
+  --border-bottom-width: 0px;
+  --border-left-width: 0px;
+  --padding-top: 1%;
+  --padding-bottom: 1%;
+  --padding-left: 5%;
+  --padding-right: 5%;
+}
+.elementor-35 .elementor-element.elementor-element-5e41882 {
+  --display: flex;
+  --min-height: 350px;
+  --margin-top: 3vh;
+  --margin-bottom: 0;
+  --margin-left: 0;
+  --margin-right: 0;
+  --padding-top: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  --padding-right: 0px;
+}
+.elementor-35 .elementor-element.elementor-element-5e41882:not(.elementor-motion-effects-element-type-background), .elementor-35 .elementor-element.elementor-element-5e41882 > .elementor-motion-effects-container > .elementor-motion-effects-layer {
+  background-color: var( --e-global-color-vamtam_accent_7 );
+  background-image: url("https://voltedge.vamtam.com/wp-content/uploads/2025/11/GettyImages-2084526747.jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.elementor-35 .elementor-element.elementor-element-81c2e0d {
+  --display: flex;
+  --flex-direction: column;
+  --container-widget-width: 100%;
+  --container-widget-height: initial;
+  --container-widget-flex-grow: 0;
+  --container-widget-align-self: initial;
+  --flex-wrap-mobile: wrap;
+  --gap: 10px 10px;
+  --row-gap: 10px;
+  --column-gap: 10px;
+  --padding-top: 1%;
+  --padding-bottom: 1%;
+  --padding-left: 5%;
+  --padding-right: 0%;
+}
+.elementor-35 .elementor-element.elementor-element-79b144d {
+  --display: flex;
+  --min-height: 350px;
+  --margin-top: 3vh;
+  --margin-bottom: 0;
+  --margin-left: 0;
+  --margin-right: 0;
+  --padding-top: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  --padding-right: 0px;
+}
+.elementor-35 .elementor-element.elementor-element-79b144d:not(.elementor-motion-effects-element-type-background), .elementor-35 .elementor-element.elementor-element-79b144d > .elementor-motion-effects-container > .elementor-motion-effects-layer {
+  background-color: var( --e-global-color-vamtam_accent_7 );
+  background-image: url("https://voltedge.vamtam.com/wp-content/uploads/2025/11/GettyImages-1365651712.jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .elementor-35 .elementor-element.elementor-element-e897cba.vamtam-has-icon-styles :is(svg, i) {
   font-size: 18px;
@@ -861,9 +986,6 @@ html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pr
 :disabled {
   cursor: not-allowed;
 }
-a:hover, a:active {
-  outline: none;
-}
 .vamtam-font-h3, h3, .font-h3, .woosw-popup .woosw-popup-inner .woosw-popup-content .woosw-popup-content-mid .woosw-popup-content-mid-message {
   font: var(--e-global-typography-vamtam_h3-font-weight,normal) var(--e-global-typography-vamtam_h3-font-style,normal) var(--e-global-typography-vamtam_h3-font-size)/var(--e-global-typography-vamtam_h3-line-height) var(--e-global-typography-vamtam_h3-font-family);
   letter-spacing: var(--e-global-typography-vamtam_h3-letter-spacing,normal);
@@ -883,25 +1005,14 @@ a:hover, a:active {
   opacity: 1;
   font-weight: 400;
 }
-.color-accent-1, .hover-color-accent-1:hover {
-  color: var(--vamtam-accent-color-1) !important;
-}
 h3, .color-h3 {
   color: var(--vamtam-h3-color);
 }
-a, .vamtam-is-link .elementor-image-box-title, .vamtam-is-link .elementor-icon-box-title, .elementor-widget-toggle .elementor-tab-title {
-  text-decoration: none;
-  color: var(--vamtam-body-link-regular);
-  transition: 0.3s;
+p {
+  margin: 0px 0px 1em;
 }
-a:where(:visited), .vamtam-is-link .elementor-image-box-title:where(:visited), .vamtam-is-link .elementor-icon-box-title:where(:visited), .elementor-widget-toggle .elementor-tab-title:where(:visited) {
-  color: var(--vamtam-body-link-visited);
-}
-a:active, .vamtam-is-link .elementor-image-box-title:active, .vamtam-is-link .elementor-icon-box-title:active, .elementor-widget-toggle .elementor-tab-title:active {
-  color: var(--vamtam-body-link-active);
-}
-a:hover, .vamtam-is-link .elementor-image-box-title:hover, .vamtam-is-link .elementor-icon-box-title:hover, .elementor-widget-toggle .elementor-tab-title:hover {
-  color: var(--vamtam-body-link-hover);
+p:empty {
+  display: none;
 }
 h1, h2, h3, h4, h5, h6 {
   margin-top: 0.6em;
@@ -935,8 +1046,14 @@ body:not(.elementor-editor-active) .blur-background:not(.elementor-widget-button
   background: var(--e-global-color-vamtam_accent_6);
   color: var(--e-global-color-vamtam_accent_5);
 }
+.border-gradient {
+  border-image: linear-gradient(to bottom,var(--e-global-color-vamtam_accent_7) 30%,rgba(255,255,255,0) 100%) 1;
+}
 .elementor-widget-button.vamtam-has-theme-widget-styles.vamtam-has-icon-styles :is(svg, i) {
   transition-duration: 0.3s;
+}
+[data-element_type="container"].vamtam-has-theme-cp.vamtam-cp-big-top {
+  clip-path: polygon(0px 12px, 0px 12px, 0.157179px 10.0546px, 0.612192px 8.20877px, 1.34025px 6.48726px, 2.31658px 4.91486px, 3.51638px 3.51638px, 4.91486px 2.31658px, 6.48726px 1.34025px, 8.20877px 0.612192px, 10.0546px 0.157179px, 12px 1.9883e-31px, calc(100% - 77.76px) 0px, calc(100% - 77.76px) 0px, calc(100% - 76.3585px) 0.082437px, calc(100% - 74.9948px) 0.323616px, calc(100% - 73.6805px) 0.716139px, calc(100% - 72.4268px) 1.25261px, calc(100% - 71.2452px) 1.92562px, calc(100% - 70.1473px) 2.72779px, calc(100% - 69.1444px) 3.65171px, calc(100% - 68.2479px) 4.68998px, calc(100% - 67.4693px) 5.83521px, calc(100% - 66.82px) 7.08px, calc(100% - 50.6px) 43.13px, calc(100% - 50.6px) 43.13px, calc(100% - 50.2119px) 43.9173px, calc(100% - 49.7697px) 44.6701px, calc(100% - 49.276px) 45.386px, calc(100% - 48.7331px) 46.0626px, calc(100% - 48.1435px) 46.6974px, calc(100% - 47.5096px) 47.288px, calc(100% - 46.8339px) 47.832px, calc(100% - 46.1188px) 48.327px, calc(100% - 45.3666px) 48.7704px, calc(100% - 44.58px) 49.16px, calc(100% - 7.08px) 66.02px, calc(100% - 7.08px) 66.02px, calc(100% - 5.83521px) 66.6693px, calc(100% - 4.68998px) 67.4479px, calc(100% - 3.65171px) 68.3444px, calc(100% - 2.72779px) 69.3473px, calc(100% - 1.92562px) 70.4453px, calc(100% - 1.25261px) 71.6268px, calc(100% - 0.716139px) 72.8805px, calc(100% - 0.323616px) 74.1948px, calc(100% - 0.082437px) 75.5585px, calc(100% - 5.68434e-14px) 76.96px, calc(100% + 0px) calc(100% - 12px), calc(100% + 0px) calc(100% - 12px), calc(100% - 0.157179px) calc(100% - 10.0546px), calc(100% - 0.612192px) calc(100% - 8.20877px), calc(100% - 1.34025px) calc(100% - 6.48726px), calc(100% - 2.31658px) calc(100% - 4.91486px), calc(100% - 3.51638px) calc(100% - 3.51638px), calc(100% - 4.91486px) calc(100% - 2.31658px), calc(100% - 6.48726px) calc(100% - 1.34025px), calc(100% - 8.20877px) calc(100% - 0.612192px), calc(100% - 10.0546px) calc(100% - 0.157179px), calc(100% - 12px) calc(100% - 5.68434e-14px), 12px calc(100% + 0px), 12px calc(100% + 0px), 10.0546px calc(100% - 0.157179px), 8.20877px calc(100% - 0.612192px), 6.48726px calc(100% - 1.34025px), 4.91486px calc(100% - 2.31658px), 3.51638px calc(100% - 3.51638px), 2.31658px calc(100% - 4.91486px), 1.34025px calc(100% - 6.48726px), 0.612192px calc(100% - 8.20877px), 0.157179px calc(100% - 10.0546px), 1.9883e-31px calc(100% - 12px));
 }
 .elementor-widget-form.vamtam-has-theme-widget-styles .flatpickr-mobile:is([type="date"], [type="time"]) {
   appearance: initial;
@@ -1286,13 +1403,12 @@ body:not(.elementor-editor-active) .vamtam-sticky-header:not(.vamtam-sticky-head
     --width: 100%;
     --flex-wrap: var(--flex-wrap-mobile);
   }
+  .elementor .elementor-hidden-mobile, .elementor .elementor-hidden-phone {
+    display: none;
+  }
   .elementor-kit-4 h3 {
     font-size: var( --e-global-typography-vamtam_h3-font-size );
     line-height: var( --e-global-typography-vamtam_h3-line-height );
-  }
-  .elementor-kit-4 button, .elementor-kit-4 input[type="button"], .elementor-kit-4 input[type="submit"], .elementor-kit-4 .elementor-button {
-    font-size: var( --e-global-typography-a1064b5-font-size );
-    line-height: var( --e-global-typography-a1064b5-line-height );
   }
   .e-con {
     --container-max-width: 767px;
@@ -1301,10 +1417,21 @@ body:not(.elementor-editor-active) .vamtam-sticky-header:not(.vamtam-sticky-head
     --container-default-padding-bottom: 0px;
     --container-default-padding-left: 20px;
   }
-  .elementor-35 .elementor-element.elementor-element-7ca14fb .elementor-heading-title {
-    font-size: var( --e-global-typography-836c40e-font-size );
-    line-height: var( --e-global-typography-836c40e-line-height );
-    letter-spacing: var( --e-global-typography-836c40e-letter-spacing );
+  .elementor-35 .elementor-element.elementor-element-bf3cd08 {
+    --width: 80%;
+    --min-height: 340px;
+  }
+  .elementor-35 .elementor-element.elementor-element-ee716c6 {
+    --width: 80%;
+    --min-height: 340px;
+  }
+  .elementor-35 .elementor-element.elementor-element-5e41882 {
+    --width: 80%;
+    --min-height: 340px;
+  }
+  .elementor-35 .elementor-element.elementor-element-79b144d {
+    --width: 80%;
+    --min-height: 340px;
   }
 }
 
@@ -1325,11 +1452,6 @@ body:not(.elementor-editor-active) .vamtam-sticky-header:not(.vamtam-sticky-head
     font-size: var( --e-global-typography-vamtam_h3-font-size );
     line-height: var( --e-global-typography-vamtam_h3-line-height );
   }
-  .elementor-kit-4 button, .elementor-kit-4 input[type="button"], .elementor-kit-4 input[type="submit"], .elementor-kit-4 .elementor-button {
-    font-size: var( --e-global-typography-a1064b5-font-size );
-    line-height: var( --e-global-typography-a1064b5-line-height );
-    padding: 13px 20px;
-  }
   .e-con {
     --container-max-width: 1024px;
     --container-default-padding-top: 0px;
@@ -1337,23 +1459,103 @@ body:not(.elementor-editor-active) .vamtam-sticky-header:not(.vamtam-sticky-head
     --container-default-padding-bottom: 0px;
     --container-default-padding-left: 20px;
   }
-  .elementor-35 .elementor-element.elementor-element-7449ce1 {
-    --margin-top: 60px;
-    --margin-bottom: 60px;
+  .elementor-35 .elementor-element.elementor-element-cf864e2 {
+    --padding-top: 0px;
+    --padding-bottom: 60px;
+    --padding-left: 20px;
+    --padding-right: 0px;
+  }
+  .elementor-35 .elementor-element.elementor-element-17aae7b {
+    margin: 0px 0px calc(var(--kit-widget-spacing, 0px) + -40px) -20.5px;
+  }
+  .elementor-35 .elementor-element.elementor-element-b494a12 {
+    --gap: 20px 20px;
+    --row-gap: 20px;
+    --column-gap: 20px;
+  }
+  .elementor-35 .elementor-element.elementor-element-32c71bb {
+    --padding-top: 0px;
+    --padding-bottom: 0px;
+    --padding-left: 0px;
+    --padding-right: 20px;
+  }
+  .elementor-35 .elementor-element.elementor-element-bf3cd08 {
+    --min-height: 300px;
+    --margin-top: 0px;
+    --margin-bottom: 0px;
     --margin-left: 0px;
     --margin-right: 0px;
   }
-  .elementor-35 .elementor-element.elementor-element-7ca14fb .elementor-heading-title {
-    font-size: var( --e-global-typography-836c40e-font-size );
-    line-height: var( --e-global-typography-836c40e-line-height );
-    letter-spacing: var( --e-global-typography-836c40e-letter-spacing );
+  .elementor-35 .elementor-element.elementor-element-3d1aab6 {
+    --padding-top: 0px;
+    --padding-bottom: 0px;
+    --padding-left: 0px;
+    --padding-right: 20px;
+  }
+  .elementor-35 .elementor-element.elementor-element-ee716c6 {
+    --min-height: 300px;
+    --margin-top: 0px;
+    --margin-bottom: 0px;
+    --margin-left: 0px;
+    --margin-right: 0px;
+  }
+  .elementor-35 .elementor-element.elementor-element-a8a235d {
+    --padding-top: 0px;
+    --padding-bottom: 0px;
+    --padding-left: 0px;
+    --padding-right: 20px;
+  }
+  .elementor-35 .elementor-element.elementor-element-5e41882 {
+    --min-height: 300px;
+    --margin-top: 0px;
+    --margin-bottom: 0px;
+    --margin-left: 0px;
+    --margin-right: 0px;
+  }
+  .elementor-35 .elementor-element.elementor-element-81c2e0d {
+    --padding-top: 0px;
+    --padding-bottom: 0px;
+    --padding-left: 0px;
+    --padding-right: 20px;
+  }
+  .elementor-35 .elementor-element.elementor-element-79b144d {
+    --min-height: 300px;
+    --margin-top: 0px;
+    --margin-bottom: 0px;
+    --margin-left: 0px;
+    --margin-right: 0px;
   }
 }
 
 /* ===== @media (min-width: 768px) ===== */
 @media (min-width: 768px) {
-  .elementor-35 .elementor-element.elementor-element-7449ce1 {
-    --content-width: 620px;
+  .elementor-35 .elementor-element.elementor-element-32c71bb {
+    --width: 23%;
+  }
+  .elementor-35 .elementor-element.elementor-element-3d1aab6 {
+    --width: 27%;
+  }
+  .elementor-35 .elementor-element.elementor-element-a8a235d {
+    --width: 27%;
+  }
+  .elementor-35 .elementor-element.elementor-element-81c2e0d {
+    --width: 23%;
+  }
+}
+
+/* ===== @media (max-width: 1024px) and (min-width: 768px) ===== */
+@media (max-width: 1024px) and (min-width: 768px) {
+  .elementor-35 .elementor-element.elementor-element-32c71bb {
+    --width: 25%;
+  }
+  .elementor-35 .elementor-element.elementor-element-3d1aab6 {
+    --width: 25%;
+  }
+  .elementor-35 .elementor-element.elementor-element-a8a235d {
+    --width: 25%;
+  }
+  .elementor-35 .elementor-element.elementor-element-81c2e0d {
+    --width: 25%;
   }
 }
 
@@ -1381,19 +1583,47 @@ body:not(.elementor-editor-active) .vamtam-sticky-header:not(.vamtam-sticky-head
   </style>
 </head>
 <body>
-<div class="elementor-element elementor-element-7449ce1 e-flex e-con-boxed e-con e-parent e-lazyloaded" data-id="7449ce1" data-element_type="container" data-e-type="container" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+<div class="elementor-element elementor-element-cf864e2 e-flex e-con-boxed e-con e-parent e-lazyloaded" data-id="cf864e2" data-element_type="container" data-e-type="container">
 					<div class="e-con-inner">
-				<div class="elementor-element elementor-element-7ca14fb animated-fast elementor-widget elementor-widget-heading animated slideInUp" data-id="7ca14fb" data-element_type="widget" data-e-type="widget" data-settings="{&quot;_animation&quot;:&quot;slideInUp&quot;}" data-widget_type="heading.default">
-					<div class="elementor-heading-title elementor-size-default">who we are</div>				</div>
-				<div class="elementor-element elementor-element-ed9e417 animated-fast elementor-widget elementor-widget-heading animated fadeIn" data-id="ed9e417" data-element_type="widget" data-e-type="widget" data-settings="{&quot;_animation&quot;:&quot;fadeIn&quot;,&quot;_animation_delay&quot;:50}" data-widget_type="heading.default">
-					<h3 class="elementor-heading-title elementor-size-default">Since our beginnings in downtown Buffalo, Volt Edge has provided expert <span class="color-accent-1"> electrical services </span> across New York and beyond for over 45 years.</h3>				</div>
-				<div class="vamtam-has-theme-widget-styles elementor-element elementor-element-49a473f animated-fast elementor-widget elementor-widget-button animated fadeIn" data-id="49a473f" data-element_type="widget" data-e-type="widget" data-settings="{&quot;_animation&quot;:&quot;fadeIn&quot;,&quot;_animation_delay&quot;:100}" data-widget_type="button.default">
-										<a class="elementor-button elementor-button-link elementor-size-sm" href="https://voltedge.vamtam.com/about/">
-						<span class="elementor-button-content-wrapper">
-									<span class="elementor-button-text">Learn more</span>
-					</span>
-					</a>
-								</div>
+				<div class="elementor-element elementor-element-17aae7b elementor-widget__width-initial elementor-hidden-mobile elementor-widget elementor-widget-spacer elementor-sticky" data-id="17aae7b" data-element_type="widget" data-e-type="widget" data-settings="{&quot;sticky&quot;:&quot;top&quot;,&quot;sticky_on&quot;:[&quot;desktop&quot;],&quot;sticky_offset&quot;:190,&quot;sticky_parent&quot;:&quot;yes&quot;,&quot;sticky_effects_offset&quot;:0,&quot;sticky_anchor_link_offset&quot;:0}" data-widget_type="spacer.default" style="">
+							<div class="elementor-spacer">
+			<div class="elementor-spacer-inner"></div>
+		</div>
+						</div>
+		<div class="elementor-element elementor-element-b494a12 e-con-full e-flex e-con e-child" data-id="b494a12" data-element_type="container" data-e-type="container">
+		<div class="elementor-element elementor-element-32c71bb e-con-full border-gradient e-flex e-con e-child" data-id="32c71bb" data-element_type="container" data-e-type="container">
+				<div class="elementor-element elementor-element-a46ef77 elementor-widget elementor-widget-heading" data-id="a46ef77" data-element_type="widget" data-e-type="widget" data-widget_type="heading.default">
+					<h3 class="elementor-heading-title elementor-size-default">120+</h3>				</div>
+				<div class="vamtam-has-theme-widget-styles elementor-element elementor-element-94895e3 elementor-widget elementor-widget-text-editor" data-id="94895e3" data-element_type="widget" data-e-type="widget" data-widget_type="text-editor.default">
+									<p>Expert Team Members</p>								</div>
+		<div class="elementor-element elementor-element-bf3cd08 e-con-full vamtam-has-theme-cp vamtam-cp-big-top animated-fast e-flex e-con e-child animated slideInUp" data-id="bf3cd08" data-element_type="container" data-e-type="container" data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;animation&quot;:&quot;slideInUp&quot;}">
+				</div>
+				</div>
+		<div class="elementor-element elementor-element-3d1aab6 e-con-full border-gradient e-flex e-con e-child" data-id="3d1aab6" data-element_type="container" data-e-type="container">
+				<div class="elementor-element elementor-element-4036860 elementor-widget elementor-widget-heading" data-id="4036860" data-element_type="widget" data-e-type="widget" data-widget_type="heading.default">
+					<h3 class="elementor-heading-title elementor-size-default">40+</h3>				</div>
+				<div class="vamtam-has-theme-widget-styles elementor-element elementor-element-359b58f elementor-widget elementor-widget-text-editor" data-id="359b58f" data-element_type="widget" data-e-type="widget" data-widget_type="text-editor.default">
+									Years of Great Relationships 								</div>
+		<div class="elementor-element elementor-element-ee716c6 e-con-full vamtam-has-theme-cp vamtam-cp-big-top animated-fast e-flex e-con e-child animated slideInUp" data-id="ee716c6" data-element_type="container" data-e-type="container" data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;animation&quot;:&quot;slideInUp&quot;,&quot;animation_delay&quot;:50}">
+				</div>
+				</div>
+		<div class="elementor-element elementor-element-a8a235d e-con-full border-gradient e-flex e-con e-child" data-id="a8a235d" data-element_type="container" data-e-type="container">
+				<div class="elementor-element elementor-element-6927bdb elementor-widget elementor-widget-heading" data-id="6927bdb" data-element_type="widget" data-e-type="widget" data-widget_type="heading.default">
+					<h3 class="elementor-heading-title elementor-size-default">4M+</h3>				</div>
+				<div class="vamtam-has-theme-widget-styles elementor-element elementor-element-e760a91 elementor-widget elementor-widget-text-editor" data-id="e760a91" data-element_type="widget" data-e-type="widget" data-widget_type="text-editor.default">
+									<p>Sq. Ft. Annually</p>								</div>
+		<div class="elementor-element elementor-element-5e41882 e-con-full vamtam-has-theme-cp vamtam-cp-big-top animated-fast e-flex e-con e-child animated slideInUp" data-id="5e41882" data-element_type="container" data-e-type="container" data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;animation&quot;:&quot;slideInUp&quot;,&quot;animation_delay&quot;:100}">
+				</div>
+				</div>
+		<div class="elementor-element elementor-element-81c2e0d e-con-full border-gradient e-flex e-con e-child" data-id="81c2e0d" data-element_type="container" data-e-type="container">
+				<div class="elementor-element elementor-element-e49e2c4 elementor-widget elementor-widget-heading" data-id="e49e2c4" data-element_type="widget" data-e-type="widget" data-widget_type="heading.default">
+					<h3 class="elementor-heading-title elementor-size-default">30+</h3>				</div>
+				<div class="vamtam-has-theme-widget-styles elementor-element elementor-element-a32aaee elementor-widget elementor-widget-text-editor" data-id="a32aaee" data-element_type="widget" data-e-type="widget" data-widget_type="text-editor.default">
+									<p>States Licensed</p>								</div>
+		<div class="elementor-element elementor-element-79b144d e-con-full vamtam-has-theme-cp vamtam-cp-big-top animated-fast e-flex e-con e-child animated slideInUp" data-id="79b144d" data-element_type="container" data-e-type="container" data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;animation&quot;:&quot;slideInUp&quot;,&quot;animation_delay&quot;:150}">
+				</div>
+				</div>
+				</div>
 					</div>
 				</div>
 </body>

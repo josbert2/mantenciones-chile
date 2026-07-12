@@ -1,0 +1,186 @@
+---
+---
+
+<style>
+  .stats-section {
+    width: 100%;
+    background-color: #ffffff;
+    padding: 100px 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .stats-container {
+    max-width: 1200px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 40px;
+  }
+
+  .stat-card {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 0;
+    animation: slideInUp 0.6s ease-out;
+    animation-fill-mode: both;
+  }
+
+  .stat-header {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-left: 20px;
+    border-left: 2px solid #8b0000;
+  }
+
+  .stat-image {
+    width: 100%;
+    height: 280px;
+    border-radius: 16px;
+    object-fit: cover;
+    display: block;
+  }
+
+  .stat-card:nth-child(2) {
+    animation-delay: 0.1s;
+  }
+
+  .stat-card:nth-child(3) {
+    animation-delay: 0.2s;
+  }
+
+  .stat-card:nth-child(4) {
+    animation-delay: 0.3s;
+  }
+
+  @keyframes slideInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .stat-number {
+    font-family: "Inter", sans-serif;
+    font-size: 56px;
+    font-weight: 700;
+    line-height: 1;
+    color: #8b0000;
+    margin: 0;
+  }
+
+  .stat-label {
+    font-family: "Inter", sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 140%;
+    color: #555555;
+    margin: 0;
+  }
+
+  @media (max-width: 1199px) {
+    .stats-section {
+      padding: 80px 40px;
+    }
+
+    .stat-number {
+      font-size: 48px;
+    }
+  }
+
+  @media (max-width: 809px) {
+    .stats-section {
+      padding: 60px 20px;
+    }
+
+    .stats-container {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+    }
+
+    .stat-card {
+      padding: 30px 15px;
+    }
+
+    .stat-number {
+      font-size: 40px;
+    }
+
+    .stat-label {
+      font-size: 14px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .stats-container {
+      grid-template-columns: 1fr;
+    }
+
+    .stat-card {
+      padding: 20px 15px;
+    }
+
+    .stat-number {
+      font-size: 36px;
+    }
+  }
+</style>
+
+<section class="stats-section">
+  <div class="stats-container">
+    <div class="stat-card">
+      <div class="stat-header">
+        <h3 class="stat-number">8+</h3>
+        <p class="stat-label">Servicios especializados</p>
+      </div>
+      <img
+        class="stat-image"
+        src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=500&h=600&fit=crop"
+        alt="Técnico en hidrojet"
+      />
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-header">
+        <h3 class="stat-number">24/7</h3>
+        <p class="stat-label">Disponibilidad emergencias</p>
+      </div>
+      <img
+        class="stat-image"
+        src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=500&h=600&fit=crop"
+        alt="Equipo técnico profesional"
+      />
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-header">
+        <h3 class="stat-number">100%</h3>
+        <p class="stat-label">Técnicos certificados</p>
+      </div>
+      <img
+        class="stat-image"
+        src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=500&h=600&fit=crop"
+        alt="Profesionales certificados"
+      />
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-header">
+        <h3 class="stat-number">RM</h3>
+        <p class="stat-label">Cobertura Región Metropolitana</p>
+      </div>
+      <img
+        class="stat-image"
+        src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=500&h=600&fit=crop"
+        alt="Cobertura geográfica"
+      />
+    </div>
+  </div>
+</section>
