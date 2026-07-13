@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Manrope:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&family=Space+Mono:wght@400;700&display=swap');
 @import "tailwindcss";
 
 /* ---------------------------------------------------------------------------
@@ -8,32 +8,33 @@
    Display: Archivo · Cuerpo: Manrope · Etiquetas tecnicas: Space Mono
 --------------------------------------------------------------------------- */
 @theme {
-  --font-sans: "Manrope", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+  --font-sans: "Montserrat", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
     Roboto, Helvetica, Arial, sans-serif;
-  --font-display: "Archivo", "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
   --font-mono: "Space Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
 
-  /* Superficies — papel frio + navy */
-  --color-background: #f4f3ef;
-  --color-foreground: #0f1b2d;
+  /* Superficies — papel calido + near-black */
+  --color-background: #f5f3ef;
+  --color-foreground: #1a1613;
   --color-surface: #ffffff;
-  --color-ink: #0d1726;
-  --color-ink-soft: #14233a;
-  --color-muted: #e8e7e1;
-  --color-muted-foreground: #5a6472;
-  --color-border: #dcdad2;
+  --color-ink: #191513;
+  --color-ink-soft: #24201d;
+  --color-muted: #ebe7df;
+  --color-muted-foreground: #6b6259;
+  --color-border: #ddd7cc;
 
-  /* Marca — naranja/ambar corporativo */
-  --color-primary: #e8871e;
-  --color-primary-foreground: #0d1726;
-  --color-accent: #e8871e;
-  --color-accent-foreground: #0d1726;
-  --color-accent-strong: #c96f10;
+  /* Marca — rojo oficial del logo */
+  --color-primary: #8b0000;
+  --color-primary-foreground: #ffffff;
+  --color-accent: #8b0000;
+  --color-accent-foreground: #ffffff;
+  --color-accent-strong: #6b0000;
 
   /* Estados */
   --color-success: #2f7d47;
-  --color-danger: #d1483b;
-  --color-warning: #e8871e;
+  --color-danger: #c1121f;
+  --color-warning: #d98324;
   --color-purple: #4a4a4a;
 
   /* Radios y sombras */

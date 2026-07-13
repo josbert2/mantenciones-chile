@@ -1,0 +1,73 @@
+---
+import fs from "node:fs";
+import path from "node:path";
+
+// Cartera de clientes (perfil corporativo): retail, supermercados y gastronomía.
+const clientes = [
+  { nombre: "Jumbo", slug: "jumbo" },
+  { nombre: "Unimarc", slug: "unimarc" },
+  { nombre: "Santa Isabel", slug: "santa-isabel" },
+  { nombre: "Alvi", slug: "alvi" },
+  { nombre: "Mayorista 10", slug: "mayorista-10" },
+  { nombre: "Cencosud", slug: "cencosud" },
+  { nombre: "KFC", slug: "kfc" },
+  { nombre: "Wendy's", slug: "wendys" },
+  { nombre: "China Wok", slug: "china-wok" },
+  { nombre: "Tarragona", slug: "tarragona" },
+  { nombre: "Spid", slug: "spid" },
+];
+
+// Si existe public/logos/<slug>.(svg|png|webp) usamos el logo; si no, el nombre en texto.
+const dir = path.resolve("public/logos");
+const buscarLogo = (slug: string) => {
+  for (const ext of ["svg", "png", "webp"]) {
+    if (fs.existsSync(path.join(dir, `${slug}.${ext}`))) return `/logos/${slug}.${ext}`;
+  }
+  return null;
+};
+
+const items = clientes.map((c) => ({ ...c, logo: buscarLogo(c.slug) }));
+---
+
+<section id="clientes" class="border-y border-border bg-surface py-16 lg:py-20">
+  <p
+    class="container-x text-center text-xl leading-relaxed text-foreground"
+    data-reveal
+  >
+    Socio estratégico en continuidad de negocio para <em
+      class="font-serif italic text-primary"
+      >retail, supermercados y gastronomía</em
+    >
+  </p>
+
+  <!-- Ticker -->
+  <div class="marquee mt-8">
+    <div class="marquee-track" style="animation-duration:45s">
+      {
+        [0, 1].map((copy) => (
+          <div
+            class="marquee-group"
+            style="gap:60px;padding-right:60px"
+            aria-hidden={copy === 1 ? "true" : undefined}
+          >
+            {items.map((c) =>
+              c.logo ? (
+                <img
+                  src={c.logo}
+                  alt={c.nombre}
+                  loading="lazy"
+                  decoding="async"
+                  class="h-14 w-[170px] shrink-0 object-contain transition-transform duration-300 hover:scale-105"
+                />
+              ) : (
+                <span class="grid h-14 w-[170px] shrink-0 place-items-center text-xl font-bold tracking-tight text-foreground/60 transition-colors hover:text-primary">
+                  {c.nombre}
+                </span>
+              ),
+            )}
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

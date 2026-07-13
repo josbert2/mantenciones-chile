@@ -12,18 +12,16 @@ const links = [
 
 <header data-site-header class="sticky top-0 z-50">
   <!-- Barra utilitaria -->
-  <div class="hidden border-b border-white/10 bg-ink text-background lg:block">
+  <div class="hidden border-b border-border bg-muted text-muted-foreground lg:block">
     <div
       class="container-x flex h-9 items-center justify-between font-mono text-[0.66rem] uppercase tracking-[0.15em]"
     >
-      <span class="text-background/55">
-        Cobertura corporativa · Región Metropolitana
-      </span>
-      <div class="flex items-center gap-6 text-background/70">
+      <span>Cobertura corporativa · Región Metropolitana</span>
+      <div class="flex items-center gap-6">
         <a href={`tel:${site.phone}`} class="transition-colors hover:text-primary"
           >{site.phoneDisplay}</a
         >
-        <span class="text-white/15">/</span>
+        <span class="text-foreground/20">/</span>
         <a
           href={`mailto:${site.email}`}
           class="transition-colors hover:text-primary">{site.email}</a
@@ -39,11 +37,7 @@ const links = [
   >
     <nav class="container-x flex h-16 items-center justify-between gap-4">
       <a href="/#inicio" class="flex items-center gap-2.5">
-        <span
-          class="grid h-9 w-9 place-items-center rounded-md bg-primary text-accent-foreground"
-        >
-          <Icon name="hugeicons:wrench-01" class="h-5 w-5" />
-        </span>
+        <img src="/maschile.svg" alt="Más de Chile" class="h-9 w-auto" />
         <span
           class="font-display text-lg font-extrabold tracking-tight text-foreground"
         >

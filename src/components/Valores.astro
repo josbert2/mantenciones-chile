@@ -1,0 +1,118 @@
+---
+const cdn = (id: string) =>
+  `https://framerusercontent.com/images/${id}.png?scale-down-to=512&width=2048&height=2048`;
+
+const fotoIzq = cdn("h8RHPQdFh0mQtKGjopKy3nIi2A"); // limpieza de campanas
+const fotoMini = cdn("5AgeMShXPsGp8UgPgzzfhnQJ9c"); // tecnico en terreno
+const fotoDer = cdn("8FKXOumsLuAOf81tpPnI3zu2Jg"); // hidrojet
+---
+
+<section id="valores" class="py-24 lg:py-32">
+  <div class="container-x">
+    <!-- Encabezado -->
+    <div class="max-w-xl">
+      <div
+        class="flex items-center gap-1 font-mono text-sm text-primary"
+        data-reveal
+      >
+        <span>//</span>
+        <span>Valores</span>
+      </div>
+      <h2
+        class="mt-3 font-display text-3xl font-extrabold leading-[1.12] tracking-[-0.02em] text-foreground sm:text-4xl lg:text-[2.6rem]"
+        data-reveal
+      >
+        Lo que nos mueve. Principios que guían nuestro trabajo.
+      </h2>
+      <p class="mt-6 leading-relaxed text-muted-foreground" data-reveal>
+        Con más de una década manteniendo la infraestructura de retail,
+        supermercados y gastronomía, entregamos soluciones técnicas de calidad,
+        priorizando la seguridad en cada operación.
+      </p>
+    </div>
+
+    <!-- Tarjetas -->
+    <div class="mt-14 grid gap-6 lg:grid-cols-3">
+      <!-- Foto + mini tarjeta flotante -->
+      <figure
+        class="relative aspect-[368/290] overflow-hidden rounded-[20px] bg-muted"
+        data-reveal
+      >
+        <img
+          src={fotoIzq}
+          alt="Equipo de Más de Chile en operación"
+          width="368"
+          height="290"
+          loading="lazy"
+          decoding="async"
+          class="h-full w-full object-cover"
+        />
+        <figcaption
+          class="absolute inset-x-3 bottom-3 flex gap-3 rounded-2xl bg-white p-3 shadow-soft"
+        >
+          <img
+            src={fotoMini}
+            alt="Técnico en terreno"
+            width="104"
+            height="125"
+            loading="lazy"
+            decoding="async"
+            class="h-[125px] w-[104px] shrink-0 rounded-lg object-cover"
+          />
+          <div class="flex flex-col justify-center">
+            <p class="text-sm font-semibold leading-snug text-foreground">
+              Nuestra vocación técnica es lo que mueve cada operación en terreno.
+            </p>
+            <p
+              class="mt-2 font-mono text-[0.62rem] uppercase tracking-[0.16em] text-primary"
+            >
+              Equipo en terreno
+            </p>
+          </div>
+        </figcaption>
+      </figure>
+
+      <!-- Tarjeta de propósito (color de marca) -->
+      <article
+        class="flex aspect-[368/290] flex-col justify-between rounded-[20px] bg-primary p-7 text-white lg:p-8"
+        data-reveal
+      >
+        <div>
+          <h3 class="font-display text-xl font-extrabold tracking-tight">
+            Guiados por un propósito
+          </h3>
+          <p class="mt-3 leading-relaxed text-white/80">
+            Cada operación nace de un propósito claro: mantener tu
+            infraestructura funcionando, con excelencia operativa y seguridad.
+          </p>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <span class="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-white p-1.5">
+            <img src="/maschile.svg" alt="Más de Chile" class="h-full w-auto" />
+          </span>
+          <div>
+            <p class="text-sm font-bold leading-tight">Más de Chile SpA</p>
+            <p class="text-xs text-white/70">Ingeniería y mantenimiento · Desde 2013</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Foto -->
+      <figure
+        class="relative aspect-[368/290] overflow-hidden rounded-[20px] bg-muted"
+        data-reveal
+      >
+        <img
+          src={fotoDer}
+          alt="Operación de hidrojet y destapes"
+          width="368"
+          height="290"
+          loading="lazy"
+          decoding="async"
+          class="h-full w-full object-cover"
+        />
+      </figure>
+    </div>
+  </div>
+</section>

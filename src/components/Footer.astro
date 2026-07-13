@@ -5,60 +5,118 @@ import { site } from "../data/site";
 
 const cols = [
   {
+    title: "Enlaces",
+    links: [
+      { label: "Nosotros", href: "/#nosotros" },
+      { label: "Servicios", href: "/#servicios" },
+      { label: "Portfolio", href: "/servicios" },
+      { label: "Contacto", href: "/#cotizar" },
+    ],
+  },
+  {
+    title: "Ayuda",
+    links: [
+      { label: "Cotizar", href: "/#cotizar" },
+      { label: "Emergencias 24/7", href: "/servicios/emergencias-24-7" },
+      { label: "Cobertura RM", href: "/servicios" },
+    ],
+  },
+  {
     title: "Servicios",
-    links: servicios.slice(0, 6).map((s) => ({
+    links: servicios.slice(0, 5).map((s) => ({
       label: s.titulo,
       href: `/servicios/${s.slug}`,
     })),
-  },
-  {
-    title: "Empresa",
-    links: [
-      { label: "Nosotros", href: "/#nosotros" },
-      { label: "Servicios", href: "/servicios" },
-      { label: "Clientes", href: "/#clientes" },
-      { label: "Contacto", href: "/#cotizar" },
-    ],
   },
 ];
 const year = 2026;
 ---
 
-<footer class="relative overflow-hidden border-t border-white/10 bg-ink text-background">
-  <div class="tech-grid pointer-events-none absolute inset-0 opacity-40"></div>
-  <div class="container-x relative py-16">
-    <div class="grid gap-12 lg:grid-cols-[1.5fr_1fr_1fr_1.2fr]">
-      <div>
-        <a href="/#inicio" class="flex items-center gap-2.5">
-          <span class="grid h-10 w-10 place-items-center rounded-md bg-primary text-accent-foreground">
-            <Icon name="hugeicons:wrench-01" class="h-5 w-5" />
-          </span>
-          <span class="font-display text-lg font-extrabold tracking-tight text-background">
-            Más de Chile
-          </span>
-        </a>
-        <p class="mt-5 max-w-xs text-sm leading-relaxed text-background/55">
-          Ingeniería, mantenimiento multitécnico y soluciones de infraestructura
-          comercial. Socio estratégico en continuidad de negocio para retail,
-          supermercados y gastronomía.
-        </p>
-        <p class="mt-5 font-mono text-[0.68rem] uppercase tracking-[0.16em] text-background/40">
-          Comercializadora y Productora Más de Chile SpA
-        </p>
-      </div>
+<footer class="relative overflow-hidden bg-primary text-white">
+  <div
+    class="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary via-primary to-accent-strong"
+  >
+  </div>
+  <div class="tech-grid pointer-events-none absolute inset-0 opacity-20"></div>
 
+  <div class="container-x relative py-16 lg:py-20">
+    <!-- CTA: agenda tu visita -->
+    <div
+      class="relative overflow-hidden rounded-2xl border border-white/15 bg-white/10 p-8 backdrop-blur-sm sm:p-12"
+    >
+      <!-- onda decorativa -->
+      <svg
+        class="pointer-events-none absolute right-0 top-0 h-full w-3/4 text-white/10"
+        viewBox="0 0 600 400"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+      >
+        <path
+          d="M600,0 L600,400 L260,400 C520,300 300,150 600,0 Z"
+          fill="currentColor"></path>
+        <path
+          d="M600,0 L600,400 L360,400 C560,320 380,180 600,40 Z"
+          fill="rgba(255,255,255,0.06)"></path>
+      </svg>
+
+      <div class="relative grid gap-8 lg:grid-cols-2 lg:items-center">
+        <div>
+          <h2
+            class="font-display text-3xl font-extrabold uppercase leading-[1.02] tracking-[-0.02em] text-white sm:text-4xl"
+          >
+            Agenda tu visita técnica
+          </h2>
+          <p class="mt-4 max-w-md leading-relaxed text-white/75">
+            Ya sea una emergencia o una mantención programada, nuestro equipo
+            técnico está a un llamado de distancia.
+          </p>
+        </div>
+
+        <div class="lg:justify-self-end lg:text-right">
+          <a
+            href={`tel:${site.phone}`}
+            class="inline-flex items-center gap-3 rounded-xl bg-white px-5 py-3.5 shadow-sm transition-transform hover:-translate-y-0.5"
+          >
+            <span class="grid h-9 w-9 place-items-center rounded-lg bg-primary text-white">
+              <Icon name="hugeicons:call-02" class="h-5 w-5" />
+            </span>
+            <span class="text-base font-bold text-foreground">
+              Llamar: {site.phoneDisplay}
+            </span>
+          </a>
+          <p
+            class="mt-3 font-mono text-[0.7rem] uppercase tracking-[0.16em] text-white/60"
+          >
+            Atención 24/7 en toda la Región Metropolitana
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Logo -->
+    <div class="mt-16 flex items-center gap-3">
+      <span class="grid h-11 w-11 place-items-center rounded-md bg-white p-1.5">
+        <img src="/maschile.svg" alt="Más de Chile" class="h-full w-auto" />
+      </span>
+      <span class="font-display text-xl font-extrabold tracking-tight text-white">
+        Más de Chile
+      </span>
+    </div>
+
+    <!-- Columnas -->
+    <div
+      class="mt-10 grid grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-3 lg:grid-cols-5"
+    >
       {
         cols.map((c) => (
           <div>
-            <h3 class="font-mono text-[0.68rem] uppercase tracking-[0.18em] text-primary">
-              {c.title}
-            </h3>
+            <h3 class="font-display text-sm font-bold text-white">{c.title}</h3>
             <ul class="mt-5 space-y-3">
               {c.links.map((l) => (
                 <li>
                   <a
                     href={l.href}
-                    class="text-sm text-background/60 transition-colors hover:text-background"
+                    class="text-sm text-white/70 transition-colors hover:text-white"
                   >
                     {l.label}
                   </a>
@@ -70,41 +128,47 @@ const year = 2026;
       }
 
       <div>
-        <h3 class="font-mono text-[0.68rem] uppercase tracking-[0.18em] text-primary">
-          Contacto
-        </h3>
-        <ul class="mt-5 space-y-3 text-sm text-background/60">
+        <h3 class="font-display text-sm font-bold text-white">Oficina central</h3>
+        <p class="mt-5 text-sm leading-relaxed text-white/70">
+          {site.address.street}<br />
+          {site.address.city}<br />
+          {site.address.region}
+        </p>
+      </div>
+
+      <div>
+        <h3 class="font-display text-sm font-bold text-white">Contacto</h3>
+        <ul class="mt-5 space-y-3 text-sm text-white/70">
           <li>
-            <a href={`tel:${site.phone}`} class="hover:text-background"
+            <a href={`tel:${site.phone}`} class="hover:text-white"
               >{site.phoneDisplay}</a
             >
           </li>
           <li>
-            <a href={`tel:${site.phoneAlt}`} class="hover:text-background"
+            <a href={`tel:${site.phoneAlt}`} class="hover:text-white"
               >{site.phoneAltDisplay}</a
             >
           </li>
           <li>
-            <a href={`mailto:${site.email}`} class="break-all hover:text-background"
+            <a href={`mailto:${site.email}`} class="break-all hover:text-white"
               >{site.email}</a
             >
-          </li>
-          <li class="pt-1 leading-relaxed">
-            {site.address.street}<br />{site.address.city}, {site.address.region}
           </li>
         </ul>
       </div>
     </div>
 
+    <!-- Barra inferior -->
     <div
-      class="mt-14 flex flex-col items-start justify-between gap-3 border-t border-white/10 pt-6 sm:flex-row sm:items-center"
+      class="mt-14 flex flex-col items-start justify-between gap-4 border-t border-white/20 pt-6 sm:flex-row sm:items-center"
     >
-      <p class="text-sm text-background/45">
-        © {year} Más de Chile SpA. Todos los derechos reservados.
+      <p class="text-sm text-white/60">
+        © {year} Comercializadora y Productora Más de Chile SpA. Todos los
+        derechos reservados.
       </p>
       <a
         href={site.url}
-        class="font-mono text-[0.72rem] uppercase tracking-[0.16em] text-background/45 hover:text-background"
+        class="font-mono text-[0.72rem] uppercase tracking-[0.16em] text-white/60 transition-colors hover:text-white"
         >www.masdechile.cl</a
       >
     </div>

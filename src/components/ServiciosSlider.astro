@@ -1,0 +1,172 @@
+---
+import { Icon } from "astro-icon/components";
+import { servicios } from "../data/servicios";
+
+const cdn = (id: string) =>
+  `https://framerusercontent.com/images/${id}.png?scale-down-to=512&width=2048&height=2048`;
+---
+
+<section id="servicios" class="overflow-x-clip py-24 lg:py-32">
+  <div class="container-x">
+    <!-- Encabezado -->
+    <div class="grid gap-8 lg:grid-cols-[1fr_368px] lg:items-end lg:gap-16">
+      <div data-reveal>
+        <div class="flex items-center gap-1 font-mono text-sm text-primary">
+          <span>//</span>
+          <span>Servicios</span>
+        </div>
+        <h2
+          class="mt-3 max-w-xl text-3xl font-semibold leading-[1.15] tracking-[-0.02em] text-foreground sm:text-4xl lg:text-[2.7rem]"
+        >
+          Nuestras capacidades. Servicios técnicos <em
+            class="font-serif font-normal italic tracking-normal"
+            >confiables</em
+          >
+        </h2>
+      </div>
+
+      <div class="flex flex-col gap-4" data-reveal>
+        <p class="leading-relaxed text-muted-foreground">
+          Cada servicio está diseñado para mantener tu operación funcionando,
+          con ejecución técnica y cumplimiento normativo.
+        </p>
+        <a
+          href="/servicios"
+          class="inline-flex w-fit items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-accent-strong"
+        >
+          Ver todos los servicios
+          <Icon name="hugeicons:arrow-right-01" class="h-4 w-4" />
+        </a>
+      </div>
+    </div>
+
+    <!-- Slider: rompe el contenedor hacia la derecha (full-bleed) -->
+    <div id="serv-slider" class="mt-12" data-reveal>
+      <div class="overflow-hidden mr-[calc(50%-50vw)]">
+        <div id="serv-track" class="serv-track flex gap-6">
+          {
+            servicios.map((s) => (
+              <a
+                href={`/servicios/${s.slug}`}
+                class="serv-card group flex w-[280px] shrink-0 flex-col gap-4 sm:w-[320px] lg:w-[352px]"
+              >
+                <figure class="aspect-[381/393] overflow-hidden rounded-xl bg-muted">
+                  <img
+                    src={cdn(s.imagen)}
+                    alt={s.titulo}
+                    width="381"
+                    height="393"
+                    loading="lazy"
+                    decoding="async"
+                    class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                </figure>
+
+                <div class="flex flex-col gap-1.5">
+                  <h3 class="text-xl font-semibold tracking-tight text-foreground transition-colors group-hover:text-primary">
+                    {s.titulo}
+                  </h3>
+                  <p class="text-[15px] leading-relaxed text-muted-foreground">
+                    {s.resumen}
+                  </p>
+                </div>
+              </a>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Controles -->
+      <div class="relative mt-8 flex items-center justify-center">
+        <div id="serv-dots" class="flex items-center gap-1.5"></div>
+        <div class="absolute right-0 flex items-center gap-3">
+          <button
+            id="serv-prev"
+            aria-label="Anterior"
+            class="grid h-11 w-11 place-items-center rounded-full border border-border bg-surface text-foreground transition-colors hover:border-primary hover:text-primary disabled:opacity-40"
+          >
+            <Icon name="hugeicons:arrow-left-01" class="h-5 w-5" />
+          </button>
+          <button
+            id="serv-next"
+            aria-label="Siguiente"
+            class="grid h-11 w-11 place-items-center rounded-full border border-border bg-surface text-foreground transition-colors hover:border-primary hover:text-primary disabled:opacity-40"
+          >
+            <Icon name="hugeicons:arrow-right-01" class="h-5 w-5" />
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .serv-track {
+    will-change: transform;
+    transition: transform 0.7s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .serv-track {
+      transition: none;
+    }
+  }
+</style>
+
+<script is:inline>
+  (() => {
+    const track = document.getElementById("serv-track");
+    const dotsWrap = document.getElementById("serv-dots");
+    if (!track || !dotsWrap) return;
+
+    const cards = Array.from(track.children);
+    let i = 0;
+
+    // cuantas tarjetas entran a la vista
+    const perView = () => {
+      const vw = track.parentElement.clientWidth;
+      const w = cards[0].offsetWidth;
+      const gap = parseFloat(getComputedStyle(track).columnGap) || 24;
+      return Math.max(1, Math.round((vw + gap) / (w + gap)));
+    };
+    const maxIndex = () => Math.max(0, cards.length - perView());
+
+    const step = () => {
+      // offsetWidth: ancho real de layout
+      const w = cards[0].offsetWidth;
+      const gap = parseFloat(getComputedStyle(track).columnGap) || 24;
+      return w + gap;
+    };
+
+    const paint = () => {
+      i = Math.min(i, maxIndex());
+      track.style.transform = "translate3d(" + -i * step() + "px,0,0)";
+      document.getElementById("serv-prev").disabled = i <= 0;
+      document.getElementById("serv-next").disabled = i >= maxIndex();
+      // dots
+      dotsWrap.innerHTML = "";
+      for (let d = 0; d <= maxIndex(); d++) {
+        const b = document.createElement("button");
+        b.setAttribute("aria-label", "Ir al slide " + (d + 1));
+        b.className =
+          "h-2 rounded-full transition-all " +
+          (d === i ? "w-6 bg-primary" : "w-2 bg-border hover:bg-muted-foreground");
+        b.addEventListener("click", () => {
+          i = d;
+          paint();
+        });
+        dotsWrap.appendChild(b);
+      }
+    };
+
+    document.getElementById("serv-next").addEventListener("click", () => {
+      i = Math.min(i + 1, maxIndex());
+      paint();
+    });
+    document.getElementById("serv-prev").addEventListener("click", () => {
+      i = Math.max(i - 1, 0);
+      paint();
+    });
+    window.addEventListener("resize", paint);
+    paint();
+  })();
+</script>

@@ -7,6 +7,9 @@ import HeroProfesional from "../components/HeroProfesional.astro";
 import Services from "../components/Services.astro";
 import Portfolio from "../components/Portfolio.astro";
 import Galeria from "../components/Galeria.astro";
+import Valores from "../components/Valores.astro";
+import ServiciosSlider from "../components/ServiciosSlider.astro";
+import Clientes from "../components/Clientes.astro";
 import CasosExito from "../components/CasosExito.astro";
 import Equipo from "../components/Equipo.astro";
 import WhyUs from "../components/WhyUs.astro";
@@ -33,14 +36,18 @@ const jsonLd = [localBusiness(), websiteSchema()];
 >
   <Nav />
   <main>
-    <BannerPromocion />
-    <QuienesSomos />
-    <Services />
-    <Portfolio />
+    {/* --- Secciones comentadas: rediseñamos de cero --- */}
+    {/* <BannerPromocion /> */}
+    {/* <QuienesSomos /> */}
+    {/* <Services /> */}
+    {/* <Portfolio /> */}
+    <Clientes />
+    <ServiciosSlider />
+    <Valores />
     <Galeria />
-    <Cotizar />
+    {/* <Cotizar /> */}
   </main>
   <Footer />
 
-  <ChatbotWhatsapp />
+  {/* <ChatbotWhatsapp /> */}
 </Layout>
