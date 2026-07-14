@@ -7,7 +7,12 @@ import Footer from "../../../components/Footer.astro";
 import { Icon } from "astro-icon/components";
 import { servicios, type Servicio } from "../../../data/servicios";
 import { comunas, type Comuna } from "../../../data/comunas";
-import { localServiceSchema, breadcrumb, localBusiness } from "../../../lib/schema";
+import {
+  localServiceSchema,
+  breadcrumb,
+  localBusiness,
+} from "../../../lib/schema";
+import { site } from "../../../data/site";
 
 export function getStaticPaths() {
   return servicios.flatMap((s) =>
@@ -24,9 +29,10 @@ interface Props {
 }
 const { s, c } = Astro.props;
 
-const cdn = (id: string) =>
-  `https://framerusercontent.com/images/${id}.png?scale-down-to=512&width=2048&height=2048`;
-const otrasComunas = comunas.filter((x) => x.slug !== c.slug).slice(0, 8);
+const cdn = (id: string, w = 2048) =>
+  `https://framerusercontent.com/images/${id}.png?scale-down-to=${w}&width=2048&height=2048`;
+
+const otrasComunas = comunas.filter((x) => x.slug !== c.slug);
 
 const jsonLd = [
   localServiceSchema(s, c.nombre),
@@ -41,26 +47,46 @@ const jsonLd = [
 ---
 
 <Layout
-  title={`${s.nombre} en ${c.nombre} | Mantenciones Chile`}
-  description={`${s.nombre} a domicilio en ${c.nombre}. Tecnicos certificados, cotizacion clara y garantia de 90 dias. Atencion en 24 hrs.`}
+  title={`${s.titulo} en ${c.nombre} | Más de Chile`}
+  description={`${s.nombre} en ${c.nombre}: ${s.resumen} Técnicos certificados y emergencias 24/7 para empresas, condominios y hogares.`}
   canonical={`/servicios/${s.slug}/${c.slug}`}
+  image={`/og/${s.slug}.png`}
   jsonLd={jsonLd}
 >
   <Nav />
   <main>
-    <section class="pt-10 lg:pt-14">
-      <div class="container-x">
-        <nav aria-label="Migas de pan" class="text-sm text-muted-foreground">
+    <!-- Hero -->
+    <section class="relative overflow-hidden">
+      <img
+        src={cdn(s.imagen)}
+        alt=""
+        aria-hidden="true"
+        width="2048"
+        height="2048"
+        loading="eager"
+        fetchpriority="high"
+        class="absolute inset-0 h-full w-full object-cover"
+      />
+      <div
+        class="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/35"
+      >
+      </div>
+
+      <div class="container-x relative py-16 lg:py-24">
+        <nav aria-label="Migas de pan" class="text-sm text-white/55">
           <ol class="flex flex-wrap items-center gap-1.5">
-            <li><a href="/" class="hover:text-accent-strong">Inicio</a></li>
+            <li><a href="/" class="transition-colors hover:text-white">Inicio</a></li>
             <li aria-hidden="true">/</li>
             <li>
-              <a href="/servicios" class="hover:text-accent-strong">Servicios</a>
+              <a href="/servicios" class="transition-colors hover:text-white"
+                >Servicios</a
+              >
             </li>
             <li aria-hidden="true">/</li>
             <li>
-              <a href={`/servicios/${s.slug}`} class="hover:text-accent-strong"
-                >{s.nombre}</a
+              <a
+                href={`/servicios/${s.slug}`}
+                class="transition-colors hover:text-white">{s.nombre}</a
               >
             </li>
             <li aria-hidden="true">/</li>
@@ -70,71 +96,113 @@ const jsonLd = [
           </ol>
         </nav>
 
-        <div class="mt-8 grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+        <div class="mt-10 grid items-end gap-10 lg:grid-cols-[1.1fr_360px] lg:gap-16">
           <div>
-            <span
-              class="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3.5 py-1.5 text-xs font-semibold text-primary"
+            <div
+              class="flex items-center gap-2 font-mono text-sm text-primary"
+              data-reveal
             >
-              <Icon name="hugeicons:location-01" class="h-4 w-4 text-accent-strong" />
-              {c.nombre}, Region Metropolitana
-            </span>
+              <Icon name="hugeicons:location-01" class="h-4 w-4" />
+              <span>{c.nombre} · Región Metropolitana</span>
+            </div>
+
             <h1
-              class="mt-5 font-display text-4xl uppercase leading-[0.95] tracking-tight text-foreground sm:text-5xl"
+              class="mt-4 text-4xl font-semibold leading-[1.08] tracking-[-0.02em] text-white sm:text-5xl lg:text-[3.4rem]"
+              data-reveal
             >
               {s.nombre} en {c.nombre}
             </h1>
-            <p class="mt-5 max-w-xl text-lg leading-relaxed text-muted-foreground">
-              Servicio de {s.nombre.toLowerCase()} a domicilio en {c.nombre}. Llegamos
-              rapido a tu direccion con tecnicos certificados, cotizacion clara y
-              garantia de 90 dias. {s.intro}
+
+            <p
+              class="mt-6 max-w-xl text-lg leading-relaxed text-white/70"
+              data-reveal
+            >
+              Servicio de {s.nombre.toLowerCase()} en {c.nombre} para empresas,
+              condominios y hogares. {s.intro}
             </p>
-            <div class="mt-8 flex flex-wrap gap-3">
+
+            <div class="mt-9 flex flex-wrap items-center gap-4" data-reveal>
               <a
                 href="#cotizar"
-                class="rounded-full bg-accent px-6 py-3.5 text-xs font-bold uppercase tracking-wide text-accent-foreground transition-transform hover:-translate-y-0.5"
-                >Pedir cotizacion</a
+                class="group inline-flex items-center gap-2.5 rounded-full bg-primary py-3 pl-6 pr-3 text-sm font-bold text-white transition-transform hover:-translate-y-0.5"
               >
+                Solicitar cotización
+                <span
+                  class="grid h-6 w-6 place-items-center rounded-full bg-white text-primary transition-transform group-hover:translate-x-0.5"
+                >
+                  <Icon name="hugeicons:arrow-right-01" class="h-3.5 w-3.5" />
+                </span>
+              </a>
               <a
-                href="tel:+56912345678"
-                class="rounded-full border border-border bg-surface px-6 py-3.5 text-xs font-bold uppercase tracking-wide text-primary transition-colors hover:bg-muted"
-                >Llamar ahora</a
+                href={`tel:${site.phone}`}
+                class="inline-flex items-center gap-2.5 text-sm font-semibold text-white transition-colors hover:text-primary"
               >
+                <span class="relative grid h-9 w-9 place-items-center rounded-full bg-white/15 backdrop-blur-sm">
+                  <Icon name="hugeicons:call-02" class="h-4 w-4" />
+                  <span class="absolute inset-0 animate-ping rounded-full bg-white/20"
+                  ></span>
+                </span>
+                Emergencia 24/7 · {site.phoneDisplay}
+              </a>
             </div>
           </div>
 
-          <div class="relative overflow-hidden rounded-3xl border border-border shadow-soft">
-            <img
-              src={cdn(s.imagen)}
-              alt={`${s.nombre} en ${c.nombre} — Mantenciones Chile`}
-              width="512"
-              height="512"
-              class="aspect-[4/3] w-full object-cover"
-              loading="eager"
-            />
-            <span class="grain-layer" aria-hidden="true"></span>
+          <div class="rounded-2xl bg-white p-7 shadow-soft" data-reveal>
+            <p class="font-mono text-[0.66rem] uppercase tracking-[0.16em] text-primary">
+              Incluye {s.incluye.length} prestaciones
+            </p>
+            <ul class="mt-4 space-y-3">
+              {
+                s.incluye.slice(0, 4).map((item) => (
+                  <li class="flex items-start gap-2.5 text-sm text-foreground">
+                    <Icon
+                      name="hugeicons:tick-02"
+                      class="mt-0.5 h-4 w-4 shrink-0 text-primary"
+                    />
+                    <span>{item}</span>
+                  </li>
+                ))
+              }
+            </ul>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="py-20 lg:py-24">
+    <!-- Alcance -->
+    <section class="py-20 lg:py-28">
       <div class="container-x">
-        <h2
-          class="text-3xl font-display uppercase tracking-tight text-foreground sm:text-4xl"
-        >
-          {s.nombre} a domicilio en {c.nombre}
-        </h2>
-        <p class="mt-4 max-w-2xl text-lg text-muted-foreground">
-          Esto es lo que resolvemos en {c.nombre} y alrededores:
-        </p>
+        <div class="max-w-2xl">
+          <div
+            class="flex items-center gap-1 font-mono text-sm text-primary"
+            data-reveal
+          >
+            <span>//</span>
+            <span>Alcance en {c.nombre}</span>
+          </div>
+          <h2
+            class="mt-3 text-3xl font-semibold leading-[1.15] tracking-[-0.02em] text-foreground sm:text-4xl"
+            data-reveal
+          >
+            Esto resolvemos en <em class="font-serif font-normal italic"
+              >{c.nombre}</em
+            > y alrededores
+          </h2>
+        </div>
+
         <div class="mt-10 grid gap-4 sm:grid-cols-2">
           {
             s.incluye.map((item) => (
-              <div class="flex items-start gap-3 rounded-2xl border border-border bg-surface p-5">
-                <span class="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-success/10 text-success">
-                  <Icon name="hugeicons:wrench-01" class="h-4 w-4" />
+              <div
+                class="flex items-start gap-3 rounded-xl border border-border bg-surface p-5"
+                data-reveal
+              >
+                <span class="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-primary/10 text-primary">
+                  <Icon name="hugeicons:tick-02" class="h-4 w-4" />
                 </span>
-                <span class="text-[15px] font-medium text-foreground">{item}</span>
+                <span class="text-[15px] font-medium leading-snug text-foreground">
+                  {item}
+                </span>
               </div>
             ))
           }
@@ -148,28 +216,29 @@ const jsonLd = [
       titulo={`Preguntas frecuentes en ${c.nombre}`}
     />
 
-    <!-- Cobertura: otras comunas -->
-    <section class="py-16">
+    <!-- Otras comunas -->
+    <section class="border-y border-border bg-surface py-16">
       <div class="container-x">
         <h2
-          class="text-2xl font-display uppercase tracking-tight text-foreground sm:text-3xl"
+          class="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl"
+          data-reveal
         >
           {s.nombre} en otras comunas
         </h2>
-        <div class="mt-6 flex flex-wrap gap-2.5">
+        <div class="mt-6 flex flex-wrap gap-2" data-reveal>
           {
             otrasComunas.map((o) => (
               <a
                 href={`/servicios/${s.slug}/${o.slug}`}
-                class="rounded-full border border-border bg-surface px-4 py-2 text-sm font-medium text-primary transition-colors hover:bg-muted"
+                class="rounded-full border border-border bg-background px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:border-primary hover:text-primary"
               >
-                {s.nombre} en {o.nombre}
+                {o.nombre}
               </a>
             ))
           }
           <a
             href={`/servicios/${s.slug}`}
-            class="rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground"
+            class="rounded-full bg-primary px-4 py-2 text-sm font-semibold text-white"
           >
             Ver todo el servicio
           </a>
@@ -177,17 +246,7 @@ const jsonLd = [
       </div>
     </section>
 
-    <Cotizar servicioPreseleccionado={s.nombre} />
+    <Cotizar servicioPreseleccionado={s.titulo} />
   </main>
   <Footer />
-
-  <a
-    href="https://wa.me/56912345678?text=Hola!%20Quiero%20cotizar%20un%20servicio%20de%20mantencion."
-    target="_blank"
-    rel="noopener"
-    aria-label="Escribir por WhatsApp"
-    class="fixed bottom-5 right-5 z-50 grid h-14 w-14 place-items-center rounded-full bg-success text-white shadow-soft transition-transform hover:-translate-y-1"
-  >
-    <Icon name="hugeicons:whatsapp" class="h-7 w-7" />
-  </a>
 </Layout>

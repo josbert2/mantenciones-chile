@@ -1,0 +1,150 @@
+---
+import { Icon } from "astro-icon/components";
+import { site } from "../data/site";
+
+const cdn = (id: string) =>
+  `https://framerusercontent.com/images/${id}.png?scale-down-to=2048&width=2048&height=2048`;
+
+const wa = (texto: string) =>
+  `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(texto)}`;
+
+const bullets = [
+  "Técnicos certificados y capacitados",
+  "Equipamiento profesional y camión hidrojet",
+];
+
+// Logos reales de la cartera (public/logos)
+const logos = [
+  { src: "/logos/jumbo.png", alt: "Jumbo" },
+  { src: "/logos/cencosud.svg", alt: "Cencosud" },
+  { src: "/logos/kfc.svg", alt: "KFC" },
+];
+---
+
+<section id="inicio" class="relative overflow-hidden">
+  <!-- Fondo: foto a pantalla completa -->
+  <img
+    src={cdn("8FKXOumsLuAOf81tpPnI3zu2Jg")}
+    alt=""
+    aria-hidden="true"
+    width="2048"
+    height="2048"
+    loading="eager"
+    fetchpriority="high"
+    class="absolute inset-0 h-full w-full object-cover"
+  />
+  <!-- Oscurecido para legibilidad del texto blanco -->
+  <div
+    class="absolute inset-0 bg-gradient-to-r from-black/85 via-black/65 to-black/30"
+  >
+  </div>
+
+  <div class="container-x relative py-24 lg:py-32">
+    <div class="max-w-[629px]">
+      <!-- Badge -->
+      <p
+        class="flex items-center gap-2 text-base text-white/75"
+        data-reveal
+      >
+        <Icon name="hugeicons:checkmark-badge-01" class="h-5 w-5 text-primary" />
+        Confían en nosotros el retail, los supermercados y la gastronomía
+      </p>
+
+      <!-- Titular blanco grande (68px) -->
+      <h1
+        class="mt-4 text-4xl font-semibold leading-[1.08] tracking-[-0.02em] text-white sm:text-5xl lg:text-[4.25rem]"
+        data-reveal
+      >
+        Mantención técnica rápida y <em
+          class="font-serif font-normal italic">confiable</em
+        >
+      </h1>
+
+      <!-- Bajada -->
+      <p class="mt-6 max-w-lg text-xl leading-relaxed text-white/70" data-reveal>
+        Hidrojet, gasfitería, cerrajería, obras civiles y emergencias 24/7 para
+        empresas, condominios y hogares en toda la Región Metropolitana.
+      </p>
+
+      <!-- CTA pill con círculo + flecha -->
+      <div class="mt-8 flex flex-wrap items-center gap-4" data-reveal>
+        <a
+          href={wa(
+            "Hola Más de Chile! Quiero solicitar una cotización.",
+          )}
+          target="_blank"
+          rel="noopener"
+          class="group inline-flex items-center gap-2.5 rounded-full bg-primary py-3 pl-6 pr-3 text-base font-bold text-white transition-transform hover:-translate-y-0.5"
+        >
+          Solicitar cotización
+          <span
+            class="grid h-6 w-6 place-items-center rounded-full bg-white text-primary transition-transform group-hover:translate-x-0.5"
+          >
+            <Icon name="hugeicons:arrow-right-01" class="h-3.5 w-3.5" />
+          </span>
+        </a>
+
+        <a
+          href={`tel:${site.phone}`}
+          class="inline-flex items-center gap-2.5 text-sm font-semibold text-white transition-colors hover:text-primary"
+        >
+          <span class="relative grid h-9 w-9 place-items-center rounded-full bg-white/15 text-white backdrop-blur-sm">
+            <Icon name="hugeicons:call-02" class="h-4 w-4" />
+            <span class="absolute inset-0 animate-ping rounded-full bg-white/20"
+            ></span>
+          </span>
+          Emergencia 24/7 · {site.phoneDisplay}
+        </a>
+      </div>
+
+      <!-- Bullets -->
+      <div class="mt-10 flex flex-col gap-4 sm:flex-row sm:gap-8" data-reveal>
+        {
+          bullets.map((b) => (
+            <p class="flex items-start gap-2.5 text-sm text-white/70">
+              <Icon
+                name="hugeicons:tick-02"
+                class="mt-0.5 h-4 w-4 shrink-0 text-primary"
+              />
+              {b}
+            </p>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- Tarjeta blanca flotante -->
+    <div
+      class="mt-12 w-[304px] rounded-2xl bg-white p-[30px] shadow-soft lg:absolute lg:bottom-32 lg:right-8 lg:mt-0"
+      data-reveal
+    >
+      <p class="text-[2.75rem] font-extrabold leading-none tracking-tight text-primary">
+        +15.000
+      </p>
+      <p class="mt-2 text-lg text-foreground">Soluciones ejecutadas</p>
+
+      <div class="mt-10 flex items-center gap-3">
+        <div class="flex">
+          {
+            logos.map((l, i) => (
+              <span
+                class:list={[
+                  "grid h-10 w-10 place-items-center overflow-hidden rounded-full border-2 border-white bg-surface p-1.5 shadow-sm",
+                  i > 0 && "-ml-3",
+                ]}
+              >
+                <img
+                  src={l.src}
+                  alt={l.alt}
+                  loading="lazy"
+                  class="h-full w-full object-contain"
+                />
+              </span>
+            ))
+          }
+        </div>
+        <p class="text-sm font-bold text-foreground">Retail y gastronomía</p>
+      </div>
+    </div>
+  </div>
+</section>

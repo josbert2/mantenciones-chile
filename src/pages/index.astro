@@ -10,6 +10,7 @@ import Galeria from "../components/Galeria.astro";
 import Valores from "../components/Valores.astro";
 import ServiciosSlider from "../components/ServiciosSlider.astro";
 import Clientes from "../components/Clientes.astro";
+import HeroInicio from "../components/HeroInicio.astro";
 import CasosExito from "../components/CasosExito.astro";
 import Equipo from "../components/Equipo.astro";
 import WhyUs from "../components/WhyUs.astro";
@@ -30,8 +31,8 @@ const jsonLd = [localBusiness(), websiteSchema()];
 ---
 
 <Layout
-  title="Más de Chile — Servicios técnicos especializados RM"
-  description="Hidrojet, gasfitería, cerrajería, obras civiles, emergencias 24/7 y más. Servicios técnicos profesionales para empresas, condominios y hogares en la Región Metropolitana."
+  title="Mantención multitécnica en Santiago | Más de Chile"
+  description="Hidrojet, gasfitería, cerrajería, obras civiles y emergencias 24/7 en la Región Metropolitana. Mantención multitécnica para empresas, condominios y hogares. +15.000 soluciones ejecutadas."
   jsonLd={jsonLd}
 >
   <Nav />
@@ -41,11 +42,13 @@ const jsonLd = [localBusiness(), websiteSchema()];
     {/* <QuienesSomos /> */}
     {/* <Services /> */}
     {/* <Portfolio /> */}
+    <HeroInicio />
     <Clientes />
     <ServiciosSlider />
     <Valores />
     <Galeria />
-    {/* <Cotizar /> */}
+    <Faq />
+    <Cotizar />
   </main>
   <Footer />
 

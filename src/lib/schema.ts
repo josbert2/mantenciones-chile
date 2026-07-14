@@ -1,5 +1,5 @@
 import { site } from "../data/site";
-import type { Servicio } from "../data/servicios";
+import { servicios, type Servicio } from "../data/servicios";
 
 const abs = (path: string) => new URL(path, site.url).toString();
 
@@ -35,6 +35,30 @@ export function localBusiness() {
     openingHours: site.openingHours,
     sameAs: site.sameAs,
     foundingDate: site.founded,
+    logo: {
+      "@type": "ImageObject",
+      url: abs("/maschile.svg"),
+    },
+    knowsAbout: [
+      "Mantenimiento multitécnico",
+      "Facility management",
+      "Infraestructura comercial",
+      "Continuidad operacional",
+    ],
+    // Catálogo de servicios: ayuda a Google a entender qué ofrecemos
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Servicios de Más de Chile",
+      itemListElement: servicios.map((s) => ({
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: s.nombre,
+          description: s.resumen,
+          url: `${site.url}/servicios/${s.slug}`,
+        },
+      })),
+    },
   };
 }
 

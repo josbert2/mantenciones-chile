@@ -1,12 +1,16 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import Nav from "../../components/Nav.astro";
+import Portfolio from "../../components/Portfolio.astro";
 import Cotizar from "../../components/Cotizar.astro";
 import Footer from "../../components/Footer.astro";
 import { Icon } from "astro-icon/components";
 import { servicios } from "../../data/servicios";
 import { breadcrumb, localBusiness } from "../../lib/schema";
 import { site } from "../../data/site";
+
+const cdn = (id: string) =>
+  `https://framerusercontent.com/images/${id}.png?scale-down-to=512&width=2048&height=2048`;
 
 const jsonLd = [
   localBusiness(),
@@ -28,59 +32,200 @@ const jsonLd = [
 ---
 
 <Layout
-  title="Servicios de mantencion en Chile | Mantenciones Chile"
-  description="Gasfiteria, electricidad, climatizacion y emergencias 24/7. Tecnicos certificados, cotizacion clara y garantia de 90 dias en todo Chile."
+  title="Servicios de mantención multitécnica RM | Más de Chile"
+  description="Hidrojet, gasfitería, cerrajería, obras civiles, limpiezas industriales, pinturas y emergencias 24/7 para empresas, condominios y hogares en la Región Metropolitana."
   canonical="/servicios"
   jsonLd={jsonLd}
 >
   <Nav />
   <main>
-    <section class="pt-10 lg:pt-14">
-      <div class="container-x">
+    <!-- Hero -->
+    <section class="relative overflow-hidden pb-8 pt-10 lg:pb-16 lg:pt-14">
+      <!-- Halo suave de marca -->
+      <div
+        class="pointer-events-none absolute -left-40 -top-40 h-[32rem] w-[32rem] rounded-full bg-primary/[0.06] blur-[100px]"
+      >
+      </div>
+
+      <div class="container-x relative">
         <nav aria-label="Migas de pan" class="text-sm text-muted-foreground">
           <ol class="flex flex-wrap items-center gap-1.5">
-            <li><a href="/" class="hover:text-accent-strong">Inicio</a></li>
+            <li><a href="/" class="transition-colors hover:text-primary">Inicio</a></li>
             <li aria-hidden="true">/</li>
-            <li class="font-semibold text-primary" aria-current="page">
-              Servicios
-            </li>
+            <li class="font-semibold text-primary" aria-current="page">Servicios</li>
           </ol>
         </nav>
 
-        <div class="mt-8 max-w-2xl">
-          <span class="text-sm font-bold uppercase tracking-widest text-accent-strong"
-            >Servicios</span
-          >
-          <h1
-            class="mt-3 font-display text-4xl uppercase tracking-tight text-primary sm:text-5xl"
-          >
-            Servicios de mantencion para tu hogar y empresa
-          </h1>
-          <p class="mt-4 text-lg text-muted-foreground">
-            Un solo equipo para resolver desde la gotera mas chica hasta la
-            mantencion completa de tu propiedad, con tecnicos certificados y
-            garantia en todo Chile.
-          </p>
-        </div>
+        <div
+          class="mt-10 grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16"
+        >
+          <!-- Texto -->
+          <div>
+            <div
+              class="flex items-center gap-1 font-mono text-sm text-primary"
+              data-reveal
+            >
+              <span>//</span>
+              <span>Portfolio de servicios</span>
+            </div>
 
-        <div class="mb-4 mt-12 grid gap-6 sm:grid-cols-2">
+            <h1
+              class="mt-3 text-4xl font-semibold leading-[1.1] tracking-[-0.02em] text-foreground sm:text-5xl lg:text-[3.4rem]"
+              data-reveal
+            >
+              Todo lo que tu operación necesita, con un solo <em
+                class="font-serif font-normal italic">proveedor</em
+              >
+            </h1>
+
+            <p
+              class="mt-6 max-w-lg text-lg leading-relaxed text-muted-foreground"
+              data-reveal
+            >
+              Soluciones preventivas y correctivas integrales para garantizar la
+              continuidad operacional y preservar los activos de tu empresa,
+              local o planta.
+            </p>
+
+            <!-- Chips de especialidades -->
+            <div class="mt-8 flex flex-wrap gap-2" data-reveal>
+              {
+                servicios.map((s) => (
+                  <a
+                    href={`/servicios/${s.slug}`}
+                    class="rounded-full border border-border bg-surface px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:border-primary hover:text-primary"
+                  >
+                    {s.titulo}
+                  </a>
+                ))
+              }
+            </div>
+
+            <div class="mt-9 flex flex-wrap items-center gap-4" data-reveal>
+              <a
+                href="#cotizar"
+                class="group inline-flex items-center gap-2.5 rounded-full bg-primary py-3 pl-6 pr-3 text-sm font-bold text-white transition-transform hover:-translate-y-0.5"
+              >
+                Solicitar cotización
+                <span
+                  class="grid h-6 w-6 place-items-center rounded-full bg-white text-primary transition-transform group-hover:translate-x-0.5"
+                >
+                  <Icon name="hugeicons:arrow-right-01" class="h-3.5 w-3.5" />
+                </span>
+              </a>
+              <a
+                href={`tel:${site.phone}`}
+                class="inline-flex items-center gap-2 text-sm font-semibold text-foreground transition-colors hover:text-primary"
+              >
+                <Icon name="hugeicons:call-02" class="h-4 w-4 text-primary" />
+                Emergencia 24/7
+              </a>
+            </div>
+          </div>
+
+          <!-- Mosaico escalonado -->
+          <div class="relative grid grid-cols-2 gap-4" data-reveal>
+            <div class="flex flex-col gap-4">
+              <figure class="aspect-[4/5] overflow-hidden rounded-2xl bg-muted">
+                <img
+                  src={cdn("8FKXOumsLuAOf81tpPnI3zu2Jg")}
+                  alt="Hidrojet y destapes"
+                  width="512"
+                  height="640"
+                  loading="eager"
+                  class="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
+                />
+              </figure>
+              <figure class="aspect-square overflow-hidden rounded-2xl bg-muted">
+                <img
+                  src={cdn("h8RHPQdFh0mQtKGjopKy3nIi2A")}
+                  alt="Limpieza de campanas"
+                  width="512"
+                  height="512"
+                  loading="lazy"
+                  class="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
+                />
+              </figure>
+            </div>
+
+            <div class="flex flex-col gap-4 pt-10">
+              <figure class="aspect-square overflow-hidden rounded-2xl bg-muted">
+                <img
+                  src={cdn("5AgeMShXPsGp8UgPgzzfhnQJ9c")}
+                  alt="Emergencia eléctrica"
+                  width="512"
+                  height="512"
+                  loading="eager"
+                  class="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
+                />
+              </figure>
+              <figure class="aspect-[4/5] overflow-hidden rounded-2xl bg-muted">
+                <img
+                  src={cdn("qIjlcu2mcGbEtpBhazcWPQTkIU")}
+                  alt="Carpintería y cerrajería"
+                  width="512"
+                  height="640"
+                  loading="lazy"
+                  class="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
+                />
+              </figure>
+            </div>
+
+            <!-- Chip flotante -->
+            <div
+              class="absolute -bottom-4 left-1/2 hidden -translate-x-1/2 items-center gap-2 rounded-full bg-white px-5 py-3 shadow-soft lg:flex"
+            >
+              <span class="text-xl font-extrabold text-primary">8</span>
+              <span class="text-sm font-semibold text-foreground">
+                especialidades
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Grilla de servicios -->
+    <section class="py-16 lg:py-20">
+      <div class="container-x">
+        <div class="grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
           {
             servicios.map((s) => (
               <a
                 href={`/servicios/${s.slug}`}
-                class="group rounded-3xl border border-border bg-surface p-7 transition-all hover:-translate-y-1 hover:shadow-soft"
+                class="group flex flex-col gap-4"
+                data-reveal
               >
-                <span class="grid h-12 w-12 place-items-center rounded-2xl bg-primary/5 text-primary transition-colors group-hover:bg-accent group-hover:text-accent-foreground">
-                  <Icon name={s.icon} class="h-6 w-6" />
-                </span>
-                <h2 class="mt-5 text-xl font-bold text-primary">{s.titulo}</h2>
-                <p class="mt-2 text-[15px] leading-relaxed text-muted-foreground">
-                  {s.resumen}
-                </p>
-                <span class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-accent-strong">
-                  Ver servicio
-                  <Icon name="hugeicons:arrow-right-01" class="h-4 w-4" />
-                </span>
+                <figure class="relative aspect-[381/300] overflow-hidden rounded-xl bg-muted">
+                  <img
+                    src={cdn(s.imagen)}
+                    alt={s.titulo}
+                    width="381"
+                    height="300"
+                    loading="lazy"
+                    decoding="async"
+                    class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <span class="absolute left-4 top-4 grid h-10 w-10 place-items-center rounded-full bg-white/90 text-primary backdrop-blur-sm">
+                    <Icon name={s.icon} class="h-5 w-5" />
+                  </span>
+                </figure>
+
+                <div class="flex flex-col gap-1.5">
+                  <h2 class="text-xl font-semibold tracking-tight text-foreground transition-colors group-hover:text-primary">
+                    {s.titulo}
+                  </h2>
+                  <p class="text-[15px] leading-relaxed text-muted-foreground">
+                    {s.resumen}
+                  </p>
+                  <span class="mt-2 inline-flex items-center gap-1.5 text-sm font-semibold text-primary">
+                    Ver servicio
+                    <Icon
+                      name="hugeicons:arrow-right-01"
+                      class="h-4 w-4 transition-transform group-hover:translate-x-0.5"
+                    />
+                  </span>
+                </div>
               </a>
             ))
           }
@@ -88,17 +233,10 @@ const jsonLd = [
       </div>
     </section>
 
+    <!-- Capacidades: preventivo / correctivo / obras civiles (del perfil corporativo) -->
+    <Portfolio />
+
     <Cotizar />
   </main>
   <Footer />
-
-  <a
-    href="https://wa.me/56912345678?text=Hola!%20Quiero%20mas%20informacion%20sobre%20sus%20servicios%20de%20mantencion."
-    target="_blank"
-    rel="noopener"
-    aria-label="Escribir por WhatsApp"
-    class="fixed bottom-5 right-5 z-50 grid h-14 w-14 place-items-center rounded-full bg-success text-white shadow-soft transition-transform hover:-translate-y-1"
-  >
-    <Icon name="hugeicons:whatsapp" class="h-7 w-7" />
-  </a>
 </Layout>

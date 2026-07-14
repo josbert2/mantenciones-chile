@@ -1,119 +1,190 @@
 ---
 import { Icon } from "astro-icon/components";
 import { site } from "../data/site";
+import { servicios } from "../data/servicios";
 
 interface Props {
   servicioPreseleccionado?: string;
 }
 const { servicioPreseleccionado } = Astro.props;
 
-const servicios = [
-  "Hidrojet y Destapes",
-  "Gasfitería",
-  "Cerrajería y Estructuras",
-  "Obras Civiles",
-  "Limpieza de campanas",
-  "Pinturas corporativas",
-  "Emergencia 24/7",
+const opciones = [
+  ...servicios.map((s) => s.titulo),
   "Otro / No estoy seguro",
+];
+
+const contacto = [
+  {
+    icon: "hugeicons:call-02",
+    label: "Teléfonos",
+    valor: `${site.phoneDisplay} · ${site.phoneAltDisplay}`,
+    href: `tel:${site.phone}`,
+  },
+  {
+    icon: "hugeicons:mail-01",
+    label: "Correo",
+    valor: site.email,
+    href: `mailto:${site.email}`,
+  },
+  {
+    icon: "hugeicons:location-01",
+    label: "Oficina central",
+    valor: `${site.address.street} · ${site.address.city}`,
+    href: null,
+  },
 ];
 ---
 
-<section id="cotizar" class="relative overflow-hidden bg-ink text-background py-20 lg:py-28">
-  <div class="tech-grid pointer-events-none absolute inset-0 opacity-50"></div>
-  <div class="container-x relative">
-    <div class="grid gap-12 lg:grid-cols-2 lg:gap-16">
+<section id="cotizar" class="py-24 lg:py-32">
+  <div class="container-x">
+    <div class="grid gap-12 lg:grid-cols-[1fr_1.05fr] lg:gap-16">
+      <!-- Info -->
       <div data-reveal>
-        <p class="eyebrow flex items-center gap-2.5 !text-primary">
-          <span class="h-px w-8 bg-primary"></span>
-          Contacto directo
-        </p>
-        <h2 class="mt-6 font-display text-4xl font-extrabold uppercase tracking-tight sm:text-5xl">
-          ¿Conversemos sobre tu infraestructura?
+        <div class="flex items-center gap-1 font-mono text-sm text-primary">
+          <span>//</span>
+          <span>Contacto</span>
+        </div>
+
+        <h2
+          class="mt-3 max-w-md text-3xl font-semibold leading-[1.15] tracking-[-0.02em] text-foreground sm:text-4xl"
+        >
+          ¿Conversemos sobre tu <em class="font-serif font-normal italic"
+            >infraestructura</em
+          >?
         </h2>
-        <p class="mt-6 max-w-md text-lg leading-relaxed text-background/65">
+
+        <p class="mt-5 max-w-md leading-relaxed text-muted-foreground">
           Cuéntanos qué necesitas y te contactamos con una cotización clara.
-          Atención para empresas, condominios y hogares en toda la RM.
+          Atención para empresas, condominios y hogares en toda la Región
+          Metropolitana.
         </p>
 
-        <div class="mt-10 space-y-6">
-          <a href="tel:+56940170148" class="block">
-            <p class="font-mono text-[0.68rem] uppercase tracking-[0.16em] text-background/50">Teléfonos</p>
-            <p class="mt-1 text-xl font-bold">+56 9 4017 0148 · +56 2 2322 1685</p>
-          </a>
-          <div class="h-px w-24 bg-white/15"></div>
-          <div>
-            <p class="font-mono text-[0.68rem] uppercase tracking-[0.16em] text-background/50">Correo</p>
-            <p class="mt-1 text-lg font-bold">seguimientomasdechile@gmail.com</p>
-          </div>
-          <div>
-            <p class="font-mono text-[0.68rem] uppercase tracking-[0.16em] text-background/50">Oficina central</p>
-            <p class="mt-1 text-lg font-bold">Santa Elena 2362, Of. 301 · San Joaquín</p>
-          </div>
-        </div>
+        <ul class="mt-10 space-y-5">
+          {
+            contacto.map((c) => (
+              <li class="flex items-start gap-4">
+                <span class="grid h-11 w-11 shrink-0 place-items-center rounded-lg bg-primary/10 text-primary">
+                  <Icon name={c.icon} class="h-5 w-5" />
+                </span>
+                <div>
+                  <p class="font-mono text-[0.66rem] uppercase tracking-[0.16em] text-muted-foreground">
+                    {c.label}
+                  </p>
+                  {c.href ? (
+                    <a
+                      href={c.href}
+                      class="mt-0.5 block font-bold text-foreground transition-colors hover:text-primary"
+                    >
+                      {c.valor}
+                    </a>
+                  ) : (
+                    <p class="mt-0.5 font-bold text-foreground">{c.valor}</p>
+                  )}
+                </div>
+              </li>
+            ))
+          }
+        </ul>
       </div>
 
+      <!-- Formulario -->
       <form
         id="cotizar-form"
         data-reveal
         data-wa={site.whatsapp}
-        class="rounded-lg bg-surface text-foreground p-8 shadow-soft"
+        class="rounded-2xl border border-border bg-surface p-7 shadow-soft sm:p-9"
       >
-        <div class="grid gap-4">
-          <div>
-            <label class="block text-sm font-bold text-foreground mb-2" for="nombre">Nombre</label>
-            <input
-              id="nombre"
-              required
-              type="text"
-              placeholder="Tu nombre"
-              class="w-full border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-primary"
-            />
+        <div class="grid gap-5">
+          <div class="grid gap-5 sm:grid-cols-2">
+            <div>
+              <label
+                class="mb-2 block text-sm font-semibold text-foreground"
+                for="nombre">Nombre</label
+              >
+              <input
+                id="nombre"
+                required
+                type="text"
+                placeholder="Tu nombre"
+                class="w-full rounded-lg border border-border bg-background px-4 py-3 text-sm outline-none transition-colors focus:border-primary"
+              />
+            </div>
+            <div>
+              <label
+                class="mb-2 block text-sm font-semibold text-foreground"
+                for="fono">Teléfono</label
+              >
+              <input
+                id="fono"
+                required
+                type="tel"
+                placeholder="+56 9 ..."
+                class="w-full rounded-lg border border-border bg-background px-4 py-3 text-sm outline-none transition-colors focus:border-primary"
+              />
+            </div>
           </div>
+
           <div>
-            <label class="block text-sm font-bold text-foreground mb-2" for="fono">Teléfono</label>
-            <input
-              id="fono"
-              required
-              type="tel"
-              placeholder="+56 9 ..."
-              class="w-full border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-primary"
-            />
+            <label
+              class="mb-2 block text-sm font-semibold text-foreground"
+              for="tipo">¿Quién eres?</label
+            >
+            <select
+              id="tipo"
+              class="w-full rounded-lg border border-border bg-background px-4 py-3 text-sm outline-none transition-colors focus:border-primary"
+            >
+              <option>Empresa / Condominio</option>
+              <option>Particular</option>
+            </select>
           </div>
+
           <div>
-            <label class="block text-sm font-bold text-foreground mb-2" for="servicio">Servicio</label>
+            <label
+              class="mb-2 block text-sm font-semibold text-foreground"
+              for="servicio">Servicio</label
+            >
             <select
               id="servicio"
-              class="w-full border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-primary"
+              class="w-full rounded-lg border border-border bg-background px-4 py-3 text-sm outline-none transition-colors focus:border-primary"
             >
               {
-                servicios.map((s) => (
+                opciones.map((s) => (
                   <option selected={s === servicioPreseleccionado}>{s}</option>
                 ))
               }
             </select>
           </div>
+
           <div>
-            <label class="block text-sm font-bold text-foreground mb-2" for="mensaje">Cuéntanos qué necesitas</label>
+            <label
+              class="mb-2 block text-sm font-semibold text-foreground"
+              for="mensaje">Cuéntanos qué necesitas</label
+            >
             <textarea
               id="mensaje"
-              rows="3"
-              placeholder="Describe el problema..."
-              class="w-full resize-none border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-primary"
+              rows="4"
+              placeholder="Describe el trabajo o la emergencia..."
+              class="w-full resize-none rounded-lg border border-border bg-background px-4 py-3 text-sm outline-none transition-colors focus:border-primary"
             ></textarea>
           </div>
+
           <button
             type="submit"
-            class="mt-2 inline-flex items-center justify-center gap-2 rounded-md bg-primary px-6 py-3.5 text-sm font-bold uppercase tracking-wide text-accent-foreground transition hover:bg-accent-strong"
+            class="group inline-flex items-center justify-center gap-2.5 rounded-full bg-primary py-3.5 pl-6 pr-3 text-sm font-bold text-white transition-transform hover:-translate-y-0.5"
           >
-            <Icon name="hugeicons:whatsapp" class="h-4 w-4" />
             Enviar por WhatsApp
+            <span
+              class="grid h-6 w-6 place-items-center rounded-full bg-white text-primary transition-transform group-hover:translate-x-0.5"
+            >
+              <Icon name="hugeicons:arrow-right-01" class="h-3.5 w-3.5" />
+            </span>
           </button>
+
           <p id="form-ok" class="hidden text-center text-sm font-semibold text-success">
-            Abriendo WhatsApp...
+            Abriendo WhatsApp con tu solicitud...
           </p>
           <p class="text-center text-xs text-muted-foreground">
-            Respondemos en menos de 30 minutos
+            Respondemos en menos de 30 minutos en horario hábil.
           </p>
         </div>
       </form>
@@ -129,21 +200,17 @@ const servicios = [
       e.preventDefault();
       const wa = form.getAttribute("data-wa");
       const val = (id) => (document.getElementById(id)?.value || "").trim();
-      const nombre = val("nombre");
-      const fono = val("fono");
-      const servicio = val("servicio");
-      const mensaje = val("mensaje");
       const lineas = [
-        "Hola! Quiero cotizar un servicio.",
-        nombre && `Nombre: ${nombre}`,
-        servicio && `Servicio: ${servicio}`,
-        fono && `Telefono: ${fono}`,
-        mensaje && `Detalle: ${mensaje}`,
+        "Hola Más de Chile! Quiero solicitar una cotización.",
+        val("tipo") && `Soy: ${val("tipo")}`,
+        val("nombre") && `Nombre: ${val("nombre")}`,
+        val("servicio") && `Servicio: ${val("servicio")}`,
+        val("fono") && `Teléfono: ${val("fono")}`,
+        val("mensaje") && `Detalle: ${val("mensaje")}`,
       ].filter(Boolean);
       const url =
         "https://wa.me/" + wa + "?text=" + encodeURIComponent(lineas.join("\n"));
-      const ok = document.getElementById("form-ok");
-      if (ok) ok.classList.remove("hidden");
+      document.getElementById("form-ok")?.classList.remove("hidden");
       window.open(url, "_blank", "noopener");
     });
   })();

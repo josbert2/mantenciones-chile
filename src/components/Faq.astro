@@ -10,31 +10,35 @@ interface Props {
 
 const defaultFaqs = [
   {
-    q: "En que comunas y ciudades atienden?",
-    a: "Trabajamos en toda la Region Metropolitana y en las principales ciudades del pais. Escribenos tu direccion y te confirmamos disponibilidad al instante.",
+    q: "¿Atienden empresas y también particulares?",
+    a: "Sí. Trabajamos con empresas, condominios, hoteles, restaurantes, colegios, clínicas y universidades, y también con hogares particulares. Al escribirnos puedes indicarnos desde dónde nos contactas para asignarte el equipo adecuado.",
   },
   {
-    q: "Cuanto se demoran en llegar?",
-    a: "Para servicios agendados coordinamos el horario que prefieras. En emergencias, nuestro tiempo promedio de respuesta es de 45 minutos.",
+    q: "¿En qué zonas trabajan?",
+    a: "Cubrimos toda la Región Metropolitana, con cobertura corporativa a nivel nacional para clientes con operaciones en varias ciudades.",
   },
   {
-    q: "El presupuesto tiene costo?",
-    a: "No. La cotizacion es gratis y sin compromiso. Solo pagas si apruebas el trabajo, y el valor final es el mismo que te informamos antes de empezar.",
+    q: "¿Atienden emergencias fuera de horario?",
+    a: "Sí. Contamos con servicio de emergencia 24/7 los 365 días del año para gasfitería, electricidad, cerrajería y camión de destape.",
   },
   {
-    q: "Que incluye la garantia?",
-    a: "Todos nuestros trabajos tienen 90 dias de garantia en mano de obra y materiales. Si el mismo problema reaparece, volvemos sin costo.",
+    q: "¿La cotización tiene costo?",
+    a: "No. Evaluamos el trabajo y te entregamos una cotización clara y sin compromiso antes de ejecutar cualquier servicio.",
   },
   {
-    q: "Emiten boleta o factura?",
-    a: "Si, entregamos boleta electronica en cada servicio y factura para empresas y comunidades que lo requieran.",
+    q: "¿Emiten factura y documentación para cumplimiento normativo?",
+    a: "Sí. Emitimos factura para empresas y condominios, y entregamos certificado de disposición final en los servicios de hidrojet y gestión de riles.",
+  },
+  {
+    q: "¿Qué experiencia tienen?",
+    a: "Más de una década en el mercado chileno, con más de 15.000 soluciones técnicas ejecutadas para retail, supermercados y gastronomía.",
   },
 ];
 
 const {
   faqs = defaultFaqs,
   eyebrow = "Preguntas frecuentes",
-  titulo = "Resolvemos tus dudas antes de agendar",
+  titulo = "Resolvemos tus dudas",
 } = Astro.props;
 ---
 
