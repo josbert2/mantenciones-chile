@@ -2,8 +2,8 @@
 import { Icon } from "astro-icon/components";
 import { servicios } from "../data/servicios";
 
-const cdn = (id: string) =>
-  `https://framerusercontent.com/images/${id}.png?scale-down-to=512&width=2048&height=2048`;
+const cdn = (nombre: string, ancho: 800 | 1600 = 800) =>
+  `/fotos/${nombre}-${ancho}.webp`;
 ---
 
 <section id="servicios" class="overflow-x-clip py-24 lg:py-32">

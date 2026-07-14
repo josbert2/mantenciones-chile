@@ -1,16 +1,16 @@
 ---
 import { Icon } from "astro-icon/components";
 
-const cdn = (id: string) =>
-  `https://framerusercontent.com/images/${id}.png?scale-down-to=512&width=2048&height=2048`;
+const cdn = (nombre: string, ancho: 800 | 1600 = 800) =>
+  `/fotos/${nombre}-${ancho}.webp`;
 
 const trabajos = [
-  { img: "8FKXOumsLuAOf81tpPnI3zu2Jg", cat: "Hidrojet & Destapes", loc: "Supermercado · RM" },
-  { img: "vzqNanbKCcj5CLe2o3o7dvcpY", cat: "Gasfitería", loc: "Local comercial · Santiago" },
-  { img: "5AgeMShXPsGp8UgPgzzfhnQJ9c", cat: "Emergencia eléctrica", loc: "Retail · RM" },
-  { img: "h8RHPQdFh0mQtKGjopKy3nIi2A", cat: "Limpieza de campanas", loc: "Gastronomía · Santiago" },
-  { img: "qIjlcu2mcGbEtpBhazcWPQTkIU", cat: "Carpintería & Cerrajería", loc: "Bodega · RM" },
-  { img: "ljcpAUhpHnqi1zhA3LtTu63Cy3U", cat: "Obras civiles", loc: "Estacionamiento · Santiago" },
+  { img: "gasfiteria-llave", cat: "Hidrojet & Destapes", loc: "Supermercado · RM" },
+  { img: "carpinteria-atornillado", cat: "Gasfitería", loc: "Local comercial · Santiago" },
+  { img: "electricidad-enchufe", cat: "Emergencia eléctrica", loc: "Retail · RM" },
+  { img: "limpieza-piso", cat: "Limpieza de campanas", loc: "Gastronomía · Santiago" },
+  { img: "instalacion-repisa", cat: "Carpintería & Cerrajería", loc: "Bodega · RM" },
+  { img: "reparacion-taladro", cat: "Obras civiles", loc: "Estacionamiento · Santiago" },
 ];
 
 // Duplicamos para que el loop sea continuo

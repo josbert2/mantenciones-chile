@@ -19,8 +19,8 @@ interface Props {
 }
 const { s } = Astro.props;
 
-const cdn = (id: string, w = 2048) =>
-  `https://framerusercontent.com/images/${id}.png?scale-down-to=${w}&width=2048&height=2048`;
+const cdn = (nombre: string, ancho: 800 | 1600 = 800) =>
+  `/fotos/${nombre}-${ancho}.webp`;
 
 const otros = servicios.filter((x) => x.slug !== s.slug).slice(0, 3);
 
@@ -47,11 +47,11 @@ const jsonLd = [
     <!-- Hero: foto a pantalla completa -->
     <section class="relative overflow-hidden">
       <img
-        src={cdn(s.imagen)}
+        src={cdn(s.imagen, 1600)}
         alt=""
         aria-hidden="true"
-        width="2048"
-        height="2048"
+        width="1600"
+        height="1600"
         loading="eager"
         fetchpriority="high"
         class="absolute inset-0 h-full w-full object-cover"
@@ -243,7 +243,7 @@ const jsonLd = [
               >
                 <figure class="aspect-[381/280] overflow-hidden rounded-xl bg-muted">
                   <img
-                    src={cdn(o.imagen, 512)}
+                    src={cdn(o.imagen, 800)}
                     alt={o.titulo}
                     width="381"
                     height="280"

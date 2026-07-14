@@ -1,96 +1,234 @@
 ---
 import { Icon } from "astro-icon/components";
+import { foto } from "../data/fotos";
+
+// Fotos escalonadas con etiqueta técnica
+const fotos = [
+  {
+    src: "terreno-cuadrilla",
+    alt: "Cuadrilla de Más de Chile en terreno",
+    tag: "En terreno",
+    bajo: true,
+  },
+  {
+    src: "gasfiteria-caneria",
+    alt: "Instalaciones sanitarias y gasfitería",
+    tag: "Sanitarias",
+    bajo: false,
+  },
+  {
+    src: "limpieza-piso",
+    alt: "Limpieza técnica en local comercial",
+    tag: "Limpieza técnica",
+    bajo: true,
+  },
+  {
+    src: "electricidad-enchufe",
+    alt: "Mantención eléctrica",
+    tag: "Eléctrica",
+    bajo: false,
+  },
+];
+
+// Solvencia y experiencia probada (perfil corporativo)
+const solvencia = [
+  { n: "+25.000", l: "Objetivos logrados" },
+  { n: "+15.000", l: "Soluciones ejecutadas" },
+  { n: "+20", l: "Colaboradores" },
+  { n: "+10", l: "Años de experiencia" },
+];
+
+const proposito = [
+  {
+    n: "01",
+    label: "Misión",
+    titular:
+      "Soluciones integrales de mantenimiento que superan las expectativas.",
+    desc: "Garantizamos la máxima eficiencia con una conducta de total responsabilidad frente a la seguridad, la salud ocupacional y el cuidado del medio ambiente.",
+  },
+  {
+    n: "02",
+    label: "Visión",
+    titular:
+      "Ser la empresa referente en mantenimiento e infraestructura en Chile.",
+    desc: "Implementamos la mejora continua en todos nuestros procesos, anticipándonos a las dinámicas operativas de las mayores industrias del país.",
+  },
+];
 
 const valores = [
   {
+    n: "01",
     icon: "hugeicons:justice-scale-01",
     title: "Conducta Ética",
-    desc: "Actuamos bajo estrictos principios de integridad, honestidad y compromiso en cada entrega técnica.",
+    desc: "Integridad, honestidad y compromiso en cada entrega técnica.",
   },
   {
+    n: "02",
     icon: "hugeicons:security-check",
     title: "Seguridad & Calidad",
-    desc: "Priorizamos la prevención y la calidad del trabajo, resguardando la infraestructura y las personas.",
+    desc: "Priorizamos la prevención, resguardando la infraestructura y las personas.",
   },
   {
+    n: "03",
     icon: "hugeicons:user-group",
     title: "Trabajo en Equipo",
-    desc: "Sinergia de técnicos especializados enfocados en los objetivos de nuestros clientes de forma ágil.",
+    desc: "Técnicos especializados enfocados en los objetivos del cliente.",
   },
 ];
 ---
 
-<section id="nosotros" class="border-b border-border py-24 lg:py-32">
-  <div class="container-x">
-    <!-- Identidad -->
-    <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
-      <div data-reveal>
-        <p class="eyebrow flex items-center gap-2.5">
-          <span class="h-px w-8 bg-primary"></span>
-          Nuestra identidad
+<section id="nosotros" class="relative overflow-hidden py-24 lg:py-32">
+  <!-- Numeral decorativo -->
+  <span
+    class="pointer-events-none absolute -right-8 top-16 select-none text-[13rem] font-extrabold leading-none tracking-tighter text-primary/[0.04] lg:text-[20rem]"
+    aria-hidden="true">2013</span
+  >
+  <!-- Halo de marca -->
+  <div
+    class="pointer-events-none absolute -left-48 top-1/3 h-[34rem] w-[34rem] rounded-full bg-primary/[0.05] blur-[110px]"
+  >
+  </div>
+
+  <div class="container-x relative">
+    <!-- Chip -->
+    <div class="flex justify-center" data-reveal>
+      <span
+        class="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-4 py-1.5 font-mono text-xs uppercase tracking-[0.14em] text-primary shadow-sm"
+      >
+        <span class="relative flex h-1.5 w-1.5">
+          <span
+            class="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary/60"
+          ></span>
+          <span class="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary"
+          ></span>
+        </span>
+        Nosotros
+      </span>
+    </div>
+
+    <!-- Enunciado -->
+    <h2
+      class="mx-auto mt-8 max-w-4xl text-center text-2xl font-semibold leading-[1.35] tracking-[-0.01em] text-foreground sm:text-3xl lg:text-[2rem]"
+      data-reveal
+    >
+      Desde 2013 entregamos ingeniería, mantenimiento multitécnico y soluciones
+      de infraestructura comercial. Más de una década construyendo relaciones de
+      confianza con una cultura orientada a la <em
+        class="font-serif font-normal italic text-primary">excelencia operativa</em
+      > y la seguridad.
+    </h2>
+
+    <!-- Fotos escalonadas con etiqueta -->
+    <div class="mt-16 grid grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-6">
+      {
+        fotos.map((f) => (
+          <figure
+            class:list={[
+              "group relative self-start overflow-hidden rounded-2xl bg-muted",
+              f.bajo ? "lg:mt-14" : "",
+            ]}
+            data-reveal
+          >
+            <img
+              src={foto(f.src, 800)}
+              alt={f.alt}
+              width="800"
+              height="760"
+              loading="lazy"
+              decoding="async"
+              class="aspect-[262/250] w-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-foreground/70 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+            <figcaption class="pointer-events-none absolute bottom-3 left-3 translate-y-2 rounded-full bg-white/95 px-3 py-1 font-mono text-[0.6rem] uppercase tracking-[0.14em] text-primary opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+              {f.tag}
+            </figcaption>
+          </figure>
+        ))
+      }
+    </div>
+
+    <!-- Solvencia y experiencia probada -->
+    <div
+      class="mt-24 grid grid-cols-2 gap-y-10 border-y border-border py-12 lg:mt-32 lg:grid-cols-4"
+      data-reveal
+    >
+      {
+        solvencia.map((s, i) => (
+          <div
+            class:list={[
+              "px-2 text-center lg:px-8",
+              i > 0 && "lg:border-l lg:border-border",
+            ]}
+          >
+            <div class="text-3xl font-extrabold tracking-tight text-primary lg:text-[2.6rem]">
+              {s.n}
+            </div>
+            <div class="mt-2 font-mono text-[0.66rem] uppercase tracking-[0.16em] text-muted-foreground">
+              {s.l}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    <!-- Misión & Visión — editorial, sin cajas -->
+    <div class="mt-24 grid gap-px bg-border md:grid-cols-2">
+      {
+        proposito.map((p) => (
+          <article
+            class="group relative bg-background px-2 py-12 md:px-10 lg:px-14 lg:py-16"
+            data-reveal
+          >
+            {/* Numeral gigante de fondo */}
+            <span
+              class="pointer-events-none absolute right-4 top-4 select-none font-mono text-7xl font-bold leading-none text-primary/[0.07] transition-colors group-hover:text-primary/[0.14] lg:text-8xl"
+              aria-hidden="true"
+            >
+              {p.n}
+            </span>
+
+            <div class="relative">
+              <p class="flex items-center gap-3 font-mono text-xs uppercase tracking-[0.18em] text-primary">
+                <span class="h-px w-6 bg-primary" />
+                {p.label}
+              </p>
+
+              <h3 class="mt-6 text-2xl font-semibold leading-[1.35] tracking-[-0.01em] text-foreground lg:text-[1.75rem]">
+                {p.titular}
+              </h3>
+
+              <p class="mt-5 max-w-md leading-relaxed text-muted-foreground">
+                {p.desc}
+              </p>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+
+    <!-- Valores fundacionales -->
+    <div class="mt-20">
+      <div class="flex items-center gap-4" data-reveal>
+        <p class="shrink-0 font-mono text-xs uppercase tracking-[0.16em] text-primary">
+          Valores fundacionales
         </p>
-        <p
-          class="mt-6 font-mono text-sm uppercase tracking-[0.15em] text-muted-foreground"
-        >
-          Desde 2013 · Santiago, RM
-        </p>
+        <span class="h-px flex-1 bg-border"></span>
       </div>
-      <h2
-        class="font-display text-3xl font-extrabold uppercase leading-[1.02] tracking-[-0.02em] text-foreground sm:text-4xl lg:text-[2.9rem]"
-        data-reveal
-      >
-        Construimos relaciones de confianza a largo plazo con una cultura
-        orientada a la <span class="text-primary">excelencia operativa</span> y la
-        seguridad.
-      </h2>
-    </div>
 
-    <!-- Mision & Vision -->
-    <div class="mt-16 grid gap-6 md:grid-cols-2 lg:mt-20">
-      <article
-        class="border-l-2 border-primary bg-surface p-8 shadow-soft lg:p-10"
-        data-reveal
-      >
-        <h3 class="font-display text-xl font-bold uppercase tracking-tight text-foreground">
-          Nuestra Misión
-        </h3>
-        <p class="mt-4 leading-relaxed text-muted-foreground">
-          Entregar servicios y soluciones integrales de mantenimiento superando
-          las expectativas de nuestros clientes, garantizando la máxima
-          eficiencia y una conducta de total responsabilidad con la seguridad,
-          la salud ocupacional y el medio ambiente.
-        </p>
-      </article>
-      <article
-        class="border-l-2 border-primary bg-surface p-8 shadow-soft lg:p-10"
-        data-reveal
-      >
-        <h3 class="font-display text-xl font-bold uppercase tracking-tight text-foreground">
-          Nuestra Visión
-        </h3>
-        <p class="mt-4 leading-relaxed text-muted-foreground">
-          Consolidarnos como una empresa referente y líder en el mercado chileno
-          de mantenimiento e infraestructura, implementando la mejora continua y
-          anticipándonos a las dinámicas operativas de las mayores industrias
-          del país.
-        </p>
-      </article>
-    </div>
-
-    <!-- Valores -->
-    <div class="mt-16 lg:mt-20">
-      <p class="eyebrow" data-reveal>Valores fundacionales</p>
-      <div class="mt-8 grid gap-6 md:grid-cols-3">
+      <div class="mt-10 grid gap-6 md:grid-cols-3">
         {
           valores.map((v) => (
             <article
-              class="group border-t-2 border-border bg-surface p-7 transition-colors hover:border-primary"
+              class="group relative rounded-2xl border border-border bg-surface p-7 transition-all hover:-translate-y-1 hover:border-primary hover:shadow-soft"
               data-reveal
             >
-              <span class="grid h-12 w-12 place-items-center rounded-md bg-primary/10 text-primary">
+              <span class="absolute right-6 top-6 font-mono text-sm text-primary/25 transition-colors group-hover:text-primary">
+                {v.n}
+              </span>
+              <span class="grid h-12 w-12 place-items-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-white">
                 <Icon name={v.icon} class="h-6 w-6" />
               </span>
-              <h3 class="mt-5 font-display text-lg font-bold text-foreground">
+              <h3 class="mt-5 text-lg font-semibold text-foreground">
                 {v.title}
               </h3>
               <p class="mt-2 text-[15px] leading-relaxed text-muted-foreground">

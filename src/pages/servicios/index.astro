@@ -9,8 +9,8 @@ import { servicios } from "../../data/servicios";
 import { breadcrumb, localBusiness } from "../../lib/schema";
 import { site } from "../../data/site";
 
-const cdn = (id: string) =>
-  `https://framerusercontent.com/images/${id}.png?scale-down-to=512&width=2048&height=2048`;
+const cdn = (nombre: string, ancho: 800 | 1600 = 800) =>
+  `/fotos/${nombre}-${ancho}.webp`;
 
 const jsonLd = [
   localBusiness(),
@@ -35,6 +35,7 @@ const jsonLd = [
   title="Servicios de mantención multitécnica RM | Más de Chile"
   description="Hidrojet, gasfitería, cerrajería, obras civiles, limpiezas industriales, pinturas y emergencias 24/7 para empresas, condominios y hogares en la Región Metropolitana."
   canonical="/servicios"
+  image="/og/servicios.png"
   jsonLd={jsonLd}
 >
   <Nav />
@@ -128,7 +129,7 @@ const jsonLd = [
             <div class="flex flex-col gap-4">
               <figure class="aspect-[4/5] overflow-hidden rounded-2xl bg-muted">
                 <img
-                  src={cdn("8FKXOumsLuAOf81tpPnI3zu2Jg")}
+                  src={cdn("gasfiteria-llave")}
                   alt="Hidrojet y destapes"
                   width="512"
                   height="640"
@@ -138,7 +139,7 @@ const jsonLd = [
               </figure>
               <figure class="aspect-square overflow-hidden rounded-2xl bg-muted">
                 <img
-                  src={cdn("h8RHPQdFh0mQtKGjopKy3nIi2A")}
+                  src={cdn("limpieza-piso")}
                   alt="Limpieza de campanas"
                   width="512"
                   height="512"
@@ -151,7 +152,7 @@ const jsonLd = [
             <div class="flex flex-col gap-4 pt-10">
               <figure class="aspect-square overflow-hidden rounded-2xl bg-muted">
                 <img
-                  src={cdn("5AgeMShXPsGp8UgPgzzfhnQJ9c")}
+                  src={cdn("electricidad-enchufe")}
                   alt="Emergencia eléctrica"
                   width="512"
                   height="512"
@@ -161,7 +162,7 @@ const jsonLd = [
               </figure>
               <figure class="aspect-[4/5] overflow-hidden rounded-2xl bg-muted">
                 <img
-                  src={cdn("qIjlcu2mcGbEtpBhazcWPQTkIU")}
+                  src={cdn("instalacion-repisa")}
                   alt="Carpintería y cerrajería"
                   width="512"
                   height="640"
