@@ -20,7 +20,7 @@ interface Props {
 const { s } = Astro.props;
 
 const cdn = (nombre: string, ancho: 800 | 1600 = 800) =>
-  `/fotos/${nombre}-${ancho}.webp`;
+  `/trabajos/${nombre}-${ancho}.webp`;
 
 const otros = servicios.filter((x) => x.slug !== s.slug).slice(0, 3);
 

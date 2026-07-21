@@ -3,7 +3,7 @@ import { Icon } from "astro-icon/components";
 import { servicios } from "../data/servicios";
 
 const cdn = (nombre: string, ancho: 800 | 1600 = 800) =>
-  `/fotos/${nombre}-${ancho}.webp`;
+  `/trabajos/${nombre}-${ancho}.webp`;
 ---
 
 <section id="servicios" class="overflow-x-clip py-24 lg:py-32">
@@ -56,7 +56,8 @@ const cdn = (nombre: string, ancho: 800 | 1600 = 800) =>
                     alt={s.titulo}
                     width="381"
                     height="393"
-                    loading="lazy"
+                    loading="eager"
+                    fetchpriority="low"
                     decoding="async"
                     class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />

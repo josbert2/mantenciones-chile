@@ -10,7 +10,7 @@ import { breadcrumb, localBusiness } from "../../lib/schema";
 import { site } from "../../data/site";
 
 const cdn = (nombre: string, ancho: 800 | 1600 = 800) =>
-  `/fotos/${nombre}-${ancho}.webp`;
+  `/trabajos/${nombre}-${ancho}.webp`;
 
 const jsonLd = [
   localBusiness(),
@@ -129,7 +129,7 @@ const jsonLd = [
             <div class="flex flex-col gap-4">
               <figure class="aspect-[4/5] overflow-hidden rounded-2xl bg-muted">
                 <img
-                  src={cdn("gasfiteria-llave")}
+                  src={cdn("camion-hidrojet/01")}
                   alt="Hidrojet y destapes"
                   width="512"
                   height="640"
@@ -139,7 +139,7 @@ const jsonLd = [
               </figure>
               <figure class="aspect-square overflow-hidden rounded-2xl bg-muted">
                 <img
-                  src={cdn("limpieza-piso")}
+                  src={cdn("lavaderos-industriales/05")}
                   alt="Limpieza de campanas"
                   width="512"
                   height="512"
@@ -152,7 +152,7 @@ const jsonLd = [
             <div class="flex flex-col gap-4 pt-10">
               <figure class="aspect-square overflow-hidden rounded-2xl bg-muted">
                 <img
-                  src={cdn("electricidad-enchufe")}
+                  src={cdn("luminosos-corporativos/02")}
                   alt="Emergencia eléctrica"
                   width="512"
                   height="512"
@@ -162,7 +162,7 @@ const jsonLd = [
               </figure>
               <figure class="aspect-[4/5] overflow-hidden rounded-2xl bg-muted">
                 <img
-                  src={cdn("instalacion-repisa")}
+                  src={cdn("rejas-transtienda/01")}
                   alt="Carpintería y cerrajería"
                   width="512"
                   height="640"

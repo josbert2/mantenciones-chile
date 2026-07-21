@@ -30,7 +30,7 @@ interface Props {
 const { s, c } = Astro.props;
 
 const cdn = (nombre: string, ancho: 800 | 1600 = 800) =>
-  `/fotos/${nombre}-${ancho}.webp`;
+  `/trabajos/${nombre}-${ancho}.webp`;
 
 const otrasComunas = comunas.filter((x) => x.slug !== c.slug);
 

@@ -55,7 +55,8 @@ const items = clientes.map((c) => ({ ...c, logo: buscarLogo(c.slug) }));
                 <img
                   src={c.logo}
                   alt={c.nombre}
-                  loading="lazy"
+                  loading="eager"
+                  fetchpriority="low"
                   decoding="async"
                   class="h-14 w-[170px] shrink-0 object-contain transition-transform duration-300 hover:scale-105"
                 />

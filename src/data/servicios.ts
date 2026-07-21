@@ -30,7 +30,7 @@ export const servicios: Servicio[] = [
     intro:
       "Limpiezas de tuberías con sistema hidrojet de alta presión. Destapamos cañerías interiores y exteriores sin dañar, gestionamos residuos y emitimos certificado de disposición final para cumplimiento normativo.",
     icon: "hugeicons:gas-pipe",
-    imagen: "gasfiteria-caneria",
+    imagen: "camion-hidrojet/01",
     keywords: [
       "hidrojet santiago",
       "destape de cañerias",
@@ -68,7 +68,7 @@ export const servicios: Servicio[] = [
     intro:
       "Servicio integral de gasfitería con técnicos certificados. Cambios de grifería y artefactos sanitarios, instalación de puntos de agua, reparación de filtraciones, destapes de tuberías y cámaras interiores. Precio claro y garantía.",
     icon: "hugeicons:gas-pipe",
-    imagen: "gasfiteria-llave",
+    imagen: "lavaderos-industriales/05",
     keywords: [
       "gasfiter santiago",
       "cambio de grifo",
@@ -106,7 +106,7 @@ export const servicios: Servicio[] = [
     intro:
       "Reparación y fabricación de portones de ingreso, puertas de seguridad y estructuras metálicas. Trabajamos con acero de calidad, sistemas de cierre profesionales y garantizamos trabajos prolijos y seguros.",
     icon: "hugeicons:security-check",
-    imagen: "instalacion-montaje",
+    imagen: "rejas-transtienda/01",
     keywords: [
       "cerrajeria santiago",
       "portones automaticos",
@@ -144,7 +144,7 @@ export const servicios: Servicio[] = [
     intro:
       "Reparaciones y remodelaciones de obras civiles menores. Trabajamos con hormigón, enfondados, revestimientos, y pequeñas restructuraciones. Todos nuestros trabajos incluyen presupuesto previo y terminación prolija.",
     icon: "hugeicons:wrench-01",
-    imagen: "reparacion-taladro",
+    imagen: "escalera-metalica/01",
     keywords: [
       "reparacion obras civiles",
       "enfondado",
@@ -178,7 +178,7 @@ export const servicios: Servicio[] = [
     intro:
       "Servicio de emergencia 24/7 los 365 días del año. Reventones de cañerías, inundaciones, cortocircuitos, cerrajería y logística. Contamos con camión destape y respuesta promedio de 45 minutos en toda la Región Metropolitana.",
     icon: "hugeicons:24-hours-clock",
-    imagen: "electricidad-enchufe",
+    imagen: "luminosos-corporativos/02",
     keywords: [
       "emergencia 24 horas",
       "reventon cañeria",
@@ -216,7 +216,7 @@ export const servicios: Servicio[] = [
     intro:
       "Limpieza profesional de campanas de extracción y sistemas de ventilación. Reemplazamos motores y correas, cumpliendo normativas de seguridad industrial. Ideal para cocinas comerciales, restaurantes y empresas de food service.",
     icon: "hugeicons:wrench-01",
-    imagen: "limpieza-piso",
+    imagen: "destape-tuberias/01",
     keywords: [
       "limpieza campanas extraccion",
       "cambio motor campana",
@@ -250,7 +250,7 @@ export const servicios: Servicio[] = [
     intro:
       "Servicios de pintura profesional para fachadas, interiores y proyectos corporativos. Usamos pinturas de calidad certificada, trabajamos con protocolos profesionales y garantizamos acabados duraderos y prolijos.",
     icon: "hugeicons:wrench-01",
-    imagen: "terreno-cuadrilla",
+    imagen: "cenefas-comerciales/01",
     keywords: [
       "pintura corporativa",
       "pintura fachada",
@@ -284,7 +284,7 @@ export const servicios: Servicio[] = [
     intro:
       "Venta especializada de ferretería industrial. Suministramos materiales, herramientas y accesorios para proyectos de construcción, mantenimiento y reparación. Incluye consultoría técnica para elegir lo correcto según el proyecto.",
     icon: "hugeicons:wrench-01",
-    imagen: "carpinteria-atornillado",
+    imagen: "proteccion-accesos/01",
     keywords: [
       "ferreteria industrial santiago",
       "materiales construccion",

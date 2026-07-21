@@ -1,29 +1,33 @@
 ---
 import { Icon } from "astro-icon/components";
-import { foto } from "../data/fotos";
+import { fotoTrabajo } from "../data/trabajos";
 
 // Fotos escalonadas con etiqueta técnica
 const fotos = [
   {
-    src: "terreno-cuadrilla",
+    src: "trabajos-altura",
+    n: 2,
     alt: "Cuadrilla de Más de Chile en terreno",
     tag: "En terreno",
     bajo: true,
   },
   {
-    src: "gasfiteria-caneria",
+    src: "lavaderos-industriales",
+    n: 5,
     alt: "Instalaciones sanitarias y gasfitería",
     tag: "Sanitarias",
     bajo: false,
   },
   {
-    src: "limpieza-piso",
+    src: "sellado-techumbres",
+    n: 4,
     alt: "Limpieza técnica en local comercial",
     tag: "Limpieza técnica",
     bajo: true,
   },
   {
-    src: "electricidad-enchufe",
+    src: "luminosos-corporativos",
+    n: 2,
     alt: "Mantención eléctrica",
     tag: "Eléctrica",
     bajo: false,
@@ -130,7 +134,7 @@ const valores = [
             data-reveal
           >
             <img
-              src={foto(f.src, 800)}
+              src={fotoTrabajo(f.src, f.n, 800)}
               alt={f.alt}
               width="800"
               height="760"

@@ -2,9 +2,6 @@
 import { Icon } from "astro-icon/components";
 import { site } from "../data/site";
 
-const cdn = (nombre: string, ancho: 800 | 1600 = 800) =>
-  `/fotos/${nombre}-${ancho}.webp`;
-
 const wa = (texto: string) =>
   `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(texto)}`;
 
@@ -22,17 +19,21 @@ const logos = [
 ---
 
 <section id="inicio" class="relative overflow-hidden">
-  <!-- Fondo: foto a pantalla completa -->
-  <img
-    src={cdn("gasfiteria-llave", 1600)}
-    alt=""
+  <!-- Fondo: video real de terreno (hidrojet en operación).
+       El poster carga primero y hace de imagen si el video no arranca
+       o si el usuario pidió menos movimiento. -->
+  <video
+    src="/video/lavado-presion.mp4"
+    poster="/video/lavado-presion-poster.webp"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="metadata"
     aria-hidden="true"
-    width="1600"
-    height="1600"
-    loading="eager"
-    fetchpriority="high"
-    class="absolute inset-0 h-full w-full object-cover"
-  />
+    class="hero-video absolute inset-0 h-full w-full object-cover"
+  >
+  </video>
   <!-- Oscurecido para legibilidad del texto blanco -->
   <div
     class="absolute inset-0 bg-gradient-to-r from-black/85 via-black/65 to-black/30"
@@ -148,3 +149,18 @@ const logos = [
     </div>
   </div>
 </section>
+
+<style>
+  /* Si el usuario pidió menos movimiento, congelamos el video:
+     queda el poster como imagen fija. */
+  @media (prefers-reduced-motion: reduce) {
+    .hero-video {
+      display: none;
+    }
+    #inicio {
+      background-image: url("/video/lavado-presion-poster.webp");
+      background-size: cover;
+      background-position: center;
+    }
+  }
+</style>
