@@ -20,3 +20,6 @@ pnpm-debug.log*
 
 # macOS
 .DS_Store
+
+# material original de fotos/videos (234MB, se convierte a public/trabajos y public/video)
+assets/

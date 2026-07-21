@@ -1,0 +1,255 @@
+---
+import { Icon } from "astro-icon/components";
+import { trabajos, categorias, fotoTrabajo, fotosDe } from "../data/trabajos";
+
+const totalFotos = trabajos.reduce((a, t) => a + t.fotos, 0);
+---
+
+<section id="trabajos" class="relative overflow-hidden py-24 lg:py-32">
+  <span
+    class="pointer-events-none absolute -left-10 top-20 select-none text-[12rem] font-extrabold leading-none tracking-tighter text-primary/[0.04] lg:text-[18rem]"
+    aria-hidden="true">01</span
+  >
+
+  <div class="container-x relative">
+    <!-- Encabezado -->
+    <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+      <div class="max-w-2xl">
+        <div class="flex items-center gap-1 font-mono text-sm text-primary" data-reveal>
+          <span>//</span><span>Trabajos realizados</span>
+        </div>
+        <h2
+          class="mt-3 font-display text-3xl font-extrabold leading-[1.12] tracking-[-0.02em] text-foreground sm:text-4xl lg:text-[2.6rem]"
+          data-reveal
+        >
+          Obra ejecutada, no imágenes de catálogo.
+        </h2>
+        <p class="mt-6 leading-relaxed text-muted-foreground" data-reveal>
+          Cada fotografía de esta sección fue tomada por nuestro equipo en
+          terreno. {totalFotos} registros de {trabajos.length} tipos de intervención
+          en supermercados, locales de comida y plantas industriales.
+        </p>
+      </div>
+
+      <a
+        href="#cotizar"
+        class="inline-flex shrink-0 items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition hover:bg-accent-strong"
+        data-reveal
+      >
+        Cotizar un trabajo
+        <Icon name="hugeicons:arrow-right-02" class="h-4 w-4" />
+      </a>
+    </div>
+
+    <!-- Filtros por categoría -->
+    <div class="mt-12 flex flex-wrap gap-2" data-reveal>
+      <button
+        type="button"
+        data-filtro="todos"
+        class="filtro-btn is-activo rounded-full border border-border px-4 py-2 font-mono text-xs uppercase tracking-[0.12em] transition"
+      >
+        Todos
+      </button>
+      {
+        categorias.map((c) => (
+          <button
+            type="button"
+            data-filtro={c}
+            class="filtro-btn rounded-full border border-border px-4 py-2 font-mono text-xs uppercase tracking-[0.12em] transition"
+          >
+            {c}
+          </button>
+        ))
+      }
+    </div>
+
+    <!-- Grilla de trabajos -->
+    <div
+      id="grilla-trabajos"
+      class="mt-10 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 lg:gap-6"
+    >
+      {
+        trabajos.map((t) => (
+          <button
+            type="button"
+            class="trabajo-card group relative overflow-hidden rounded-2xl bg-muted text-left"
+            data-cat={t.categoria}
+            data-slug={t.slug}
+            data-titulo={t.titulo}
+            data-desc={t.desc}
+            data-fotos={JSON.stringify(fotosDe(t, 1600))}
+            data-reveal
+          >
+            <img
+              src={fotoTrabajo(t.slug, t.portada ?? 1, 800)}
+              alt={t.titulo}
+              width="600"
+              height="800"
+              loading="lazy"
+              decoding="async"
+              class="aspect-[3/4] w-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-foreground/85 via-foreground/20 to-transparent" />
+
+            <div class="pointer-events-none absolute inset-x-0 bottom-0 p-4">
+              <p class="font-mono text-[0.6rem] uppercase tracking-[0.14em] text-white/70">
+                {t.categoria}
+              </p>
+              <h3 class="mt-1 text-sm font-semibold leading-snug text-white lg:text-base">
+                {t.titulo}
+              </h3>
+            </div>
+
+            <span class="pointer-events-none absolute right-3 top-3 flex items-center gap-1 rounded-full bg-white/95 px-2.5 py-1 font-mono text-[0.6rem] text-primary opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+              <Icon name="hugeicons:image-01" class="h-3 w-3" />
+              {t.fotos}
+            </span>
+          </button>
+        ))
+      }
+    </div>
+  </div>
+
+  <!-- Lightbox -->
+  <div
+    id="lb"
+    class="fixed inset-0 z-[100] hidden bg-foreground/95 backdrop-blur-sm"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="lb-titulo"
+  >
+    <div class="flex h-full flex-col">
+      <header class="flex items-start justify-between gap-4 px-5 py-4 lg:px-10">
+        <div>
+          <p id="lb-cat" class="font-mono text-[0.65rem] uppercase tracking-[0.16em] text-white/60"></p>
+          <h3 id="lb-titulo" class="mt-1 text-lg font-semibold text-white lg:text-2xl"></h3>
+          <p id="lb-desc" class="mt-2 max-w-2xl text-sm leading-relaxed text-white/70"></p>
+        </div>
+        <button
+          id="lb-cerrar"
+          type="button"
+          aria-label="Cerrar galería"
+          class="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-white/20 text-white transition hover:bg-white hover:text-foreground"
+        >
+          <Icon name="hugeicons:cancel-01" class="h-5 w-5" />
+        </button>
+      </header>
+
+      <div class="relative flex-1 overflow-hidden px-5 pb-4 lg:px-10">
+        <img
+          id="lb-img"
+          src=""
+          alt=""
+          class="mx-auto h-full w-auto max-w-full rounded-xl object-contain"
+        />
+        <button
+          id="lb-prev"
+          type="button"
+          aria-label="Foto anterior"
+          class="absolute left-6 top-1/2 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full bg-white/90 text-foreground transition hover:bg-white lg:left-14"
+        >
+          <Icon name="hugeicons:arrow-left-02" class="h-5 w-5" />
+        </button>
+        <button
+          id="lb-next"
+          type="button"
+          aria-label="Foto siguiente"
+          class="absolute right-6 top-1/2 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full bg-white/90 text-foreground transition hover:bg-white lg:right-14"
+        >
+          <Icon name="hugeicons:arrow-right-02" class="h-5 w-5" />
+        </button>
+      </div>
+
+      <footer class="px-5 pb-5 text-center lg:px-10">
+        <p id="lb-contador" class="font-mono text-xs text-white/60"></p>
+      </footer>
+    </div>
+  </div>
+</section>
+
+<style>
+  .filtro-btn {
+    color: var(--color-muted-foreground);
+  }
+  .filtro-btn:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+  .filtro-btn.is-activo {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--color-primary-foreground);
+  }
+  .trabajo-card.is-oculto {
+    display: none;
+  }
+</style>
+
+<script>
+  // --- Filtro por categoría ---
+  const botones = document.querySelectorAll<HTMLButtonElement>(".filtro-btn");
+  const cards = document.querySelectorAll<HTMLElement>(".trabajo-card");
+
+  botones.forEach((b) =>
+    b.addEventListener("click", () => {
+      const f = b.dataset.filtro;
+      botones.forEach((x) => x.classList.toggle("is-activo", x === b));
+      cards.forEach((c) =>
+        c.classList.toggle("is-oculto", f !== "todos" && c.dataset.cat !== f),
+      );
+    }),
+  );
+
+  // --- Lightbox ---
+  const lb = document.getElementById("lb")!;
+  const lbImg = document.getElementById("lb-img") as HTMLImageElement;
+  const lbTitulo = document.getElementById("lb-titulo")!;
+  const lbCat = document.getElementById("lb-cat")!;
+  const lbDesc = document.getElementById("lb-desc")!;
+  const lbCont = document.getElementById("lb-contador")!;
+
+  let fotos: string[] = [];
+  let idx = 0;
+
+  const pintar = () => {
+    lbImg.src = fotos[idx];
+    lbCont.textContent = `${idx + 1} / ${fotos.length}`;
+  };
+
+  const abrir = (c: HTMLElement) => {
+    fotos = JSON.parse(c.dataset.fotos || "[]");
+    idx = 0;
+    lbTitulo.textContent = c.dataset.titulo || "";
+    lbCat.textContent = c.dataset.cat || "";
+    lbDesc.textContent = c.dataset.desc || "";
+    lbImg.alt = c.dataset.titulo || "";
+    pintar();
+    lb.classList.remove("hidden");
+    document.body.style.overflow = "hidden";
+  };
+
+  const cerrar = () => {
+    lb.classList.add("hidden");
+    document.body.style.overflow = "";
+  };
+
+  const mover = (d: number) => {
+    idx = (idx + d + fotos.length) % fotos.length;
+    pintar();
+  };
+
+  cards.forEach((c) => c.addEventListener("click", () => abrir(c)));
+  document.getElementById("lb-cerrar")!.addEventListener("click", cerrar);
+  document.getElementById("lb-prev")!.addEventListener("click", () => mover(-1));
+  document.getElementById("lb-next")!.addEventListener("click", () => mover(1));
+  lb.addEventListener("click", (e) => {
+    if (e.target === lb) cerrar();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (lb.classList.contains("hidden")) return;
+    if (e.key === "Escape") cerrar();
+    if (e.key === "ArrowLeft") mover(-1);
+    if (e.key === "ArrowRight") mover(1);
+  });
+</script>
