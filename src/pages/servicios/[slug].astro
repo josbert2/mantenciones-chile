@@ -201,17 +201,14 @@ const jsonLd = [
           {s.nombre} por comuna
         </h2>
         <p class="mt-3 max-w-2xl text-muted-foreground" data-reveal>
-          Atendemos en toda la Región Metropolitana. Elige tu comuna:
+          Atendemos en toda la Región Metropolitana, con despacho de cuadrilla desde nuestra base en San Joaquín:
         </p>
         <div class="mt-6 flex flex-wrap gap-2" data-reveal>
           {
             comunas.map((c) => (
-              <a
-                href={`/servicios/${s.slug}/${c.slug}`}
-                class="rounded-full border border-border bg-background px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:border-primary hover:text-primary"
-              >
+              <span class="rounded-full border border-border bg-background px-4 py-2 text-sm font-medium text-muted-foreground">
                 {c.nombre}
-              </a>
+              </span>
             ))
           }
         </div>
