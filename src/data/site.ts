@@ -1,7 +1,7 @@
 export const site = {
   name: "Más de Chile",
   legalName: "Comercializadora y Productora Más de Chile SpA",
-  url: "https://www.masdechile.cl",
+  url: "https://masdechile.cl",
   shortDescription:
     "Ingeniería, mantenimiento multitécnico y soluciones de infraestructura comercial.",
   description:

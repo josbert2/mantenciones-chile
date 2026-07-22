@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mantenciones.cl/sitemap-index.xml
+Sitemap: https://masdechile.cl/sitemap-index.xml
