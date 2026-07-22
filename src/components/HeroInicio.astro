@@ -1,6 +1,7 @@
 ---
 import { Icon } from "astro-icon/components";
 import { site } from "../data/site";
+import { fotoTrabajo } from "../data/trabajos";
 
 const wa = (texto: string) =>
   `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(texto)}`;
@@ -16,151 +17,183 @@ const logos = [
   { src: "/logos/cencosud.svg", alt: "Cencosud" },
   { src: "/logos/kfc.svg", alt: "KFC" },
 ];
+
+// Fondo: la única foto horizontal en alta resolución (1600x900), con el
+// camión rotulado. El video de terreno es vertical, así que va en su
+// propio marco vertical en vez de estirarse a pantalla completa.
+const fondo = fotoTrabajo("camion-hidrojet", 11, 1600);
 ---
 
-<section id="inicio" class="relative overflow-hidden">
-  <!-- Fondo: video real de terreno (hidrojet en operación).
-       El poster carga primero y hace de imagen si el video no arranca
-       o si el usuario pidió menos movimiento. -->
-  <video
-    src="/video/lavado-presion.mp4"
-    poster="/video/lavado-presion-poster.webp"
-    autoplay
-    muted
-    loop
-    playsinline
-    preload="metadata"
+<section id="inicio" class="relative overflow-hidden bg-ink">
+  <!-- Fondo: foto real 16:9, nítida a ancho completo -->
+  <img
+    src={fondo}
+    alt=""
     aria-hidden="true"
-    class="hero-video absolute inset-0 h-full w-full object-cover"
-  >
-  </video>
+    width="1600"
+    height="900"
+    loading="eager"
+    fetchpriority="high"
+    class="absolute inset-0 h-full w-full object-cover"
+  />
   <!-- Oscurecido para legibilidad del texto blanco -->
   <div
-    class="absolute inset-0 bg-gradient-to-r from-black/85 via-black/65 to-black/30"
+    class="absolute inset-0 bg-gradient-to-r from-black/90 via-black/75 to-black/45"
   >
   </div>
 
-  <div class="container-x relative py-24 lg:py-32">
-    <div class="max-w-[629px]">
-      <!-- Badge -->
-      <p
-        class="flex items-center gap-2 text-base text-white/75"
-        data-reveal
-      >
-        <Icon name="hugeicons:checkmark-badge-01" class="h-5 w-5 text-primary" />
-        Confían en nosotros el retail, los supermercados y la gastronomía
-      </p>
+  <div class="container-x relative py-20 lg:py-28">
+    <div class="grid items-center gap-14 lg:grid-cols-[1fr_auto] lg:gap-16">
+      <!-- Columna de texto -->
+      <div class="max-w-[629px]">
+        <p class="flex items-center gap-2 text-base text-white/75" data-reveal>
+          <Icon name="hugeicons:checkmark-badge-01" class="h-5 w-5 text-primary" />
+          Confían en nosotros el retail, los supermercados y la gastronomía
+        </p>
 
-      <!-- Titular blanco grande (68px) -->
-      <h1
-        class="mt-4 text-4xl font-semibold leading-[1.08] tracking-[-0.02em] text-white sm:text-5xl lg:text-[4.25rem]"
-        data-reveal
-      >
-        Mantención técnica rápida y <em
-          class="font-serif font-normal italic">confiable</em
+        <h1
+          class="mt-4 text-4xl font-semibold leading-[1.08] tracking-[-0.02em] text-white sm:text-5xl lg:text-[4.25rem]"
+          data-reveal
         >
-      </h1>
-
-      <!-- Bajada -->
-      <p class="mt-6 max-w-lg text-xl leading-relaxed text-white/70" data-reveal>
-        Hidrojet, gasfitería, cerrajería, obras civiles y emergencias 24/7 para
-        empresas, condominios y hogares en toda la Región Metropolitana.
-      </p>
-
-      <!-- CTA pill con círculo + flecha -->
-      <div class="mt-8 flex flex-wrap items-center gap-4" data-reveal>
-        <a
-          href={wa(
-            "Hola Más de Chile! Quiero solicitar una cotización.",
-          )}
-          target="_blank"
-          rel="noopener"
-          class="group inline-flex items-center gap-2.5 rounded-full bg-primary py-3 pl-6 pr-3 text-base font-bold text-white transition-transform hover:-translate-y-0.5"
-        >
-          Solicitar cotización
-          <span
-            class="grid h-6 w-6 place-items-center rounded-full bg-white text-primary transition-transform group-hover:translate-x-0.5"
+          Mantención técnica rápida y <em
+            class="font-serif font-normal italic">confiable</em
           >
-            <Icon name="hugeicons:arrow-right-01" class="h-3.5 w-3.5" />
-          </span>
-        </a>
+        </h1>
 
-        <a
-          href={`tel:${site.phone}`}
-          class="inline-flex items-center gap-2.5 text-sm font-semibold text-white transition-colors hover:text-primary"
-        >
-          <span class="relative grid h-9 w-9 place-items-center rounded-full bg-white/15 text-white backdrop-blur-sm">
-            <Icon name="hugeicons:call-02" class="h-4 w-4" />
-            <span class="absolute inset-0 animate-ping rounded-full bg-white/20"
-            ></span>
-          </span>
-          Emergencia 24/7 · {site.phoneDisplay}
-        </a>
-      </div>
+        <p class="mt-6 max-w-lg text-xl leading-relaxed text-white/70" data-reveal>
+          Hidrojet, gasfitería, cerrajería, obras civiles y emergencias 24/7 para
+          empresas, condominios y hogares en toda la Región Metropolitana.
+        </p>
 
-      <!-- Bullets -->
-      <div class="mt-10 flex flex-col gap-4 sm:flex-row sm:gap-8" data-reveal>
-        {
-          bullets.map((b) => (
-            <p class="flex items-start gap-2.5 text-sm text-white/70">
-              <Icon
-                name="hugeicons:tick-02"
-                class="mt-0.5 h-4 w-4 shrink-0 text-primary"
-              />
-              {b}
-            </p>
-          ))
-        }
-      </div>
-    </div>
+        <div class="mt-8 flex flex-wrap items-center gap-4" data-reveal>
+          <a
+            href={wa("Hola Más de Chile! Quiero solicitar una cotización.")}
+            target="_blank"
+            rel="noopener"
+            class="group inline-flex items-center gap-2.5 rounded-full bg-primary py-3 pl-6 pr-3 text-base font-bold text-white transition-transform hover:-translate-y-0.5"
+          >
+            Solicitar cotización
+            <span
+              class="grid h-6 w-6 place-items-center rounded-full bg-white text-primary transition-transform group-hover:translate-x-0.5"
+            >
+              <Icon name="hugeicons:arrow-right-01" class="h-3.5 w-3.5" />
+            </span>
+          </a>
 
-    <!-- Tarjeta blanca flotante -->
-    <div
-      class="mt-12 w-[304px] rounded-2xl bg-white p-[30px] shadow-soft lg:absolute lg:bottom-32 lg:right-8 lg:mt-0"
-      data-reveal
-    >
-      <p class="text-[2.75rem] font-extrabold leading-none tracking-tight text-primary">
-        +15.000
-      </p>
-      <p class="mt-2 text-lg text-foreground">Soluciones ejecutadas</p>
+          <a
+            href={`tel:${site.phone}`}
+            class="inline-flex items-center gap-2.5 text-sm font-semibold text-white transition-colors hover:text-primary"
+          >
+            <span
+              class="relative grid h-9 w-9 place-items-center rounded-full bg-white/15 text-white backdrop-blur-sm"
+            >
+              <Icon name="hugeicons:call-02" class="h-4 w-4" />
+              <span class="absolute inset-0 animate-ping rounded-full bg-white/20"
+              ></span>
+            </span>
+            Emergencia 24/7 · {site.phoneDisplay}
+          </a>
+        </div>
 
-      <div class="mt-10 flex items-center gap-3">
-        <div class="flex">
+        <div class="mt-10 flex flex-col gap-4 sm:flex-row sm:gap-8" data-reveal>
           {
-            logos.map((l, i) => (
-              <span
-                class:list={[
-                  "grid h-10 w-10 place-items-center overflow-hidden rounded-full border-2 border-white bg-surface p-1.5 shadow-sm",
-                  i > 0 && "-ml-3",
-                ]}
-              >
-                <img
-                  src={l.src}
-                  alt={l.alt}
-                  loading="lazy"
-                  class="h-full w-full object-contain"
+            bullets.map((b) => (
+              <p class="flex items-start gap-2.5 text-sm text-white/70">
+                <Icon
+                  name="hugeicons:tick-02"
+                  class="mt-0.5 h-4 w-4 shrink-0 text-primary"
                 />
-              </span>
+                {b}
+              </p>
             ))
           }
         </div>
-        <p class="text-sm font-bold text-foreground">Retail y gastronomía</p>
+      </div>
+
+      <!-- Columna del video: marco vertical, el video calza a su
+           proporción nativa (9:16) sin recorte ni ampliación -->
+      <div class="relative mx-auto w-full max-w-[320px] lg:mx-0" data-reveal>
+        <div
+          class="hero-marco relative aspect-[9/16] overflow-hidden rounded-[28px] border border-white/15 bg-ink bg-cover bg-center shadow-2xl"
+        >
+          <video
+            src="/video/lavado-presion.mp4"
+            poster="/video/lavado-presion-poster.webp"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="metadata"
+            aria-hidden="true"
+            class="hero-video h-full w-full object-cover"></video>
+
+          <!-- Etiqueta "en vivo" sobre el video -->
+          <span
+            class="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-black/55 px-3 py-1.5 font-mono text-[0.6rem] uppercase tracking-[0.14em] text-white backdrop-blur-sm"
+          >
+            <span class="relative flex h-1.5 w-1.5">
+              <span
+                class="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary"
+              ></span>
+              <span class="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary"
+              ></span>
+            </span>
+            En terreno
+          </span>
+        </div>
+
+        <!-- Tarjeta de cifra, montada sobre el borde del video.
+             z-10 para que quede por encima del marco, no debajo. -->
+        <div
+          class="relative z-10 mx-auto mt-[-3.25rem] w-[268px] rounded-2xl bg-white p-6 shadow-soft lg:mx-0 lg:ml-[-2.5rem]"
+        >
+          <p
+            class="text-[2.5rem] font-extrabold leading-none tracking-tight text-primary"
+          >
+            +15.000
+          </p>
+          <p class="mt-1.5 text-base text-foreground">Soluciones ejecutadas</p>
+
+          <div class="mt-5 flex items-center gap-3">
+            <div class="flex">
+              {
+                logos.map((l, i) => (
+                  <span
+                    class:list={[
+                      "grid h-9 w-9 place-items-center overflow-hidden rounded-full border-2 border-white bg-surface p-1.5 shadow-sm",
+                      i > 0 && "-ml-3",
+                    ]}
+                  >
+                    <img
+                      src={l.src}
+                      alt={l.alt}
+                      loading="eager"
+                      fetchpriority="low"
+                      class="h-full w-full object-contain"
+                    />
+                  </span>
+                ))
+              }
+            </div>
+            <p class="text-sm font-bold leading-tight text-foreground">
+              Retail y gastronomía
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 <style>
-  /* Si el usuario pidió menos movimiento, congelamos el video:
-     queda el poster como imagen fija. */
+  /* Si el usuario pidió menos movimiento, ocultamos el video y el marco
+     muestra el poster como imagen fija, así no queda un hueco negro. */
   @media (prefers-reduced-motion: reduce) {
     .hero-video {
       display: none;
     }
-    #inicio {
+    .hero-marco {
       background-image: url("/video/lavado-presion-poster.webp");
-      background-size: cover;
-      background-position: center;
     }
   }
 </style>
