@@ -1,0 +1,186 @@
+---
+import { Icon } from "astro-icon/components";
+import { trabajos, fotoTrabajo, fotosDe } from "../data/trabajos";
+
+interface Props {
+  /** Slug del servicio (ver src/data/servicios.ts) */
+  servicio: string;
+  /** Título de ese servicio, para el texto de la sección */
+  titulo: string;
+}
+
+const { servicio, titulo } = Astro.props;
+
+const casos = trabajos.filter((t) => t.servicio === servicio);
+const totalFotos = casos.reduce((a, t) => a + t.fotos, 0);
+---
+
+{
+  casos.length > 0 && (
+    <section class="border-t border-border py-20 lg:py-28">
+      <div class="container-x">
+        <div class="max-w-2xl">
+          <div class="flex items-center gap-1 font-mono text-sm text-primary" data-reveal>
+            <span>//</span>
+            <span>Obra ejecutada</span>
+          </div>
+          <h2
+            class="mt-3 font-display text-3xl font-extrabold leading-[1.14] tracking-[-0.02em] text-foreground sm:text-4xl"
+            data-reveal
+          >
+            {titulo} que ya resolvimos.
+          </h2>
+          <p class="mt-5 leading-relaxed text-muted-foreground" data-reveal>
+            {totalFotos} fotografías propias tomadas en terreno por nuestro
+            equipo. Sin imágenes de catálogo.
+          </p>
+        </div>
+
+        <div class="mt-12 space-y-14">
+          {casos.map((t) => (
+            <article data-reveal>
+              <div class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
+                <h3 class="text-xl font-semibold text-foreground">{t.titulo}</h3>
+                <p class="flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground">
+                  <Icon name="hugeicons:image-01" class="h-3.5 w-3.5" />
+                  {t.fotos} registros
+                </p>
+              </div>
+              <p class="mt-3 max-w-3xl leading-relaxed text-muted-foreground">
+                {t.desc}
+              </p>
+
+              <div class="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+                {fotosDe(t)
+                  .slice(0, 5)
+                  .map((src, i) => (
+                    <button
+                      type="button"
+                      class="ts-foto group relative overflow-hidden rounded-xl bg-muted"
+                      data-fotos={JSON.stringify(fotosDe(t, 1600))}
+                      data-i={i}
+                      data-titulo={t.titulo}
+                      aria-label={`Ver ${t.titulo}, foto ${i + 1}`}
+                    >
+                      <img
+                        src={src}
+                        alt={`${t.titulo} — registro ${i + 1}`}
+                        width="600"
+                        height="800"
+                        loading="lazy"
+                        decoding="async"
+                        class="aspect-[3/4] w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                      {i === 4 && t.fotos > 5 && (
+                        <span class="absolute inset-0 grid place-items-center bg-foreground/65 font-mono text-sm font-bold text-white">
+                          +{t.fotos - 5}
+                        </span>
+                      )}
+                    </button>
+                  ))}
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+
+      {/* Lightbox */}
+      <div
+        id="ts-lb"
+        class="fixed inset-0 z-[100] hidden bg-foreground/95 backdrop-blur-sm"
+        role="dialog"
+        aria-modal="true"
+      >
+        <div class="flex h-full flex-col">
+          <header class="flex items-center justify-between gap-4 px-5 py-4 lg:px-10">
+            <h3 id="ts-titulo" class="text-lg font-semibold text-white" />
+            <button
+              id="ts-cerrar"
+              type="button"
+              aria-label="Cerrar galería"
+              class="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-white/20 text-white transition hover:bg-white hover:text-foreground"
+            >
+              <Icon name="hugeicons:cancel-01" class="h-5 w-5" />
+            </button>
+          </header>
+          <div class="relative flex-1 overflow-hidden px-5 pb-4 lg:px-10">
+            <img
+              id="ts-img"
+              src=""
+              alt=""
+              class="mx-auto h-full w-auto max-w-full rounded-xl object-contain"
+            />
+            <button
+              id="ts-prev"
+              type="button"
+              aria-label="Anterior"
+              class="absolute left-6 top-1/2 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full bg-white/90 text-foreground transition hover:bg-white lg:left-14"
+            >
+              <Icon name="hugeicons:arrow-left-02" class="h-5 w-5" />
+            </button>
+            <button
+              id="ts-next"
+              type="button"
+              aria-label="Siguiente"
+              class="absolute right-6 top-1/2 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full bg-white/90 text-foreground transition hover:bg-white lg:right-14"
+            >
+              <Icon name="hugeicons:arrow-right-02" class="h-5 w-5" />
+            </button>
+          </div>
+          <footer class="px-5 pb-5 text-center lg:px-10">
+            <p id="ts-contador" class="font-mono text-xs text-white/60" />
+          </footer>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+<script>
+  const lb = document.getElementById("ts-lb");
+  if (lb) {
+    const img = document.getElementById("ts-img") as HTMLImageElement;
+    const tit = document.getElementById("ts-titulo")!;
+    const cnt = document.getElementById("ts-contador")!;
+    let fotos: string[] = [];
+    let idx = 0;
+
+    const pintar = () => {
+      img.src = fotos[idx];
+      cnt.textContent = `${idx + 1} / ${fotos.length}`;
+    };
+    const cerrar = () => {
+      lb.classList.add("hidden");
+      document.body.style.overflow = "";
+    };
+    const mover = (d: number) => {
+      idx = (idx + d + fotos.length) % fotos.length;
+      pintar();
+    };
+
+    document.querySelectorAll<HTMLElement>(".ts-foto").forEach((b) =>
+      b.addEventListener("click", () => {
+        fotos = JSON.parse(b.dataset.fotos || "[]");
+        idx = Number(b.dataset.i || 0);
+        tit.textContent = b.dataset.titulo || "";
+        img.alt = b.dataset.titulo || "";
+        pintar();
+        lb.classList.remove("hidden");
+        document.body.style.overflow = "hidden";
+      }),
+    );
+
+    document.getElementById("ts-cerrar")!.addEventListener("click", cerrar);
+    document.getElementById("ts-prev")!.addEventListener("click", () => mover(-1));
+    document.getElementById("ts-next")!.addEventListener("click", () => mover(1));
+    lb.addEventListener("click", (e) => {
+      if (e.target === lb) cerrar();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (lb.classList.contains("hidden")) return;
+      if (e.key === "Escape") cerrar();
+      if (e.key === "ArrowLeft") mover(-1);
+      if (e.key === "ArrowRight") mover(1);
+    });
+  }
+</script>

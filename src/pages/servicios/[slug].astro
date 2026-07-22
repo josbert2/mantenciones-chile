@@ -3,6 +3,7 @@ import Layout from "../../layouts/Layout.astro";
 import Nav from "../../components/Nav.astro";
 import Faq from "../../components/Faq.astro";
 import Cotizar from "../../components/Cotizar.astro";
+import TrabajosDeServicio from "../../components/TrabajosDeServicio.astro";
 import Footer from "../../components/Footer.astro";
 import { Icon } from "astro-icon/components";
 import { servicios, type Servicio } from "../../data/servicios";
@@ -267,6 +268,7 @@ const jsonLd = [
       </div>
     </section>
 
+    <TrabajosDeServicio servicio={s.slug} titulo={s.titulo} />
     <Cotizar servicioPreseleccionado={s.titulo} />
   </main>
   <Footer />
