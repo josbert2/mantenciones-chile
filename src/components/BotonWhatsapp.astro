@@ -1,6 +1,7 @@
 ---
 // Botón flotante de WhatsApp: contacto directo desde cualquier página,
 // un toque y sin formulario. Verde WhatsApp para reconocimiento inmediato.
+// Al pasar el mouse, un tooltip aparece arriba con el mensaje.
 import { Icon } from "astro-icon/components";
 import { site } from "../data/site";
 
@@ -8,26 +9,37 @@ const mensaje = "Hola Más de Chile! Quiero hacer una consulta.";
 const url = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(mensaje)}`;
 ---
 
-<a
-  href={url}
-  target="_blank"
-  rel="noopener"
-  data-track="whatsapp"
-  aria-label="Escríbenos por WhatsApp"
-  class="wa-fab group fixed bottom-5 right-5 z-50 flex items-center gap-3 rounded-full bg-[#25D366] py-3 pl-3 pr-4 text-white shadow-lg transition-transform hover:-translate-y-0.5 sm:bottom-6 sm:right-6"
->
-  <span class="relative grid h-11 w-11 place-items-center rounded-full">
-    <span
-      class="absolute inline-flex h-full w-full animate-ping rounded-full bg-white/30"
-    ></span>
-    <Icon name="hugeicons:whatsapp" class="relative h-7 w-7" />
-  </span>
-  <span
-    class="max-w-0 overflow-hidden whitespace-nowrap text-sm font-semibold opacity-0 transition-all duration-300 group-hover:max-w-[12rem] group-hover:opacity-100 sm:group-hover:pr-1"
+<div class="wa-fab group fixed bottom-5 right-5 z-50 sm:bottom-6 sm:right-6">
+  <!-- Tooltip: aparece arriba del botón al hacer hover -->
+  <div
+    class="pointer-events-none absolute bottom-full right-0 mb-3 w-max max-w-[16rem] translate-y-2 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100"
+    role="tooltip"
   >
-    Escríbenos ahora
-  </span>
-</a>
+    <div
+      class="rounded-2xl bg-ink px-4 py-2.5 text-sm font-semibold text-white shadow-xl"
+    >
+      ¿Necesitas ayuda? Escríbenos por WhatsApp
+    </div>
+    <!-- Flecha apuntando al botón -->
+    <span
+      class="absolute right-6 top-full -mt-1 h-3 w-3 rotate-45 rounded-[2px] bg-ink"
+    ></span>
+  </div>
+
+  <a
+    href={url}
+    target="_blank"
+    rel="noopener"
+    data-track="whatsapp"
+    aria-label="Escríbenos por WhatsApp"
+    class="relative flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg transition-transform hover:-translate-y-0.5"
+  >
+    <span
+      class="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#25D366]/40"
+    ></span>
+    <Icon name="hugeicons:whatsapp" class="relative h-8 w-8" />
+  </a>
+</div>
 
 <style>
   /* Aparece con un pequeño rebote al cargar, para que se note */
