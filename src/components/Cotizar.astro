@@ -59,6 +59,23 @@ const contacto = [
           Metropolitana.
         </p>
 
+        {/* Atajo directo: para quien no quiere llenar el formulario */}
+        <a
+          href={`https://wa.me/${site.whatsapp}?text=${encodeURIComponent("Hola Más de Chile! Quiero hacer una consulta.")}`}
+          target="_blank"
+          rel="noopener"
+          data-track="whatsapp"
+          class="mt-7 inline-flex items-center gap-3 rounded-full bg-[#25D366] py-3 pl-4 pr-6 font-semibold text-white shadow-sm transition-transform hover:-translate-y-0.5"
+        >
+          <span class="grid h-8 w-8 place-items-center rounded-full bg-white/20">
+            <Icon name="hugeicons:whatsapp" class="h-5 w-5" />
+          </span>
+          Escríbenos directo por WhatsApp
+        </a>
+        <p class="mt-2 text-sm text-muted-foreground">
+          ¿Sin ganas de llenar el formulario? Escríbenos y listo.
+        </p>
+
         <ul class="mt-10 space-y-5">
           {
             contacto.map((c) => (

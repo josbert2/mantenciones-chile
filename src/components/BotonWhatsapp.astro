@@ -1,0 +1,55 @@
+---
+// Botón flotante de WhatsApp: contacto directo desde cualquier página,
+// un toque y sin formulario. Verde WhatsApp para reconocimiento inmediato.
+import { Icon } from "astro-icon/components";
+import { site } from "../data/site";
+
+const mensaje = "Hola Más de Chile! Quiero hacer una consulta.";
+const url = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(mensaje)}`;
+---
+
+<a
+  href={url}
+  target="_blank"
+  rel="noopener"
+  data-track="whatsapp"
+  aria-label="Escríbenos por WhatsApp"
+  class="wa-fab group fixed bottom-5 right-5 z-50 flex items-center gap-3 rounded-full bg-[#25D366] py-3 pl-3 pr-4 text-white shadow-lg transition-transform hover:-translate-y-0.5 sm:bottom-6 sm:right-6"
+>
+  <span class="relative grid h-11 w-11 place-items-center rounded-full">
+    <span
+      class="absolute inline-flex h-full w-full animate-ping rounded-full bg-white/30"
+    ></span>
+    <Icon name="hugeicons:whatsapp" class="relative h-7 w-7" />
+  </span>
+  <span
+    class="max-w-0 overflow-hidden whitespace-nowrap text-sm font-semibold opacity-0 transition-all duration-300 group-hover:max-w-[12rem] group-hover:opacity-100 sm:group-hover:pr-1"
+  >
+    Escríbenos ahora
+  </span>
+</a>
+
+<style>
+  /* Aparece con un pequeño rebote al cargar, para que se note */
+  .wa-fab {
+    animation: wa-in 0.4s ease-out 0.8s both;
+  }
+  @keyframes wa-in {
+    from {
+      opacity: 0;
+      transform: scale(0.6) translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .wa-fab {
+      animation: none;
+    }
+    .wa-fab .animate-ping {
+      animation: none;
+    }
+  }
+</style>
