@@ -1,0 +1,117 @@
+---
+// Analítica y píxeles de conversión.
+//
+// Todo se activa por variables de entorno (prefijo PUBLIC_ para que Astro
+// las exponga al cliente). Si un ID no está definido, ese tag no se emite:
+// así el sitio no queda con etiquetas rotas cuando falta configurar algo.
+//
+// Definí lo que uses en un archivo .env en la raíz (ver .env.example):
+//   PUBLIC_GA_ID           = G-XXXXXXXXXX      (Google Analytics 4)
+//   PUBLIC_ADS_ID          = AW-XXXXXXXXXX     (Google Ads)
+//   PUBLIC_ADS_LABEL       = XXXXXXXXXXXXXXXXX (etiqueta de conversión de Ads)
+//   PUBLIC_META_PIXEL_ID   = 1234567890        (Meta / Facebook Pixel)
+//   PUBLIC_GSC_VERIFICATION= xxxxx             (verificación de Search Console)
+
+const GA_ID = import.meta.env.PUBLIC_GA_ID ?? "";
+const ADS_ID = import.meta.env.PUBLIC_ADS_ID ?? "";
+const ADS_LABEL = import.meta.env.PUBLIC_ADS_LABEL ?? "";
+const META_PIXEL_ID = import.meta.env.PUBLIC_META_PIXEL_ID ?? "";
+const GSC = import.meta.env.PUBLIC_GSC_VERIFICATION ?? "";
+
+// gtag.js cubre GA4 y Google Ads con un único script.
+const gtagId = GA_ID || ADS_ID;
+const hayGoogle = Boolean(gtagId);
+const hayMeta = Boolean(META_PIXEL_ID);
+
+// Los IDs se serializan con JSON.stringify para que entren al JS ya
+// entrecomillados y escapados. El cuerpo se inyecta con set:html.
+const q = (v: string) => JSON.stringify(v);
+
+const script = `
+${
+  hayGoogle
+    ? `
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  window.gtag = gtag;
+  gtag('js', new Date());
+  gtag('consent', 'default', {
+    ad_storage: 'granted', analytics_storage: 'granted',
+    ad_user_data: 'granted', ad_personalization: 'granted'
+  });
+  ${GA_ID ? `gtag('config', ${q(GA_ID)}, { anonymize_ip: true });` : ""}
+  ${ADS_ID ? `gtag('config', ${q(ADS_ID)});` : ""}
+`
+    : ""
+}
+${
+  hayMeta
+    ? `
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
+  (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', ${q(META_PIXEL_ID)});
+  fbq('track', 'PageView');
+`
+    : ""
+}
+  // Despachador de conversiones: data-track="whatsapp|llamada|cotizacion"
+  var MAPA = {
+    whatsapp:   { ga: 'generate_lead', meta: 'Lead',    label: 'WhatsApp' },
+    llamada:    { ga: 'generate_lead', meta: 'Contact', label: 'Llamada' },
+    cotizacion: { ga: 'generate_lead', meta: 'Lead',    label: 'Cotización' }
+  };
+  window.track = function (evento, extra) {
+    var m = MAPA[evento];
+    if (!m) return;
+    var params = Object.assign({ event_category: 'contacto', event_label: m.label }, extra || {});
+    if (window.gtag) {
+      gtag('event', m.ga, params);
+      ${
+        ADS_ID && ADS_LABEL
+          ? `gtag('event', 'conversion', { send_to: ${q(ADS_ID + "/" + ADS_LABEL)} });`
+          : ""
+      }
+    }
+    if (window.fbq) fbq('track', m.meta, { content_name: m.label });
+  };
+  document.addEventListener('click', function (e) {
+    var el = e.target.closest('[data-track]');
+    if (el) window.track(el.getAttribute('data-track'));
+  });
+`;
+---
+
+{/* Verificación de Google Search Console */}
+{GSC && <meta name="google-site-verification" content={GSC} />}
+
+{/* Librería gtag.js (GA4 + Ads) */}
+{
+  hayGoogle && (
+    <script
+      is:inline
+      async
+      src={`https://www.googletagmanager.com/gtag/js?id=${gtagId}`}
+    />
+  )
+}
+
+{/* Inicialización + despachador de conversiones (un solo script) */}
+{(hayGoogle || hayMeta) && <script is:inline set:html={script} />}
+
+{/* Fallback sin JS para el Pixel de Meta */}
+{
+  hayMeta && (
+    <noscript>
+      <img
+        height="1"
+        width="1"
+        style="display:none"
+        alt=""
+        src={`https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1`}
+      />
+    </noscript>
+  )
+}

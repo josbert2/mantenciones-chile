@@ -75,6 +75,7 @@ const year = 2026;
         <div class="lg:justify-self-end lg:text-right">
           <a
             href={`tel:${site.phone}`}
+            data-track="llamada"
             class="inline-flex items-center gap-3 rounded-xl bg-white px-5 py-3.5 shadow-sm transition-transform hover:-translate-y-0.5"
           >
             <span class="grid h-9 w-9 place-items-center rounded-lg bg-primary text-white">
@@ -141,11 +142,13 @@ const year = 2026;
         <ul class="mt-5 space-y-3 text-sm text-white/70">
           <li>
             <a href={`tel:${site.phone}`} class="hover:text-white"
+            data-track="llamada"
               >{site.phoneDisplay}</a
             >
           </li>
           <li>
             <a href={`tel:${site.phoneAlt}`} class="hover:text-white"
+            data-track="llamada"
               >{site.phoneAltDisplay}</a
             >
           </li>

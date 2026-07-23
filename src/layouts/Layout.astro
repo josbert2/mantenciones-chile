@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import Seo from "../components/Seo.astro";
+import Analytics from "../components/Analytics.astro";
 
 interface Props {
   title?: string;
@@ -36,6 +37,8 @@ const { title, description, canonical, image, type, noindex, jsonLd } =
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <Analytics />
   </head>
   <body>
     <slot />

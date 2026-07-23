@@ -210,6 +210,8 @@ const contacto = [
       ].filter(Boolean);
       const url =
         "https://wa.me/" + wa + "?text=" + encodeURIComponent(lineas.join("\n"));
+      // Conversión: envío de formulario de cotización
+      if (window.track) window.track("cotizacion", { servicio: val("servicio") });
       document.getElementById("form-ok")?.classList.remove("hidden");
       window.open(url, "_blank", "noopener");
     });

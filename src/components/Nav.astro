@@ -19,6 +19,7 @@ const links = [
       <span>Cobertura corporativa · Región Metropolitana</span>
       <div class="flex items-center gap-6">
         <a href={`tel:${site.phone}`} class="transition-colors hover:text-primary"
+        data-track="llamada"
           >{site.phoneDisplay}</a
         >
         <span class="text-foreground/20">/</span>
@@ -61,6 +62,7 @@ const links = [
       <div class="flex items-center gap-3">
         <a
           href={`tel:${site.phone}`}
+          data-track="llamada"
           class="hidden text-sm font-bold text-foreground xl:block"
           >{site.phoneDisplay}</a
         >
