@@ -185,11 +185,23 @@ const contacto = [
             ></textarea>
           </div>
 
+          {/* Honeypot anti-spam: invisible para humanos, los bots lo llenan */}
+          <input
+            type="text"
+            name="website"
+            id="website"
+            tabindex="-1"
+            autocomplete="off"
+            class="absolute left-[-9999px] h-0 w-0 opacity-0"
+            aria-hidden="true"
+          />
+
           <button
+            id="cotizar-btn"
             type="submit"
-            class="group inline-flex items-center justify-center gap-2.5 rounded-full bg-primary py-3.5 pl-6 pr-3 text-sm font-bold text-white transition-transform hover:-translate-y-0.5"
+            class="group inline-flex items-center justify-center gap-2.5 rounded-full bg-primary py-3.5 pl-6 pr-3 text-sm font-bold text-white transition-transform hover:-translate-y-0.5 disabled:opacity-60"
           >
-            Enviar por WhatsApp
+            <span data-btn-label>Enviar solicitud</span>
             <span
               class="grid h-6 w-6 place-items-center rounded-full bg-white text-primary transition-transform group-hover:translate-x-0.5"
             >
@@ -197,8 +209,17 @@ const contacto = [
             </span>
           </button>
 
-          <p id="form-ok" class="hidden text-center text-sm font-semibold text-success">
-            Abriendo WhatsApp con tu solicitud...
+          <p
+            id="form-ok"
+            class="hidden rounded-lg bg-success/10 px-4 py-3 text-center text-sm font-semibold text-success"
+          >
+            ¡Listo! Recibimos tu solicitud, te contactamos a la brevedad.
+          </p>
+          <p
+            id="form-err"
+            class="hidden rounded-lg bg-danger/10 px-4 py-3 text-center text-sm font-semibold text-danger"
+          >
+            No pudimos enviar. Escríbenos por WhatsApp y te atendemos igual.
           </p>
           <p class="text-center text-xs text-muted-foreground">
             Respondemos en menos de 30 minutos en horario hábil.
@@ -213,24 +234,46 @@ const contacto = [
   (() => {
     const form = document.getElementById("cotizar-form");
     if (!form) return;
-    form.addEventListener("submit", (e) => {
+    const btn = document.getElementById("cotizar-btn");
+    const label = form.querySelector("[data-btn-label]");
+    const ok = document.getElementById("form-ok");
+    const err = document.getElementById("form-err");
+    const val = (id) => (document.getElementById(id)?.value || "").trim();
+
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
-      const wa = form.getAttribute("data-wa");
-      const val = (id) => (document.getElementById(id)?.value || "").trim();
-      const lineas = [
-        "Hola Más de Chile! Quiero solicitar una cotización.",
-        val("tipo") && `Soy: ${val("tipo")}`,
-        val("nombre") && `Nombre: ${val("nombre")}`,
-        val("servicio") && `Servicio: ${val("servicio")}`,
-        val("fono") && `Teléfono: ${val("fono")}`,
-        val("mensaje") && `Detalle: ${val("mensaje")}`,
-      ].filter(Boolean);
-      const url =
-        "https://wa.me/" + wa + "?text=" + encodeURIComponent(lineas.join("\n"));
-      // Conversión: envío de formulario de cotización
-      if (window.track) window.track("cotizacion", { servicio: val("servicio") });
-      document.getElementById("form-ok")?.classList.remove("hidden");
-      window.open(url, "_blank", "noopener");
+      ok.classList.add("hidden");
+      err.classList.add("hidden");
+      btn.disabled = true;
+      const txt = label.textContent;
+      label.textContent = "Enviando...";
+
+      const payload = {
+        nombre: val("nombre"),
+        fono: val("fono"),
+        tipo: val("tipo"),
+        servicio: val("servicio"),
+        mensaje: val("mensaje"),
+        website: val("website"), // honeypot
+      };
+
+      try {
+        const r = await fetch("/api/cotizar", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+        if (!r.ok) throw new Error("http " + r.status);
+        // Conversión: envío de formulario de cotización
+        if (window.track) window.track("cotizacion", { servicio: payload.servicio });
+        form.reset();
+        ok.classList.remove("hidden");
+      } catch (_) {
+        err.classList.remove("hidden");
+      } finally {
+        btn.disabled = false;
+        label.textContent = txt;
+      }
     });
   })();
 </script>

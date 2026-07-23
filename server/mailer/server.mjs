@@ -1,0 +1,107 @@
+// Servicio de correo de Más de Chile.
+// Recibe el POST del formulario, arma el email con el template de marca
+// y lo envía vía Resend. La API key vive solo acá (env), nunca en el front.
+import { createServer } from "node:http";
+
+const PORT = process.env.PORT || 8790;
+const RESEND_API_KEY = process.env.RESEND_API_KEY || "";
+const MAIL_TO = process.env.MAIL_TO || "seguimientomasdechile@gmail.com";
+const MAIL_FROM = process.env.MAIL_FROM || "Más de Chile <onboarding@resend.dev>";
+
+const esc = (s = "") =>
+  String(s).replace(/[&<>"']/g, (c) =>
+    ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c],
+  );
+
+const fila = (label, val) =>
+  val
+    ? `<tr><td style="padding:16px 18px;border-bottom:1px solid #f1ece8;">
+        <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#a49b93;font-weight:700;">${label}</div>
+        <div style="font-size:16px;color:#191513;font-weight:600;margin-top:3px;">${esc(val)}</div></td></tr>`
+    : "";
+
+const waLink = (fono) => {
+  const num = String(fono || "").replace(/[^0-9]/g, "");
+  if (!num) return "";
+  const n = num.startsWith("56") ? num : "56" + num.replace(/^0+/, "");
+  return `https://wa.me/${n}`;
+};
+
+function template({ nombre, tipo, servicio, fono, mensaje }) {
+  const wa = waLink(fono);
+  return `<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#f2ede9;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f2ede9;padding:32px 12px;"><tr><td align="center">
+<table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 8px 30px rgba(20,15,12,.08);">
+  <tr><td style="background:#8b0000;padding:26px 32px;"><table role="presentation" width="100%"><tr>
+    <td style="vertical-align:middle;"><span style="color:#fff;font-size:20px;font-weight:800;letter-spacing:-.01em;">Más de Chile</span></td>
+    <td align="right" style="vertical-align:middle;"><span style="display:inline-block;background:rgba(255,255,255,.16);color:#fff;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:6px 12px;border-radius:999px;">Nueva cotización</span></td>
+  </tr></table></td></tr>
+  <tr><td style="padding:32px 32px 8px;">
+    <h1 style="margin:0;font-size:24px;line-height:1.25;color:#191513;font-weight:800;">Te llegó una nueva solicitud</h1>
+    <p style="margin:10px 0 0;font-size:15px;line-height:1.6;color:#6f6862;">Un cliente completó el formulario de la web. Estos son sus datos:</p></td></tr>
+  <tr><td style="padding:20px 32px 8px;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #ece7e3;border-radius:12px;">
+      ${fila("Nombre", nombre)}
+      ${fila("Tipo de cliente", tipo)}
+      ${fila("Servicio", servicio)}
+      ${fila("Teléfono", fono)}
+      ${
+        mensaje
+          ? `<tr><td style="padding:16px 18px;"><div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#a49b93;font-weight:700;">Detalle</div>
+             <div style="font-size:15px;color:#3a332e;line-height:1.55;margin-top:5px;">${esc(mensaje)}</div></td></tr>`
+          : ""
+      }
+    </table></td></tr>
+  ${
+    wa
+      ? `<tr><td style="padding:22px 32px 32px;"><table role="presentation"><tr><td style="border-radius:999px;background:#25D366;">
+         <a href="${wa}" style="display:inline-block;padding:14px 28px;font-size:15px;font-weight:700;color:#fff;text-decoration:none;">Responder por WhatsApp →</a>
+         </td></tr></table><p style="margin:14px 0 0;font-size:13px;color:#a49b93;">Respondé rápido: el cliente espera una cotización clara.</p></td></tr>`
+      : `<tr><td style="padding:8px 32px 32px;"></td></tr>`
+  }
+  <tr><td style="background:#faf7f5;padding:20px 32px;border-top:1px solid #ece7e3;">
+    <p style="margin:0;font-size:12px;line-height:1.6;color:#a49b93;">Más de Chile SpA · Ingeniería y mantenimiento multitécnico<br>Santa Elena 2362 Of. 301, San Joaquín · masdechile.cl</p></td></tr>
+</table></td></tr></table></body></html>`;
+}
+
+const readBody = (req) =>
+  new Promise((res, rej) => {
+    let d = "";
+    req.on("data", (c) => {
+      d += c;
+      if (d.length > 20000) req.destroy();
+    });
+    req.on("end", () => res(d));
+    req.on("error", rej);
+  });
+
+createServer(async (req, res) => {
+  const cors = { "Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "Content-Type", "Access-Control-Allow-Methods": "POST, OPTIONS" };
+  if (req.method === "OPTIONS") { res.writeHead(204, cors); return res.end(); }
+  if (req.method === "GET") { res.writeHead(200, {...cors,"Content-Type":"application/json"}); return res.end(JSON.stringify({ ok: true, service: "masdechile-mailer" })); }
+  if (req.method !== "POST") { res.writeHead(405, cors); return res.end(); }
+
+  try {
+    const raw = await readBody(req);
+    const data = JSON.parse(raw || "{}");
+    // Honeypot anti-spam: si viene lleno, fingimos éxito y descartamos.
+    if (data.website) { res.writeHead(200, {...cors,"Content-Type":"application/json"}); return res.end(JSON.stringify({ ok: true })); }
+    if (!data.nombre && !data.fono && !data.mensaje) { res.writeHead(400, {...cors,"Content-Type":"application/json"}); return res.end(JSON.stringify({ ok:false, error:"vacio" })); }
+
+    const html = template(data);
+    const r = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${RESEND_API_KEY}`, "Content-Type": "application/json" },
+      body: JSON.stringify({
+        from: MAIL_FROM, to: [MAIL_TO],
+        subject: `Nueva cotización${data.servicio ? " · " + data.servicio : ""}${data.nombre ? " — " + data.nombre : ""}`,
+        html,
+      }),
+    });
+    if (!r.ok) { const t = await r.text(); console.error("resend", r.status, t); res.writeHead(502, {...cors,"Content-Type":"application/json"}); return res.end(JSON.stringify({ ok:false, error:"envio" })); }
+    res.writeHead(200, {...cors,"Content-Type":"application/json"}); res.end(JSON.stringify({ ok: true }));
+  } catch (e) {
+    console.error(e); res.writeHead(500, {...cors,"Content-Type":"application/json"}); res.end(JSON.stringify({ ok:false, error:"server" }));
+  }
+}).listen(PORT, "127.0.0.1", () => console.log("mailer en :" + PORT));

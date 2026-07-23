@@ -1,0 +1,15 @@
+[Unit]
+Description=Mas de Chile - servicio de correo (Resend)
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/masdechile-mailer
+EnvironmentFile=/opt/masdechile-mailer/.env
+ExecStart=/usr/bin/env node /opt/masdechile-mailer/server.mjs
+Restart=always
+RestartSec=3
+User=www-data
+
+[Install]
+WantedBy=multi-user.target
