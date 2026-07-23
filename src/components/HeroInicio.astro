@@ -2,6 +2,7 @@
 import { Icon } from "astro-icon/components";
 import { site } from "../data/site";
 import { fotoTrabajo } from "../data/trabajos";
+import { media } from "../lib/media";
 
 const wa = (texto: string) =>
   `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(texto)}`;
@@ -117,10 +118,11 @@ const fondo = fotoTrabajo("camion-hidrojet", 11, 1600);
       <div class="relative mx-auto w-full max-w-[320px] lg:mx-0" data-reveal>
         <div
           class="hero-marco relative aspect-[9/16] overflow-hidden rounded-[28px] border border-white/15 bg-ink bg-cover bg-center shadow-2xl"
+          style={`--hero-poster: url(${media("video/lavado-presion-poster.webp")})`}
         >
           <video
-            src="/video/lavado-presion.mp4"
-            poster="/video/lavado-presion-poster.webp"
+            src={media("video/lavado-presion.mp4")}
+            poster={media("video/lavado-presion-poster.webp")}
             autoplay
             muted
             loop
@@ -195,7 +197,7 @@ const fondo = fotoTrabajo("camion-hidrojet", 11, 1600);
       display: none;
     }
     .hero-marco {
-      background-image: url("/video/lavado-presion-poster.webp");
+      background-image: var(--hero-poster);
     }
   }
 </style>
